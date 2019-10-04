@@ -1,4 +1,4 @@
-package oracle;
+package orclData;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class Connect {
 		Connection con = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl:scott:tiger");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.189:1523:sailodba","apps","apps");
 			Statement st = con.createStatement();
 			String sqlQuery = "select * from emp";
 			ResultSet rs = st.executeQuery(sqlQuery);
