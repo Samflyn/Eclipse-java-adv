@@ -1,0 +1,688 @@
+X-Account-Key: account1
+X-Mozilla-Keys:                                                                                 
+Return-Path: <nageswar.mandru@sailotech.net>
+Delivered-To: srivaths.puranam@sailotech.net
+Received: from md-22.webhostbox.net
+	by md-22.webhostbox.net with LMTP
+	id KAYjNvpSmF1QvRUA/6xX1w
+	(envelope-from <nageswar.mandru@sailotech.net>)
+	for <srivaths.puranam@sailotech.net>; Sat, 05 Oct 2019 08:23:22 +0000
+Return-path: <nageswar.mandru@sailotech.net>
+Envelope-to: srivaths.puranam@sailotech.net
+Delivery-date: Sat, 05 Oct 2019 08:23:22 +0000
+Received: from [223.230.103.18] (port=56295 helo=MNRAOPC)
+	by md-22.webhostbox.net with esmtpa (Exim 4.92)
+	(envelope-from <nageswar.mandru@sailotech.net>)
+	id 1iGfLV-0061Cz-La
+	for srivaths.puranam@sailotech.net; Sat, 05 Oct 2019 08:23:22 +0000
+From: "Nageswar Rao Mandru" <nageswar.mandru@sailotech.net>
+To: <srivaths.puranam@sailotech.net>
+Subject: JDBC Programs
+Date: Sat, 5 Oct 2019 13:53:25 +0530
+Message-ID: <000601d57b56$2e135340$8a39f9c0$@sailotech.net>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="----=_NextPart_000_0007_01D57B84.47CC2B80"
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AdV7RTU186M37umYTZKHfKyRnx0qfw==
+Content-Language: en-us
+
+This is a multipart message in MIME format.
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_001_0008_01D57B84.47CC2B80"
+
+
+------=_NextPart_001_0008_01D57B84.47CC2B80
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+ 
+
+Hi All,
+
+ 
+
+PFA are JDBC programs
+
+ 
+
+Thanks 
+
+Nageswar Rao
+
+
+------=_NextPart_001_0008_01D57B84.47CC2B80
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" =
+xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" =
+xmlns=3D"http://www.w3.org/TR/REC-html40"><head><META =
+HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii"><meta name=3DGenerator content=3D"Microsoft Word 14 =
+(filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3DEN-US link=3Dblue =
+vlink=3Dpurple><div class=3DWordSection1><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>Hi =
+All,<o:p></o:p></p><p class=3DMsoNormal><o:p>&nbsp;</o:p></p><p =
+class=3DMsoNormal>PFA are JDBC programs<o:p></o:p></p><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>Thanks =
+<o:p></o:p></p><p class=3DMsoNormal>Nageswar =
+Rao<o:p></o:p></p></div></body></html>
+------=_NextPart_001_0008_01D57B84.47CC2B80--
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PropertiesFileTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PropertiesFileTest.java"
+
+package com.stech.mnrao.jdbc;
+
+
+import java.io.File;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;
+
+public class PropertiesFileTest {
+=09
+	public static void main(String[] args) throws SQLException {
+	=09
+		Connection con =3Dnull;
+	=09
+		try
+		{
+		=09
+			Properties dbProp =3D new Properties();
+		=09
+			File  databasePropertiesFilePath=3Dnew File(args[0]);
+		=09
+			FileReader  reader =3D new FileReader(databasePropertiesFilePath);
+		=09
+			dbProp.load(reader);
+		=09
+			reader.close();
+		=09
+			String product =3D dbProp.getProperty("dbProduct");
+		=09
+			String driver =3D dbProp.getProperty("dbDriver");
+		=09
+			String hostName =3D dbProp.getProperty("dbHost");
+		=09
+			String portNum =3D dbProp.getProperty("dbPort");
+		=09
+			String uid =3D dbProp.getProperty("dbUid");
+		=09
+			String pwd =3D dbProp.getProperty("dbPasswd");
+		=09
+		=09
+		=09
+			Class.forName(driver);
+		=09
+			String url =3D null;
+		=09
+			if(product.equalsIgnoreCase("oracle"))
+			{
+				System.out.println("reading from oracle database");
+				String sid =3D dbProp.getProperty("dbSid");
+				url =3D "jdbc:oracle:thin:@"+hostName+":"+portNum+":"+sid;
+			=09
+			=09
+			}
+			else if(product.equalsIgnoreCase("mysql"))
+			{
+				System.out.println("reading from mysql database");
+				String dbName =3D dbProp.getProperty("dbName");
+				url =3D "jdbc:mysql://"+hostName+":"+portNum+"/"+dbName;		=09
+			}					 =20
+			System.out.println("before Connected");
+		=09
+			con=3DDriverManager.getConnection(url, uid, pwd);
+		=09
+			System.out.println("Connected");
+			Statement st =3D con.createStatement();
+		=09
+			String  sqlQuery=3D "select * from employee";
+		=09
+			ResultSet rs =3D st.executeQuery(sqlQuery);
+		=09
+			while(rs.next())
+			{
+				String =
+record=3Drs.getInt(1)+","+rs.getString(2)+","+rs.getDouble(3)+","+rs.getI=
+nt(4)+","+rs.getString(5)+","+rs.getInt(6);
+			}	=09
+		=09
+		=09
+			con.close();
+		=09
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	=09
+		finally
+		{
+			if(con!=3Dnull)
+			{
+				con.close();
+			}
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PreparedStatementImageInsertTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementImageInsertTest.java"
+
+package com.stech.mnrao.jdbc;
+
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class PreparedStatementImageInsertTest {
+=09
+	public static void main(String[] args) {
+	=09
+		File  filePath =3D new File(args[0]);	=09
+	=09
+		Connection con=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			PreparedStatement pst =3D con.prepareStatement("insert into employee =
+values(?,?,?,?,?,?, ?)");
+			FileInputStream fis =3D new FileInputStream(args[0]);
+				pst.setInt(1, 1001);
+				pst.setString(2, "hello");
+				pst.setDouble(3, 5000);
+				pst.setInt(4, 10);
+				pst.setString(5, "gender");
+				pst.setInt(6, 24);
+				pst.setBinaryStream(7, fis, fis.available());
+				pst.executeUpdate();					=09
+				con.close();
+		=09
+			System.out.println("Successfully inserted into database");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PreparedStatementTextFileInsertTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementTextFileInsertTest.java"
+
+package com.stech.mnrao.jdbc;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class PreparedStatementTextFileInsertTest {
+=09
+	public static void main(String[] args) {
+	=09
+	=09
+		Connection con=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			PreparedStatement pst =3D con.prepareStatement("insert into employee =
+values(?,?,?,?,?,?,?,?)");
+			FileInputStream fis =3D new FileInputStream(args[0]);
+			FileReader fr =3D new FileReader(args[1]);
+		=09
+			File file  =3D new File(args[1]);
+					=09
+				pst.setInt(1, 1001);
+				pst.setString(2, "hello");
+				pst.setDouble(3, 5000);
+				pst.setInt(4, 10);
+				pst.setString(5, "gender");
+				pst.setInt(6, 24);			=09
+				pst.setBinaryStream(7, fis, fis.available());					=09
+				pst.setCharacterStream(8, fr,(int) file.length());		=09
+			=09
+				pst.executeUpdate();					=09
+				con.close();
+		=09
+			System.out.println("Successfully inserted into database");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PreparedStatementTextFileRetrieveTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementTextFileRetrieveTest.java"
+
+package com.stech.mnrao.jdbc;
+
+
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.Reader;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import oracle.sql.BLOB;
+
+public class PreparedStatementTextFileRetrieveTest {
+=09
+	public static void main(String[] args) {
+	=09
+	=09
+		Connection con=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			PreparedStatement pst =3D con.prepareStatement("select * from =
+employee");=09
+			=09
+				ResultSet rs =3D  pst.executeQuery();=09
+			=09
+				rs.next();
+			=09
+				int eno =3D rs.getInt(1);
+			=09
+				Blob  blob =3D rs.getBlob(7);
+		=09
+				InputStream is =3D blob.getBinaryStream();
+			=09
+				FileOutputStream fos =3D new FileOutputStream(args[0]);
+			=09
+				int i =3D is.read();
+			=09
+				while(i!=3D-1)
+				{
+					fos.write(i);
+					i =3D is.read();
+				}
+				fos.close();
+			=09
+				Clob clob =3D rs.getClob(8);
+			=09
+				Reader reader =3D clob.getCharacterStream();
+			=09
+				FileWriter fw =3D new FileWriter(args[1]);
+			=09
+			=09
+				 i =3D reader.read();
+			=09
+				while(i!=3D-1)
+				{
+					fw.write(i);
+					i =3D reader.read();
+				}
+				fw.close();
+			=09
+				con.close();
+		=09
+			System.out.println("Successfully Retrived from database");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PreparedStatementDataFileTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementDataFileTest.java"
+
+package com.stech.mnrao.jdbc;
+
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class PreparedStatementDataFileTest {
+=09
+	public static void main(String[] args) {
+	=09
+		File  filePath =3D new File(args[0]);
+	=09
+		FileInputStream fis =3D null;
+		DataInputStream dis=3Dnull;
+		Connection con=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			PreparedStatement pst =3D con.prepareStatement("insert into employee =
+values(?,?,?,?,?,?)");
+		=09
+			fis =3D new FileInputStream(filePath);
+			dis =3D new DataInputStream(fis);
+		=09
+			String record =3D dis.readLine();
+		=09
+			while(record!=3Dnull && !record.isEmpty())
+			{
+				String[] field =3D record.split("#");
+			=09
+				pst.setInt(1, Integer.parseInt(field[0]));
+				pst.setString(2, field[1]);
+				pst.setDouble(3, Double.parseDouble(field[2]));
+				pst.setInt(4, Integer.parseInt(field[3]));
+				pst.setString(5, field[4]);
+				pst.setInt(6, Integer.parseInt(field[5]));
+				pst.executeUpdate();
+				record =3D dis.readLine();
+			}
+		=09
+			dis.close();
+			fis.close();		=09
+			con.close();
+		=09
+			System.out.println("Successfully loaded into database");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PreparedStatementTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementTest.java"
+
+package com.stech.mnrao.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class PreparedStatementTest {
+=09
+	public static void main(String[] args) {
+	=09
+		Connection con=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			PreparedStatement pst =3D con.prepareStatement("insert into employee =
+values(?,?,?,?,?,?)");
+		=09
+			pst.setInt(1, 1001);
+			pst.setString(2, "hello1");
+			pst.setDouble(3, 5000);
+			pst.setInt(4, 10);
+			pst.setString(5, "male");
+			pst.setInt(6, 25);
+=09
+			int count =3D pst.executeUpdate();
+		=09
+			if(count>=3D0)
+			{
+				System.out.println(count+" records inserted");
+			}
+			else
+			{
+				System.out.println("failed to insert");
+			}
+		=09
+			con.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="PreparedStatementImageRetrieveTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementImageRetrieveTest.java"
+
+package com.stech.mnrao.jdbc;
+
+
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import oracle.sql.BLOB;
+
+public class PreparedStatementImageRetrieveTest {
+=09
+	public static void main(String[] args) {
+	=09
+	=09
+		Connection con=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			PreparedStatement pst =3D con.prepareStatement("select * from =
+employee");=09
+			=09
+				ResultSet rs =3D  pst.executeQuery();=09
+			=09
+				rs.next();
+			=09
+				int eno =3D rs.getInt(1);
+			=09
+				Blob  blob =3D rs.getBlob(7);
+		=09
+				InputStream is =3D blob.getBinaryStream();
+			=09
+				FileOutputStream fos =3D new FileOutputStream(args[0]);
+			=09
+				int i =3D is.read();
+			=09
+				while(i!=3D-1)
+				{
+					fos.write(i);
+					i =3D is.read();
+				}
+				fos.close();
+				con.close();
+		=09
+			System.out.println("Successfully Retrived from database");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80
+Content-Type: application/octet-stream;
+	name="DatabaseInformation.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="DatabaseInformation.java"
+
+package com.stech.mnrao.jdbc;
+
+import java.sql.Statement;
+
+
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
+public class DatabaseInformation {
+=09
+	public static void main(String[] args) {
+	=09
+		Connection con =3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+		=09
+			DatabaseMetaData dbmd =3D con.getMetaData();
+		=09
+			System.out.println("DB product : "+dbmd.getDatabaseProductName());
+		=09
+			System.out.println("DB Version : "+dbmd.getDatabaseProductVersion());
+		=09
+			System.out.println("DB Major Version =
+:"+dbmd.getDatabaseMajorVersion());
+			System.out.println("DB Minor Version : =
+"+dbmd.getDatabaseMinorVersion());
+		=09
+			System.out.println("Driver name : "+dbmd.getDriverName());
+		=09
+			System.out.println("Driver Version : "+dbmd.getDriverVersion());
+			System.out.println("User Id : "+dbmd.getUserName());
+			con.close();
+		=09
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	=09
+	}
+
+}
+
+------=_NextPart_000_0007_01D57B84.47CC2B80--
+

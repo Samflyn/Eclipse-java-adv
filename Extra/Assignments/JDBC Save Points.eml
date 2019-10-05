@@ -1,0 +1,222 @@
+X-Account-Key: account1
+X-Mozilla-Keys:                                                                                 
+Return-Path: <nageswar.mandru@sailotech.net>
+Delivered-To: srivaths.puranam@sailotech.net
+Received: from md-22.webhostbox.net
+	by md-22.webhostbox.net with LMTP
+	id iKHCNvhSmF1QvRUA/6xX1w
+	(envelope-from <nageswar.mandru@sailotech.net>)
+	for <srivaths.puranam@sailotech.net>; Sat, 05 Oct 2019 08:23:20 +0000
+Return-path: <nageswar.mandru@sailotech.net>
+Envelope-to: srivaths.puranam@sailotech.net
+Delivery-date: Sat, 05 Oct 2019 08:23:20 +0000
+Received: from [223.230.103.18] (port=56295 helo=MNRAOPC)
+	by md-22.webhostbox.net with esmtpa (Exim 4.92)
+	(envelope-from <nageswar.mandru@sailotech.net>)
+	id 1iGfLU-0061Cz-4T
+	for srivaths.puranam@sailotech.net; Sat, 05 Oct 2019 08:23:20 +0000
+From: "Nageswar Rao Mandru" <nageswar.mandru@sailotech.net>
+To: <srivaths.puranam@sailotech.net>
+Subject: JDBC Save Points
+Date: Sat, 5 Oct 2019 13:53:25 +0530
+Message-ID: <000001d57b56$2d35c480$87a14d80$@sailotech.net>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="----=_NextPart_000_0001_01D57B84.46F24640"
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AdV7VR8HGjqUB3ocRxi2FZg7rpyiVQ==
+Content-Language: en-us
+
+This is a multipart message in MIME format.
+
+------=_NextPart_000_0001_01D57B84.46F24640
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_001_0002_01D57B84.46F24640"
+
+
+------=_NextPart_001_0002_01D57B84.46F24640
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+ 
+
+ 
+
+ 
+
+
+------=_NextPart_001_0002_01D57B84.46F24640
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" =
+xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" =
+xmlns=3D"http://www.w3.org/TR/REC-html40"><head><META =
+HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii"><meta name=3DGenerator content=3D"Microsoft Word 14 =
+(filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3DEN-US link=3Dblue =
+vlink=3Dpurple><div class=3DWordSection1><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p></div></body></html>
+------=_NextPart_001_0002_01D57B84.46F24640--
+
+------=_NextPart_000_0001_01D57B84.46F24640
+Content-Type: application/octet-stream;
+	name="PreparedStatementTest.java"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="PreparedStatementTest.java"
+
+package com.stech.mnrao.jdbc;
+
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Savepoint;
+
+
+public class PreparedStatementTest {
+=09
+	public static void main(String[] args) throws SQLException {
+	=09
+		Connection con=3Dnull;
+		Statement st=3Dnull;
+		Savepoint sp1=3Dnull;
+		Savepoint sp2=3Dnull;
+		Savepoint sp3=3Dnull;
+	=09
+		try
+		{
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		=09
+			=
+con=3DDriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"=
+, "scott","tiger");
+	=09
+			con.setAutoCommit(false);
+		=09
+			 st =3D con.createStatement();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();		=09
+		}
+	=09
+	=09
+		try
+		{	=09
+			sp1 =3D con.setSavepoint("sp1");
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1001,'hello1',5000,10,'male',25)");
+		=09
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1002,'hello2',6000,20,'female',25)");
+		=09
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1003,'hello3',8000,30,'male',26)");
+			=09
+		=09
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			con.rollback(sp1);
+		}
+		=09
+		try
+		{
+			sp2 =3D con.setSavepoint("sp2");
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1004,'hello1',5000,10,'male',25)");
+		=09
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1005,'hello2',6000,20,'female',25)");
+		=09
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(xyz,'hello3',8000,30,'male',26)");
+		=09
+		=09
+	=09
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			con.rollback(sp2);
+		}
+	=09
+		try
+		{
+			sp3 =3D con.setSavepoint("sp3");
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1007,'hello1',5000,10,'male',25)");
+		=09
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1008,'hello2',6000,20,'female',25)");
+		=09
+			st.executeUpdate("INSERT INTO EMPLOYEE =
+VALUES(1009,'hello3',8000,30,'male',26)");
+		=09
+			con.commit();
+			System.out.println("Inserted ");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			con.rollback(sp3);
+		}
+		finally
+		{
+			if(con!=3Dnull)
+			{
+				con.close();
+			}
+		}	=09
+	=09
+	}
+
+}
+
+------=_NextPart_000_0001_01D57B84.46F24640--
+

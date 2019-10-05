@@ -1,0 +1,143 @@
+X-Account-Key: account1
+X-Mozilla-Keys:                                                                                 
+Return-Path: <nageswar.mandru@sailotech.net>
+Delivered-To: srivaths.puranam@sailotech.net
+Received: from md-22.webhostbox.net
+	by md-22.webhostbox.net with LMTP
+	id wO+AM9psmF3EOxsA/6xX1w
+	(envelope-from <nageswar.mandru@sailotech.net>)
+	for <srivaths.puranam@sailotech.net>; Sat, 05 Oct 2019 10:13:46 +0000
+Return-path: <nageswar.mandru@sailotech.net>
+Envelope-to: srivaths.puranam@sailotech.net
+Delivery-date: Sat, 05 Oct 2019 10:13:46 +0000
+Received: from [223.230.103.18] (port=52333 helo=MNRAOPC)
+	by md-22.webhostbox.net with esmtpa (Exim 4.92)
+	(envelope-from <nageswar.mandru@sailotech.net>)
+	id 1iGh4M-007dOW-6M
+	for srivaths.puranam@sailotech.net; Sat, 05 Oct 2019 10:13:46 +0000
+From: "Nageswar Rao Mandru" <nageswar.mandru@sailotech.net>
+To: <srivaths.puranam@sailotech.net>
+Subject: 
+Date: Sat, 5 Oct 2019 15:43:56 +0530
+Message-ID: <000001d57b65$9aa95680$cffc0380$@sailotech.net>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+	boundary="----=_NextPart_000_0001_01D57B93.B462F210"
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AdV7ZZjvK2eVCl0yQ0aToI14jhlZYA==
+Content-Language: en-us
+
+This is a multipart message in MIME format.
+
+------=_NextPart_000_0001_01D57B93.B462F210
+Content-Type: multipart/alternative;
+	boundary="----=_NextPart_001_0002_01D57B93.B462F210"
+
+
+------=_NextPart_001_0002_01D57B93.B462F210
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+
+ 
+
+PFA are assignments in JDBC
+
+ 
+
+Thanks 
+
+Nageswar Rao
+
+
+------=_NextPart_001_0002_01D57B93.B462F210
+Content-Type: text/html;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" =
+xmlns:o=3D"urn:schemas-microsoft-com:office:office" =
+xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" =
+xmlns=3D"http://www.w3.org/TR/REC-html40"><head><META =
+HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3Dus-ascii"><meta name=3DGenerator content=3D"Microsoft Word 14 =
+(filtered medium)"><style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:blue;
+	text-decoration:underline;}
+a:visited, span.MsoHyperlinkFollowed
+	{mso-style-priority:99;
+	color:purple;
+	text-decoration:underline;}
+span.EmailStyle17
+	{mso-style-type:personal-compose;
+	font-family:"Calibri","sans-serif";
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-family:"Calibri","sans-serif";}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]--></head><body lang=3DEN-US link=3Dblue =
+vlink=3Dpurple><div class=3DWordSection1><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>PFA are =
+assignments in JDBC<o:p></o:p></p><p =
+class=3DMsoNormal><o:p>&nbsp;</o:p></p><p class=3DMsoNormal>Thanks =
+<o:p></o:p></p><p class=3DMsoNormal>Nageswar =
+Rao<o:p></o:p></p></div></body></html>
+------=_NextPart_001_0002_01D57B93.B462F210--
+
+------=_NextPart_000_0001_01D57B93.B462F210
+Content-Type: text/plain;
+	name="Assignments.txt"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="Assignments.txt"
+
+1) program to load emp records from database table to ArrayList and =
+Display
+
+2) program to read emp records from database table and Generate CSV =
+file.
+
+3) program to read emp records CSV file and insert into  database table=20
+
+4) program to read emp records Excel file and insert into  database =
+table=20
+
+5) program to read emp records from database table and Generate Excel =
+file.
+
+6) program to read emp records XML File and insert into  database table=20
+
+7) program to read emp records database table and Genrate XML file.
+
+8) program to read emp records database table and Genrate JSON Data =
+file.=20
+
+9) program to read emp records JSON file  and insert into table.
+
+10) program to read emp records database table ( Oracle )  and insert =
+another database table ( mysql )
+------=_NextPart_000_0001_01D57B93.B462F210--
+

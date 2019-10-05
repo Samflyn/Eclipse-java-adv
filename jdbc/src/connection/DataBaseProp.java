@@ -13,7 +13,7 @@ import java.util.Properties;
 public class DataBaseProp {
 	ResultSet rs = null;
 
-	public ResultSet DataBaseProp(String src) throws IOException, SQLException, FileNotFoundException {
+	public Connection getConnection(String src) throws IOException, SQLException, FileNotFoundException {
 		Connection con = null;
 		String url = null;
 		Properties prop = new Properties();
@@ -35,16 +35,11 @@ public class DataBaseProp {
 			}
 			Class.forName(dbDriver);
 			con = DriverManager.getConnection(url, dbUid, dbPasswd);
-			Statement st = con.createStatement();
-			String query = "select * from emp";
-			rs = st.executeQuery(query);
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			if (con != null) {
-				con.close();
-			}
 		}
-		return rs;
+
+		return con;
 	}
 }
