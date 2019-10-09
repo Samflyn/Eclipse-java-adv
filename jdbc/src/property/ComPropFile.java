@@ -1,4 +1,4 @@
-package orclData;
+package property;
 
 import java.io.FileReader;
 import java.sql.Connection;

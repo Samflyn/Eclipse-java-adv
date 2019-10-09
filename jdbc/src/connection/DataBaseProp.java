@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
 public class DataBaseProp {
@@ -35,11 +34,9 @@ public class DataBaseProp {
 			}
 			Class.forName(dbDriver);
 			con = DriverManager.getConnection(url, dbUid, dbPasswd);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return con;
 	}
 }

@@ -9,7 +9,6 @@ import java.sql.Statement;
 
 public class Test {
 	public static void main(String[] args) throws FileNotFoundException, IOException, SQLException {
-
 		Connection con = null;
 		DataBaseProp pro = new DataBaseProp();
 		String query = "select * from emp";

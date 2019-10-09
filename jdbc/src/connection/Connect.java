@@ -1,23 +1,22 @@
-package mysql;
+package connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Update {
+public class Connect {
 	public static void main(String[] args) throws SQLException {
 		Connection con = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.189:1523:sailodba", "apps", "apps");
 			Statement st = con.createStatement();
-			String sqlQuery = "update emp set salary=20000 where empno=1001";
-			int rs = st.executeUpdate(sqlQuery);
-			if (rs > 1) {
-				System.out.println("Updated");
-			} else {
-				System.out.println("failed");
+			String sqlQuery = "select * from emp";
+			ResultSet rs = st.executeQuery(sqlQuery);
+			while (rs.next()) {
+				System.out.println();
 			}
 			con.close();
 		} catch (Exception e) {

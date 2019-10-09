@@ -10,7 +10,7 @@ public class Insert {
 		Connection con = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","root");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
 			Statement st = con.createStatement();
 			String sqlQuery = "insert into emp vaules(1001,'sam',10000,20)";
 			int rs = st.executeUpdate(sqlQuery);

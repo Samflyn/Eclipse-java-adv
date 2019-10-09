@@ -10,7 +10,7 @@ public class Delete {
 		Connection con = null;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","root");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
 			Statement st = con.createStatement();
 			String sqlQuery = "delete from emp where empno=1001";
 			int rs = st.executeUpdate(sqlQuery);

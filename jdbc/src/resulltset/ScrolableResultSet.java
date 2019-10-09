@@ -1,0 +1,35 @@
+package resulltset;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class ScrolableResultSet {
+	public static void main(String[] args) throws SQLException {
+		Connection con = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@192.168.1.189:1523:sailodba", "apps", "apps");
+			Statement st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			String query = "Select * from emp";
+			ResultSet rs = st.executeQuery(query);
+			if (rs.first()) {
+				System.out.println(rs.getInt(1));
+			}
+			if (rs.last()) {
+				System.out.println(rs.getInt(1));
+			}
+			if (rs.relative(-2)) {
+				System.out.println(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				con.close();
+			}
+		}
+	}
+}
