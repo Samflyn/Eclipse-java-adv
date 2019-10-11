@@ -8,7 +8,7 @@ public class Roww {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			JdbcRowSet rs = RowSetProvider.newFactory().createJdbcRowSet();
-			rs.setUrl("jdbc:oracle:thin:@192.168.1.189:sailodba");
+			rs.setUrl("jdbc:oracle:thin:@192.168.1.189:1523:sailodba");
 			rs.setUsername("apps");
 			rs.setPassword("apps");
 			rs.setCommand("select * from sam");
@@ -19,6 +19,7 @@ public class Roww {
 				System.out.println(rs.getDouble(3));
 				System.out.println(rs.getString(4));
 			}
+			rs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
