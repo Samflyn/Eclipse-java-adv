@@ -26,7 +26,22 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/sam/Eclipse-java-core/Extra/poi-4.1.0/xmlbeans-3.1.0.jar">
+	<classpathentry kind="lib" path="/home/sam/Eclipse-java-core/Extra/poi-4.1.0/poi-scratchpad-4.1.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/sam/Eclipse-java-core/Extra/poi-4.1.0/ooxml-lib/xmlbeans-3.1.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/sam/Eclipse-java-core/Extra/poi-4.1.0/lib/commons-compress-1.18.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/home/sam/Eclipse-java-core/Extra/poi-4.1.0/lib/commons-collections4-4.3.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
