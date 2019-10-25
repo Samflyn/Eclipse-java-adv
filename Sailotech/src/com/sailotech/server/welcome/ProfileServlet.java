@@ -32,7 +32,6 @@ public class ProfileServlet extends HttpServlet {
 		PreparedStatement statement = null;
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
-
 		try {
 			ServletContext context = getServletContext();
 			String Driver = context.getInitParameter("dbDriver");
@@ -46,7 +45,7 @@ public class ProfileServlet extends HttpServlet {
 			connection = DriverManager.getConnection(url, Uid, password);
 			statement = connection.prepareStatement("SELECT * FROM SAILO1 WHERE USERID=? ");
 			HttpSession session = req.getSession(false);
-			String userName = (String) session.getAttribute("uid");
+			String userName = (String) session.getAttribute("sid");
 			statement.setString(1, userName);
 			ResultSet result = statement.executeQuery();
 			result.next();
@@ -55,7 +54,13 @@ public class ProfileServlet extends HttpServlet {
 			String lastName = result.getString(4);
 			Date date = result.getDate(5);
 			String gender = result.getString(6);
-			out.println();
+			out.println("<h1>Welcome, " + userID + "</h1><hr>");
+			out.println("<input type=\"submit\" onclick=\"window.location.href='./logout';\" value=\"logout\">");
+			out.println("<h3>User ID - "+userID+"</h3>");
+			out.println("<h3>First Name - "+firstName+"</h3>");
+			out.println("<h3>Last Name - "+lastName+"</h3>");
+			out.println("<h3>Date Of Birth - "+date+"</h3>");
+			out.println("<h3>Gender - "+gender+"</h3>");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

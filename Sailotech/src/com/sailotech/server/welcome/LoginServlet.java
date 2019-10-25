@@ -50,18 +50,18 @@ public class LoginServlet extends HttpServlet {
 		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		try {
-			String userID = req.getParameter("uid");
-			String passwd = req.getParameter("pwd");
+			String userID = req.getParameter("userID");
+			String passwd = req.getParameter("password");
 			statement.setString(1, userID);
 			statement.setString(2, passwd);
 			ResultSet executeQuery = statement.executeQuery();
 			executeQuery.next();
 			int count = executeQuery.getInt(1);
 			if (count == 1) {
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("Dashboard.html");
-				requestDispatcher.forward(req, resp);
 				HttpSession session = req.getSession();
 				session.setAttribute("sid", userID);
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("Dashboard.html");
+				requestDispatcher.forward(req, resp);
 			} else {
 				out.println("<h2 style=" + "color:red;" + " >Username or Password invalid !</h2>");
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("LoginForm.html");

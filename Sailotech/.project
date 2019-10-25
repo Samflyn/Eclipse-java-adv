@@ -28,4 +28,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/lib/ojdbc10-19.3.0.0.jar</name>
+			<type>1</type>
+			<location>/home/sam/Eclipse-java-adv/Extra/ojdbc driver/ojdbc10-19.3.0.0.jar</location>
+		</link>
+	</linkedResources>
 </projectDescription>

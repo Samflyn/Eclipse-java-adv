@@ -77,4 +77,14 @@ DATE VARCHAR2(12), GENDER VARCHAR2(6));
     <url-pattern>/profile</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>LogOut</servlet-name>
+    <servlet-class>com.sailotech.server.welcome.LogoutServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LogOut</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
 </web-app>

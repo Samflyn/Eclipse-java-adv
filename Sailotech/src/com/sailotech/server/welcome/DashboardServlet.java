@@ -26,18 +26,16 @@ public class DashboardServlet extends HttpServlet {
 		try {
 			resp.setContentType("text/html");
 			PrintWriter out = resp.getWriter();
-			RequestDispatcher linkRequestDispatcher = req.getRequestDispatcher("Dashboard.html");
-			linkRequestDispatcher.include(req, resp);
 			HttpSession session = req.getSession(false);
 			if (session != null) {
 				String userID = (String) session.getAttribute("sid");
-				out.print("Hello, " + userID + " Welcome to Dashboard");
+				RequestDispatcher linkRequestDispatcher = req.getRequestDispatcher("Profile.html");
+				linkRequestDispatcher.include(req, resp);
 			} else {
-				out.print("Please login first");
+				out.println("<h1>Hello</h1>");
 				RequestDispatcher loginRequestDispatcher = req.getRequestDispatcher("Login.html");
 				loginRequestDispatcher.include(req, resp);
 			}
-			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
 		try {
 			String userID = req.getParameter("userID");
 			String passwd = req.getParameter("passwd");
-			String repasswd = req.getParameter("rpwd");
+			String repasswd = req.getParameter("re-passwd");
 			String firstName = req.getParameter("first name");
 			String lastName = req.getParameter("last name");
 			String date = req.getParameter("date");
