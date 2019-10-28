@@ -36,6 +36,7 @@ public class ExcelParser {
 				}
 				sb.deleteCharAt(sb.length() - 1);
 				sb.append('\n');
+				wb.close();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

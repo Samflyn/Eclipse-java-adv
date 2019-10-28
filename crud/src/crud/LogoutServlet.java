@@ -1,4 +1,4 @@
-package com.sailotech.server.welcome;
+package crud;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,12 +25,17 @@ public class LogoutServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
-		PrintWriter out = resp.getWriter();
-		HttpSession session = req.getSession(false);
-		session.invalidate();
-		out.print("<h3 style=\"color: green;\">You're logged out!</h3>");
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("HomePage.html");
-		requestDispatcher.include(req, resp);
+		PrintWriter writer = resp.getWriter();
+		try {
+			HttpSession session = req.getSession(false);
+			session.invalidate();
+			writer.print("<h3 style=\"color: green;\">You're logged out!</h3>");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginform.html");
+			requestDispatcher.include(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+			writer.println("<h1 style=" + "color: red;" + ">Server Busy!</h1>");
+		}
 	}
 
 }

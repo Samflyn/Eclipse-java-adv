@@ -36,6 +36,7 @@ public class ExcelWriter {
 				cell.setCellValue(Integer.parseInt(split[3]));
 				wb.write(fos);
 				fos.flush();
+				wb.close();
 				fos.close();
 			}
 		} catch (Exception e) {

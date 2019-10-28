@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>assignment</display-name>
+  <welcome-file-list>
+    <welcome-file>home.html</welcome-file>
+  </welcome-file-list>
+<!-- CREATE TABLE SAILO1 (USERID VARCHAR2(20), PASSWORD VARCHAR2(30), FIRST NAME VARCHAR2(20), LAST NAME VARCHAR2(20),
+DATE VARCHAR2(12), GENDER VARCHAR2(6));
+ -->
+  <context-param>
+    <param-name>dbDriver</param-name>
+    <param-value>oracle.jdbc.driver.OracleDriver</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>dbHost</param-name>
+    <param-value>192.168.1.189</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>dbport</param-name>
+    <param-value>1523</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>dbUid</param-name>
+    <param-value>apps</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>dbpassword </param-name>
+    <param-value>apps</param-value>
+  </context-param>
+
+  <context-param>
+    <param-name>dbsid</param-name>
+    <param-value>sailodba</param-value>
+  </context-param>
+
+  <servlet>
+    <servlet-name>register</servlet-name>
+    <servlet-class>crud.RegisterServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>register</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>crud.LoginServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>crud.DasboardServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Profile</servlet-name>
+    <servlet-class>crud.ProfileServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Profile</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Edit</servlet-name>
+    <servlet-class>crud.EditServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Edit</servlet-name>
+    <url-pattern>/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LogOut</servlet-name>
+    <servlet-class>crud.LogoutServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>LogOut</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+</web-app>
