@@ -3,7 +3,6 @@ package crud;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +23,6 @@ public class EditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection connection = null;
 	PreparedStatement verify = null;
-	PreparedStatement update = null;
 
 	@Override
 	public void init() throws ServletException {
@@ -40,8 +38,6 @@ public class EditServlet extends HttpServlet {
 			String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
 			connection = DriverManager.getConnection(url, Uid, password);
 			verify = connection.prepareStatement("SELECT * FROM SAILO1 WHERE USERID=? ");
-			update = connection.prepareStatement(
-					"UPDATE SAILO1 SET PASSWORD=?,FIRSTNAME=?,LASTNAME=?,DATE=?,GENDER=? WHERE USERID=?");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -69,41 +65,22 @@ public class EditServlet extends HttpServlet {
 			String lastName = result.getString(4);
 			String date = result.getString(5);
 			String gender = result.getString(6);
+			writer.println("<form action=\"./update\" method=\"post\">");
 			writer.println("<title>Edit Profile</title>");
 			writer.println("<h1>Edit Profile</h1><hr>");
 			writer.println("<input type=\"submit\" onclick=\"window.location.href='./logout';\" value=\"logout\">");
 			writer.println(
 					"User ID:<input type=\"text\" name=\"userID\" value=\"" + userID + "\" disabled>" + "<br><br>");
 			writer.println("Password: <input type=\"password\" name=\"passwd\" value=\"" + passwd + "\">" + "<br><br>");
-			writer.println("Re-type Password: <input type=\"password\" name=\"rpasswd\" value=\"" + rpasswd + "\">");
-			writer.println("First Name: <input type=\"text\" name=\"fname\" value=\"" + firstName + "\">");
-			writer.println("Last Name: <input type=\"text\" name=\"lname\" value=\"" + lastName + "\">");
-			writer.println("Date Of Birth: <input type=\"date\" name=\"dob\" value=\"" + date + "\">");
-			writer.println("Gender: <input type=\"text\" name=\"gender\" value=\"" + gender + "\">");
+			writer.println("Re-type Password: <input type=\"password\" name=\"rpasswd\" value=\"" + rpasswd + "\">"
+					+ "<br><br>");
+			writer.println("First Name: <input type=\"text\" name=\"fname\" value=\"" + firstName + "\">" + "<br><br>");
+			writer.println("Last Name: <input type=\"text\" name=\"lname\" value=\"" + lastName + "\">" + "<br><br>");
+			writer.println("Date Of Birth: <input type=\"date\" name=\"dob\" value=\"" + date + "\">" + "<br><br>");
+			writer.println("Gender: <input type=\"text\" name=\"gender\" value=\"" + gender + "\">" + "<br><br>");
 			writer.println("<input type=\"submit\" value=\"submit\">");
-			String passwd1 = req.getParameter("passwd");
-			String rpasswd1 = req.getParameter("rpasswd");
-			String firstName1 = req.getParameter("fname");
-			String lastName1 = req.getParameter("lname");
-			String date1 = req.getParameter("dob");
-			String gender1 = req.getParameter("gender");
-			if (!passwd1.equals(rpasswd1)) {
-				writer.println("<h3 style=\"color: red;\">Password Mis-matched</h3>");
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("EditServlet");
-				requestDispatcher.include(req, resp);
-				return;
-			}
-			update.setString(1, passwd);
-			update.setString(2, firstName);
-			update.setString(3, lastName);
-			update.setString(4, date);
-			update.setString(5, gender);
-			update.setString(6, userName);
-			update.executeUpdate();
-			writer.println("<h3 style=\"color: green;\">Sucessfully registered!</h3>");
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("registerform.html");
-			requestDispatcher.include(req, resp);
 			writer.println("<input type=\"reset\" onclick=\"window.location.href='./profile'\" value=\"cancel\">");
+			writer.println("</form>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			writer.println("<h1 style=" + "color: red;" + ">Server Busy!</h1>");

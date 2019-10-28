@@ -29,8 +29,8 @@ public class DashboardServlet extends HttpServlet {
 			HttpSession session = req.getSession(false);
 			if (session != null) {
 				String userID = (String) session.getAttribute("sid");
-				RequestDispatcher linkRequestDispatcher = req.getRequestDispatcher("Profile.html");
-				linkRequestDispatcher.include(req, resp);
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("Profile.html");
+				requestDispatcher.forward(req, resp);
 			} else {
 				out.println("<h1>Hello</h1>");
 				RequestDispatcher loginRequestDispatcher = req.getRequestDispatcher("Login.html");

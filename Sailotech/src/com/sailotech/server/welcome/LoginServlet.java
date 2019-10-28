@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			if (count == 1) {
 				HttpSession session = req.getSession();
 				session.setAttribute("sid", userID);
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("Dashboard.html");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("DashboardServlet");
 				requestDispatcher.forward(req, resp);
 			} else {
 				out.println("<h2 style=" + "color:red;" + " >Username or Password invalid !</h2>");
@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			out.print("<h1 style=\\\\\\\"color: red;\\\\\\\">Server Busy!</h1>");
+			out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
 			try {
 				connection.rollback();
 			} catch (SQLException p) {

@@ -46,8 +46,8 @@ public class ProfileServlet extends HttpServlet {
 			connection = DriverManager.getConnection(url, Uid, password);
 			statement = connection.prepareStatement("SELECT * FROM SAILO1 WHERE USERID=? ");
 			HttpSession session = req.getSession(false);
-			String userName = (String) session.getAttribute("sid");
-			if (!userName.isEmpty()) {
+			if (session != null) {
+				String userName = (String) session.getAttribute("sid");
 				statement.setString(1, userName);
 				ResultSet result = statement.executeQuery();
 				result.next();

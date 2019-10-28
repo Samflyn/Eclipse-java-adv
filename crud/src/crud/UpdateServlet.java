@@ -3,10 +3,8 @@ package crud;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,17 +12,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class ProfileServlet extends HttpServlet {
+public class UpdateServlet extends HttpServlet{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	Connection connection = null;
-	PreparedStatement statement = null;
-
+	PreparedStatement update = null;
+	
 	@Override
 	public void init() throws ServletException {
 		try {
@@ -38,51 +35,48 @@ public class ProfileServlet extends HttpServlet {
 			Class.forName(Driver);
 			String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
 			connection = DriverManager.getConnection(url, Uid, password);
-			statement = connection.prepareStatement("SELECT * FROM SAILO1 WHERE USERID=? ");
+			update = connection.prepareStatement(
+					"UPDATE SAILO1 SET PASSWORD=?,FIRSTNAME=?,LASTNAME=?,DATE=?,GENDER=? WHERE USERID=?");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html");
 		PrintWriter writer = resp.getWriter();
 		try {
-			HttpSession session = req.getSession(false);
-			if (session != null) {
-				String userName = (String) session.getAttribute("sid");
-				statement.setString(1, userName);
-				ResultSet result = statement.executeQuery();
-				result.next();
-				String userID = result.getString(1);
-				String firstName = result.getString(3);
-				String lastName = result.getString(4);
-				Date date = result.getDate(5);
-				String gender = result.getString(6);
-				writer.println("<title>Profile</title>");
-				writer.println("<h1>Welcome, " + userID + "</h1><hr>");
-				writer.println("<input type=\"submit\" onclick=\"window.location.href='./logout';\" value=\"logout\">");
-				writer.println("<h3>User ID - " + userID + "</h3>");
-				writer.println("<h3>First Name - " + firstName + "</h3>");
-				writer.println("<h3>Last Name - " + lastName + "</h3>");
-				writer.println("<h3>Date Of Birth - " + date + "</h3>");
-				writer.println("<h3>Gender - " + gender + "</h3>");
-				writer.println("<input type=\"submit\" onclick=\"window.location.href='./edit'\" value=\"Edit\">");
-			} else {
-				writer.println("<h1>Please Login First </h1><hr>");
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("LoginForm.html");
+			String userName = req.getParameter("userName");
+			String passwd = req.getParameter("passwd");
+			String rpasswd = req.getParameter("rpasswd");
+			String firstName = req.getParameter("fname");
+			String lastName = req.getParameter("lname");
+			String date = req.getParameter("dob");
+			String gender = req.getParameter("gender");
+			if (!passwd.equals(rpasswd)) {
+				writer.println("<h3 style=\"color: red;\">Password Mis-matched</h3>");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("EditServlet");
 				requestDispatcher.include(req, resp);
+				return;
 			}
-		} catch (Exception e) {
+			update.setString(1, passwd);
+			update.setString(2, firstName);
+			update.setString(3, lastName);
+			update.setString(4, date);
+			update.setString(5, gender);
+			update.setString(6, userName);
+			update.executeUpdate();
+			writer.println("<h3 style=\"color: green;\">Sucessfully updated!</h3>");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("EditServlet");
+			requestDispatcher.include(req, resp);
+		} catch(Exception e) {
 			e.printStackTrace();
 			writer.println("<h1 style=" + "color: red;" + ">Server Busy!</h1>");
 		}
 	}
-
 }
