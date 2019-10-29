@@ -60,7 +60,7 @@ public class UpdateServlet extends HttpServlet{
 			String gender = req.getParameter("gender");
 			if (!passwd.equals(rpasswd)) {
 				writer.println("<h3 style=\"color: red;\">Password Mis-matched</h3>");
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("EditServlet");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("./edit");
 				requestDispatcher.include(req, resp);
 				return;
 			}

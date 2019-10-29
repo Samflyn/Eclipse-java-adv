@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			if (count == 1) {
 				HttpSession session = req.getSession();
 				session.setAttribute("sid", userID);
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("DashboardServlet");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("Dashboard.html");
 				requestDispatcher.forward(req, resp);
 			} else {
 				out.println("<h2 style=" + "color:red;" + " >Username or Password invalid !</h2>");

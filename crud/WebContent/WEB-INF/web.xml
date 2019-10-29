@@ -97,4 +97,14 @@ DATE VARCHAR2(12), GENDER VARCHAR2(6));
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>Update</servlet-name>
+    <servlet-class>crud.UpdateServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Update</servlet-name>
+    <url-pattern>/update</url-pattern>
+  </servlet-mapping>
+
 </web-app>

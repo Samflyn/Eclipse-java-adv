@@ -60,7 +60,6 @@ public class EditServlet extends HttpServlet {
 			result.next();
 			String userID = result.getString(1);
 			String passwd = result.getString(2);
-			String rpasswd = null;
 			String firstName = result.getString(3);
 			String lastName = result.getString(4);
 			String date = result.getString(5);
@@ -72,7 +71,7 @@ public class EditServlet extends HttpServlet {
 			writer.println(
 					"User ID:<input type=\"text\" name=\"userID\" value=\"" + userID + "\" disabled>" + "<br><br>");
 			writer.println("Password: <input type=\"password\" name=\"passwd\" value=\"" + passwd + "\">" + "<br><br>");
-			writer.println("Re-type Password: <input type=\"password\" name=\"rpasswd\" value=\"" + rpasswd + "\">"
+			writer.println("Re-type Password: <input type=\"password\" name=\"rpasswd\" value=\"" + passwd + "\">"
 					+ "<br><br>");
 			writer.println("First Name: <input type=\"text\" name=\"fname\" value=\"" + firstName + "\">" + "<br><br>");
 			writer.println("Last Name: <input type=\"text\" name=\"lname\" value=\"" + lastName + "\">" + "<br><br>");

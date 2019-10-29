@@ -75,8 +75,8 @@ public class ProfileServlet extends HttpServlet {
 				writer.println("<h3>Gender - " + gender + "</h3>");
 				writer.println("<input type=\"submit\" onclick=\"window.location.href='./edit'\" value=\"Edit\">");
 			} else {
-				writer.println("<h1>Please Login First </h1><hr>");
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("LoginForm.html");
+				writer.println("<h1 style=\"color: red;\">Please login first!</h1>");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginform.html");
 				requestDispatcher.include(req, resp);
 			}
 		} catch (Exception e) {

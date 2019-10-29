@@ -64,7 +64,7 @@ public class ProfileServlet extends HttpServlet {
 				out.println("<h3>Date Of Birth - " + date + "</h3>");
 				out.println("<h3>Gender - " + gender + "</h3>");
 			} else {
-				out.println("<h1>Please Login First </h1><hr>");
+				out.println("<h1 style=\"color: red;\">Please login first!</h1>");
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("LoginForm.html");
 				requestDispatcher.include(req, resp);
 			}

@@ -28,10 +28,16 @@ public class LogoutServlet extends HttpServlet {
 		PrintWriter writer = resp.getWriter();
 		try {
 			HttpSession session = req.getSession(false);
-			session.invalidate();
-			writer.print("<h3 style=\"color: green;\">You're logged out!</h3>");
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginform.html");
-			requestDispatcher.include(req, resp);
+			if (session != null) {
+				session.invalidate();
+				writer.print("<h3 style=\"color: green;\">You're logged out!</h3>");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginform.html");
+				requestDispatcher.include(req, resp);
+			} else {
+				writer.print("<h3 style=\"color: red;\">Please login first!</h3>");
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("loginform.html");
+				requestDispatcher.include(req, resp);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			writer.println("<h1 style=" + "color: red;" + ">Server Busy!</h1>");
