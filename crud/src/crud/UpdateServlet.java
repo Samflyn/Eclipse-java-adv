@@ -36,7 +36,7 @@ public class UpdateServlet extends HttpServlet{
 			String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
 			connection = DriverManager.getConnection(url, Uid, password);
 			update = connection.prepareStatement(
-					"UPDATE SAILO1 SET PASSWORD=?,FIRSTNAME=?,LASTNAME=?,DATE=?,GENDER=? WHERE USERID=?");
+					"UPDATE SAILO1 SET PASSWORD=?,FIRSTNAME=?,LASTNAME=?,DOB=?,GENDER=? WHERE USERID=?");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

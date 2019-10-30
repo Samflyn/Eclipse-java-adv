@@ -64,6 +64,7 @@ public class EditServlet extends HttpServlet {
 			String lastName = result.getString(4);
 			String date = result.getString(5);
 			String gender = result.getString(6);
+			writer.println("<body>");
 			writer.println("<form action=\"./update\" method=\"post\">");
 			writer.println("<title>Edit Profile</title>");
 			writer.println("<h1>Edit Profile</h1><hr>");
@@ -80,6 +81,7 @@ public class EditServlet extends HttpServlet {
 			writer.println("<input type=\"submit\" value=\"submit\">");
 			writer.println("<input type=\"reset\" onclick=\"window.location.href='./profile'\" value=\"cancel\">");
 			writer.println("</form>");
+			writer.println("</body>");
 		} catch (Exception e) {
 			e.printStackTrace();
 			writer.println("<h1 style=" + "color: red;" + ">Server Busy!</h1>");
