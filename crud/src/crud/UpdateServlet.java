@@ -35,8 +35,7 @@ public class UpdateServlet extends HttpServlet{
 			Class.forName(Driver);
 			String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
 			connection = DriverManager.getConnection(url, Uid, password);
-			update = connection.prepareStatement(
-					"UPDATE SAILO1 SET PASSWORD=?,FIRSTNAME=?,LASTNAME=?,DOB=?,GENDER=? WHERE USERID=?");
+			update = connection.prepareStatement("UPDATE SAILO1 SET PASSWORD=?,FIRSTNAME=?,LASTNAME=?,DOB=?,GENDER=? WHERE USERID=?");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,7 +50,7 @@ public class UpdateServlet extends HttpServlet{
 		resp.setContentType("text/html");
 		PrintWriter writer = resp.getWriter();
 		try {
-			String userName = req.getParameter("userName");
+			String userName = req.getParameter("userID");
 			String passwd = req.getParameter("passwd");
 			String rpasswd = req.getParameter("rpasswd");
 			String firstName = req.getParameter("fname");
