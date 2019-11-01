@@ -1,7 +1,0 @@
-dbProduct=oracle
-dbDriver=oracle.jdbc.driver.OracleDriver
-dbHost=192.168.1.189
-dbPort=1523
-dbUid=apps
-dbPasswd=apps
-dbSid=orcl

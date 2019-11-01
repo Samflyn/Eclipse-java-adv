@@ -13,11 +13,11 @@
   <url-pattern>/register</url-pattern>
   </servlet-mapping>
   <servlet>
-  <servlet-name></servlet-name>
-  <servlet-class></servlet-class>
+  <servlet-name>Success</servlet-name>
+  <servlet-class>ctrl.Success</servlet-class>
   </servlet>
   <servlet-mapping>
-  <servlet-name></servlet-name>
-  <url-pattern></url-pattern>
+  <servlet-name>Success</servlet-name>
+  <url-pattern>/Success</url-pattern>
   </servlet-mapping>
 </web-app>
