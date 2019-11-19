@@ -1,9 +1,21 @@
 package com.testing.jersey;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Sample {
+	@Override
+	public String toString() {
+		return "Sample [no=" + no + ", name=" + name + ", num=" + num + "]";
+	}
+
 	private int no;
 	private String name;
 	private int num;
+
+	public Sample() {
+
+	}
 
 	public int getNo() {
 		return no;

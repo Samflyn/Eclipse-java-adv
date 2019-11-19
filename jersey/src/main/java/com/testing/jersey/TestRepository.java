@@ -37,4 +37,12 @@ public class TestRepository {
 	public void create(Sample s1) {
 		samp.add(s1);
 	}
+
+	public void update(Sample s1) {
+
+	}
+
+	public void delete(Sample s1) {
+
+	}
 }
