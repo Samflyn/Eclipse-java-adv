@@ -10,7 +10,7 @@
 		NOT NULL, Password varchar(255) NOT NULL, Department varchar(255) FOREIGN 
 		KEY REFERENCES Departments(Department), Salary int ); -->
 	<welcome-file-list>
-		<welcome-file>web.jsp</welcome-file>
+		<welcome-file>LandingForm.html</welcome-file>
 	</welcome-file-list>
 
 	<context-param>
@@ -45,7 +45,7 @@
 
 	<servlet>
 		<servlet-name>register</servlet-name>
-		<servlet-class>com.test.four.RegisterServlet</servlet-class>
+		<servlet-class>com.demo.project.RegisterServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>

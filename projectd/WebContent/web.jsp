@@ -103,15 +103,23 @@
     <div class="topnav" style="align-self: center;">
         <a>Welcome</a>
     </div>
-
+    <%!String name; 
+    String role;%>
+    <%session=request.getSession(false); 
+    if (session != null) {
+		name = (String) session.getAttribute("name");
+		role=(String)session.getAttribute("role");
+	}%>
     <ul class="sidebar" id="sidebar">
         <li><a href="home">Home</a></li>
+        <%if(role.equals("Admin")) {%>
         <li><a href="register">Register</a></li>
+        <%} %>
         <li><a href="list">User List</a></li>
         <li><a href="logout">Logout</a></li>
     </ul>
-
-    <div id="content" class="mycontent">This is the starting page</div>
+    
+    <div id="content" class="mycontent">Welcome, <%out.print(name); %></div>
 </body>
 
 </html>
