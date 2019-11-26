@@ -11,9 +11,10 @@
 <title>All Users</title>
 </head>
 <body>
-<div>
+<div id="message"></div>
+<div id="content">
 	<h2 style="text-align: center;">All User List</h2>
-	<table style="width: 100%">
+	<table style="width: 100%" id="">
 		<tr>
 			<th>Name</th>
 			<th>Password</th>
@@ -52,8 +53,8 @@
 		<td><%out.print(rs.getString(4));%></td>
 		<td><%out.print(rs.getString(5));%></td>
 		<td><%out.print(rs.getString(6));%></td>
-		<td> <a href="edit?action=edit&name=<%=rs.getString(1)%>">Update</a></td>
-		<td> <a href="delete?action=delete&name=<%=rs.getString(1)%>">Delete</a></td>
+		<td> <button id="update" value="<%=out.print(rs.getString(1))%>">update</button></td>
+		<td> <button id="delete" value="<%=out.print(rs.getString(1))%>">update</button></td>
 		</tr>
 		<%} } catch (Exception e) {
 			e.printStackTrace();

@@ -7,7 +7,10 @@
 <title>Profile Page</title>
 </head>
 <body>
+<div>
 <%String name = (String) session.getAttribute("name"); %>
-welcome to profile <%=name %>
+<h3>Your Profile</h3>
+
+</div>
 </body>
 </html>
