@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +9,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="register.js">
 	</script>
+
 </head>
 
 <body>
@@ -32,9 +33,7 @@
 				<option value="Sales">Sales</option>
 			</select><br><br>
 			Role: <select name="role" id="role">
-				<option value="Admin">Admin</option>
 				<option value="Employee">Employee</option>
-				<option value="Dept Head">Dept Head</option>
 			</select><br>
 			<br> <input type="submit" id="submit" value="Submit">
 			<input type="reset" value="Clear">

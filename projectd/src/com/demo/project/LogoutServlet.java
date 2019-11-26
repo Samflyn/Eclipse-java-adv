@@ -30,11 +30,11 @@ public class LogoutServlet extends HttpServlet {
 		if(session!=null) {
 			session.invalidate();
 			out.print("<h3 style=\"color: green;\">You're logged out!</h3>");
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("HomePage.html");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("LandingForm.html");
 			requestDispatcher.include(req, resp);
 		}else {
 			out.print("<h3 style=\"color: red;\">Please login first!</h3>");
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("HomePage.html");
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("LandingForm.html");
 			requestDispatcher.include(req, resp);
 		}
 	}

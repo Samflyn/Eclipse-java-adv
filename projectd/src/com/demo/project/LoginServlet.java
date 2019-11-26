@@ -3,11 +3,12 @@ package com.demo.project;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +16,35 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
-	
-	Connection con = null;
+
+	Connection con;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Override
+	public void init() throws ServletException {
+		try {
+			ServletContext context = getServletContext();
+			String Driver = context.getInitParameter("dbDriver");
+			String Host = context.getInitParameter("dbHost");
+			String port = context.getInitParameter("dbport");
+			String Uid = context.getInitParameter("dbUid");
+			String password = context.getInitParameter("dbpassword");
+			String sid = context.getInitParameter("dbsid");
+			Class.forName(Driver);
+			String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
+			con = DriverManager.getConnection(url, Uid, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		DataBaseCon db = new DataBaseCon();
 		PrintWriter out = resp.getWriter();
 		try {
-			con = db.getConn();
 			PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM EMPLOYEES WHERE NAME=? AND PASSWORD=?");
 			String name = req.getParameter("name");
 			String passwd = req.getParameter("password");
@@ -56,14 +73,6 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 			out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
-		} finally {
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 

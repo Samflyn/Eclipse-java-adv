@@ -7,9 +7,7 @@
 <title>Profile Page</title>
 </head>
 <body>
-<%session=request.getSession(false);
-String name = (String) session.getAttribute("name");
-out.print(name);
-%>
+<%String name = (String) session.getAttribute("name"); %>
+welcome to profile <%=name %>
 </body>
 </html>
