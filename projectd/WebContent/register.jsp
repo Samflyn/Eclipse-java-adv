@@ -32,7 +32,9 @@
 				<option value="Sales">Sales</option>
 			</select><br><br>
 			Role: <select name="role" id="role">
-				<option value="Admin">Admin</option>
+			<%HttpSession ses=request.getSession(false);
+	        if (ses !=null) { %>
+				<option value="Admin">Admin</option><%} %>
 				<option value="Employee">Employee</option>
 				<option value="Dept Head">Dept Head</option>
 			</select><br>

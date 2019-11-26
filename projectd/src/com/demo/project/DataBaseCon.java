@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 
-public class DataBaseCon extends HttpServlet{
+public class DataBaseCon extends HttpServlet {
 	/**
 	 * 
 	 */

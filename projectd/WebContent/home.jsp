@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body>
-<h3>this is logout</h3>
+<div><%out.print("This is your home page, only Admin's will be able to create a new user and view all the lists"); %></div>
 </body>
 </html>

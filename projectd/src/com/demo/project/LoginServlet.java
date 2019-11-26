@@ -28,21 +28,21 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		try {
 			con = db.getConn();
-			PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM SAILO2 WHERE NAME=? AND PASSWORD=?");
-			PreparedStatement prole = con.prepareStatement("SELECT * FROM SAILO2 WHERE NAME=? AND PASSWORD=?");
+			PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM EMPLOYEES WHERE NAME=? AND PASSWORD=?");
 			String name = req.getParameter("name");
 			String passwd = req.getParameter("password");
 			ps.setString(1, name);
 			ps.setString(2, passwd);
-			prole.setString(1, name);
-			prole.setString(2, passwd);
 			ResultSet executeQuery = ps.executeQuery();
-			ResultSet rrole = prole.executeQuery();
 			executeQuery.next();
-			rrole.next();
-			String role = rrole.getString(6);
 			int count = executeQuery.getInt(1);
 			if (count == 1) {
+				PreparedStatement prole = con.prepareStatement("SELECT * FROM EMPLOYEES WHERE NAME=? AND PASSWORD=?");
+				prole.setString(1, name);
+				prole.setString(2, passwd);
+				ResultSet rrole = prole.executeQuery();
+				rrole.next();
+				String role = rrole.getString(6);
 				HttpSession session = req.getSession();
 				session.setAttribute("name", name);
 				session.setAttribute("role", role);
