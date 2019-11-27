@@ -3,11 +3,9 @@ package com.demo.project;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,29 +15,11 @@ public class RegisterServlet extends HttpServlet {
 	Connection con = null;
 	PreparedStatement ps = null;
 	PreparedStatement ver = null;
+	ConnectionGen cont = new ConnectionGen();
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	@Override
-	public void init() throws ServletException {
-		try {
-			ServletContext context = getServletContext();
-			String Driver = context.getInitParameter("dbDriver");
-			String Host = context.getInitParameter("dbHost");
-			String port = context.getInitParameter("dbport");
-			String Uid = context.getInitParameter("dbUid");
-			String password = context.getInitParameter("dbpassword");
-			String sid = context.getInitParameter("dbsid");
-			Class.forName(Driver);
-			String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
-			con = DriverManager.getConnection(url, Uid, password);
-			con.setAutoCommit(false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -57,6 +37,7 @@ public class RegisterServlet extends HttpServlet {
 			return;
 		}
 		try {
+			con = cont.getConnection(getServletContext());
 			PreparedStatement ps = con.prepareStatement("INSERT INTO EMPLOYEES VALUES (?,?,?,?,?,?)");
 			ps.setString(1, name);
 			ps.setString(2, password);

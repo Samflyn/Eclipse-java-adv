@@ -1,3 +1,4 @@
+<%@page import="com.demo.project.ConnectionGen"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -11,48 +12,16 @@
 <meta charset="UTF-8">
 <title>Update Page</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(document).ready(function () {
-	$('#submit').click(function (e) {
-		e.preventDefault();
-		var name = $("#name").val();
-		var password = $("#password").val();
-		var date = $("#date").val();
-		var gender = $("#gender").val();
-		var dept = $("#dept").val();
-		var role = $("#role").val();
-
-		$.ajax({
-			url: "register",
-			type: "post",
-			data: {
-				name, password, date, gender, dept, role
-			},
-			cache: false,
-			success: function (register) {
-				$("#content").html(register).slideDown('slow');
-			}
-		});
-	});
-});;
-</script>
+<script>update.js</script>
 </head>
 <body>
 <div id="content">
 <%!ResultSet rs;
 	Connection con;%>
 <%String name = (String) session.getAttribute("name");
+ConnectionGen cont = new ConnectionGen();
 try{
-	ServletContext context = getServletContext();
-	String Driver = context.getInitParameter("dbDriver");
-	String Host = context.getInitParameter("dbHost");
-	String port = context.getInitParameter("dbport");
-	String Uid = context.getInitParameter("dbUid");
-	String password = context.getInitParameter("dbpassword");
-	String sid = context.getInitParameter("dbsid");
-	Class.forName(Driver);
-	String url = "jdbc:oracle:thin:@" + Host + ":" + port + ":" + sid;
-	con = DriverManager.getConnection(url, Uid, password);
+	con=cont.getConnection(getServletContext());
 	Statement st=con.createStatement();
 	String str = "select * from employees where name='"+name+"'";
 	ResultSet rs=st.executeQuery(str);
