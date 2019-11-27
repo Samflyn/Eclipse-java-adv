@@ -32,16 +32,27 @@ public class UpdateServlet extends HttpServlet {
 		String role = req.getParameter("role");
 		try {
 			con = cont.getConnection(getServletContext());
-			PreparedStatement ps = con
-					.prepareStatement("update employees set password=?,date=?,gender=?,dept=?,role=? where name=?");
-			ps.setString(6, name);
-			ps.setString(1, password);
-			ps.setString(2, date);
-			ps.setString(3, gender);
-			ps.setString(4, dept);
-			ps.setString(5, role);
-			con.commit();
-			out.println("<h3 style=\"color: green;\">Sucessfully updated!</h3>");
+			if (dept != null && role != null) {
+				ps = con.prepareStatement("update employees set password=?,date=?,gender=?,dept=?,role=? where name=?");
+				ps.setString(6, name);
+				ps.setString(1, password);
+				ps.setString(2, date);
+				ps.setString(3, gender);
+				ps.setString(4, dept);
+				ps.setString(5, role);
+			} else {
+				ps = con.prepareStatement("UPDATE EMPLOYEES SET PASSWORD=?, DATE=?, GENDER=? WHERE NAME=?");
+				ps.setString(1, password);
+				ps.setString(2, date);
+				ps.setString(3, gender);
+				ps.setString(4, name);
+			}
+			ps.executeUpdate();
+			if (ps.executeUpdate() > 0) {
+				out.println("<h3 style=\"color: green;\">Sucessfully updated!</h3>");
+			} else {
+				out.println("<h3 style=\"color: red;\">Failed to update!</h3>");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

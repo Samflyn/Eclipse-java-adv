@@ -29,8 +29,12 @@ public class DeleteServlet extends HttpServlet {
 			con = cont.getConnection(getServletContext());
 			PreparedStatement ps = con.prepareStatement("delete from employees where name=?");
 			ps.setString(1, name);
-			con.commit();
-			out.println("<h3 style=\"color: green;\">Sucessfully deleted!</h3>");
+			int update = ps.executeUpdate();
+			if (update == 1) {
+				out.println("<h3 style=\"color: green;\">Sucessfully deleted!</h3>");
+			} else {
+				out.println("<h3 style=\"color: red;\">Failed to delete!</h3>");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

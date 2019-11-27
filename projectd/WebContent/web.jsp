@@ -93,12 +93,13 @@
             position: relative;
         }
     </style>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="general.js"></script>
     <title>HomePage</title>
 </head>
 
 <body>
-<%!String name; 
+    <%!String name; 
     String role;%>
     <%
     	session=request.getSession(false);
@@ -119,8 +120,7 @@
         <li><a href="logout">Logout</a></li>
     </ul>
     <div id="content" class="mycontent">Welcome, <%out.print(name); %></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="general.js"></script>
+
     <% }else{
     	out.println("<h2 style=" + "color:red;" + " >Please login first !</h2>");
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("LoginForm.html");
