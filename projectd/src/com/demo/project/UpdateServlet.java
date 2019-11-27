@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +33,7 @@ public class UpdateServlet extends HttpServlet {
 		System.out.println(name + " " + password + " " + date + " " + gender + " " + dept + " " + role);
 		try {
 			con = cont.getConnection(getServletContext());
+			con.setAutoCommit(false);
 			int count = 0;
 			if (name != null && password != null && date != null && gender != null) {
 				if (dept != null && role != null) {
@@ -45,7 +46,7 @@ public class UpdateServlet extends HttpServlet {
 					ps.setString(4, dept);
 					ps.setString(5, role);
 					ps.setString(6, name);
-					ps.executeUpdate();
+					count = ps.executeUpdate();
 				} else {
 					System.out.println("else");
 					ps = con.prepareStatement("UPDATE EMPLOYEES SET PASSWORD=?, DATE=?, GENDER=? WHERE NAME=?");
@@ -53,18 +54,33 @@ public class UpdateServlet extends HttpServlet {
 					ps.setString(2, date);
 					ps.setString(3, gender);
 					ps.setString(4, name);
-					ps.executeUpdate();
+					count = ps.executeUpdate();
 				}
-				if (count == 1) {
+				con.commit();
+				if (count > 1) {
 					out.println("<h3 style=\"color: green;\">Sucessfully updated!</h3>");
 				} else {
 					out.println("<h3 style=\"color: red;\">Failed to update!</h3>");
 				}
+				con.close();
 			} else {
 				out.println("<h3 style=\"color: red;\">Fill all details!</h3>");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

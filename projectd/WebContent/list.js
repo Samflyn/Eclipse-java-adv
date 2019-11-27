@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $("button").click(function (e) {
+    $("button").click(function () {
         var name = $(this).attr("value");
         var page = $(this).attr("id");
         if (page == "delete") {
@@ -8,8 +8,8 @@ $(document).ready(function () {
                 type: "post",
                 data: { name },
                 cache: false,
-                success: function (register) {
-                    $("#message").html(register).slideDown('slow');
+                success: function (x) {
+                    $("#message").html(x);
                 }
             });
         } else {

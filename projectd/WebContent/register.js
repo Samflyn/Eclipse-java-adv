@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$('#submit').click(function (e) {
+	$('#submit').click(function () {
 		e.preventDefault();
 		var name = $("#name").val();
 		var password = $("#password").val();
@@ -16,8 +16,8 @@ $(document).ready(function () {
 				name, password, rpassword, date, gender, dept, role
 			},
 			cache: false,
-			success: function (register) {
-				$("#message").html(register).slideDown('slow');
+			success: function (x) {
+				$("#message").html(x);
 			}
 		});
 	});

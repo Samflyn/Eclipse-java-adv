@@ -36,9 +36,18 @@
 		<br>Department : <%=rs.getString(5) %> <br>
 		<br>Role : <%=rs.getString(6) %> <br>
 		<br><br><button id="update" value="<%=rs.getString(1)%>">update</button>
-		<%}catch(Exception e){
+		<%con.close();
+		}catch(Exception e){
 		e.printStackTrace();
-		} %>
+		} finally {
+			if(con!=null){
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}			
+			}
+		}%>
 	</div>
 </body>
 

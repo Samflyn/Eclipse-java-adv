@@ -47,9 +47,19 @@
 				<td> <button id="update" value="<%out.print(rs.getString(1));%>">update</button></td>
 				<td> <button id="delete" value="<%out.print(rs.getString(1));%>">delete</button></td>
 			</tr>
-			<%} } catch (Exception e) {
-			e.printStackTrace();
-			out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
+			<%}
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
+			} finally {
+				if(con!=null){
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 			}%>
 		</table>
 	</div>

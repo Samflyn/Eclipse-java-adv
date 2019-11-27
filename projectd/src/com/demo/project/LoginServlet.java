@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 			ResultSet executeQuery = ps.executeQuery();
 			executeQuery.next();
 			int count = executeQuery.getInt(1);
-			if (count == 1) {
+			if (count > 1) {
 				PreparedStatement prole = con.prepareStatement("SELECT * FROM EMPLOYEES WHERE NAME=? AND PASSWORD=?");
 				prole.setString(1, name);
 				prole.setString(2, passwd);
@@ -52,9 +53,18 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher requestDispatcher = req.getRequestDispatcher("LoginForm.html");
 				requestDispatcher.include(req, resp);
 			}
+			con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

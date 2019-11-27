@@ -67,9 +67,18 @@
 			<option value="Dept Head">Dept Head</option>
 		</select><br> <%} %>
 		<br>
-		<%}catch(Exception e){
+		<%con.close();
+		}catch(Exception e){
 				e.printStackTrace();
-			} %>
+		} finally {
+			if(con!=null){
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}%>
 		<input type="submit" id="submit" value="submit">
 		<input type="reset" value="clear">
 	</div>

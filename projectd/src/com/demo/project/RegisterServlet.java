@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,15 +52,24 @@ public class RegisterServlet extends HttpServlet {
 				ResultSet executeQuery = ver.executeQuery();
 				executeQuery.next();
 				int count = executeQuery.getInt(1);
-				if (count == 1) {
+				if (count > 1) {
 					out.println("<h3 style=\"color: red;\">Name already exists!</h3>");
 				} else {
 					ps.executeUpdate();
 					con.commit();
 					out.println("<h3 style=\"color: green;\">Sucessfully registered!</h3>");
 				}
+				con.close();
 			} catch (Exception e) {
 				e.printStackTrace();
+			} finally {
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		} else {
 			out.println("<h3 style=\"color: red;\">Please fill all details!</h3>");
