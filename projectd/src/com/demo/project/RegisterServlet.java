@@ -36,29 +36,33 @@ public class RegisterServlet extends HttpServlet {
 			out.println("<h3 style=\"color: red;\">Password Mis-matched</h3>");
 			return;
 		}
-		try {
-			con = cont.getConnection(getServletContext());
-			PreparedStatement ps = con.prepareStatement("INSERT INTO EMPLOYEES VALUES (?,?,?,?,?,?)");
-			ps.setString(1, name);
-			ps.setString(2, password);
-			ps.setString(3, date);
-			ps.setString(4, gender);
-			ps.setString(5, dept);
-			ps.setString(6, role);
-			ver = con.prepareStatement("SELECT COUNT(*) FROM EMPLOYEES WHERE NAME=?");
-			ver.setString(1, name);
-			ResultSet executeQuery = ver.executeQuery();
-			executeQuery.next();
-			int count = executeQuery.getInt(1);
-			if (count == 1) {
-				out.println("<h3 style=\"color: red;\">Name already exists!</h3>");
-			} else {
-				ps.executeUpdate();
-				con.commit();
-				out.println("<h3 style=\"color: green;\">Sucessfully registered!</h3>");
+		if (name != null && password != null && date != null && gender != null && dept != null && role != null) {
+			try {
+				con = cont.getConnection(getServletContext());
+				PreparedStatement ps = con.prepareStatement("INSERT INTO EMPLOYEES VALUES (?,?,?,?,?,?)");
+				ps.setString(1, name);
+				ps.setString(2, password);
+				ps.setString(3, date);
+				ps.setString(4, gender);
+				ps.setString(5, dept);
+				ps.setString(6, role);
+				ver = con.prepareStatement("SELECT COUNT(*) FROM EMPLOYEES WHERE NAME=?");
+				ver.setString(1, name);
+				ResultSet executeQuery = ver.executeQuery();
+				executeQuery.next();
+				int count = executeQuery.getInt(1);
+				if (count == 1) {
+					out.println("<h3 style=\"color: red;\">Name already exists!</h3>");
+				} else {
+					ps.executeUpdate();
+					con.commit();
+					out.println("<h3 style=\"color: green;\">Sucessfully registered!</h3>");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} else {
+			out.println("<h3 style=\"color: red;\">Please fill all details!</h3>");
 		}
 	}
 

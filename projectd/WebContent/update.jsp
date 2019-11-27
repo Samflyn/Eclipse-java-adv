@@ -69,8 +69,9 @@
 		<br>
 		<%}catch(Exception e){
 				e.printStackTrace();
-			} %><input type="submit" id="submit" value="Submit">
-		<input type="reset" value="Clear">
+			} %>
+		<input type="submit" id="submit" value="submit">
+		<input type="reset" value="clear">
 	</div>
 </body>
 

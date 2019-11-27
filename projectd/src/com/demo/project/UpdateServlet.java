@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateServlet extends HttpServlet {
 	Connection con = null;
 	PreparedStatement ps = null;
-	PreparedStatement ver = null;
 	ConnectionGen cont = new ConnectionGen();
 	/**
 	 * 
@@ -30,28 +30,38 @@ public class UpdateServlet extends HttpServlet {
 		String gender = req.getParameter("gender");
 		String dept = req.getParameter("dept");
 		String role = req.getParameter("role");
+		System.out.println(name + " " + password + " " + date + " " + gender + " " + dept + " " + role);
 		try {
 			con = cont.getConnection(getServletContext());
-			if (dept != null && role != null) {
-				ps = con.prepareStatement("update employees set password=?,date=?,gender=?,dept=?,role=? where name=?");
-				ps.setString(6, name);
-				ps.setString(1, password);
-				ps.setString(2, date);
-				ps.setString(3, gender);
-				ps.setString(4, dept);
-				ps.setString(5, role);
+			int count = 0;
+			if (name != null && password != null && date != null && gender != null) {
+				if (dept != null && role != null) {
+					System.out.println("if");
+					ps = con.prepareStatement(
+							"update employees set password=?,date=?,gender=?,dept=?,role=? where name=?");
+					ps.setString(1, password);
+					ps.setString(2, date);
+					ps.setString(3, gender);
+					ps.setString(4, dept);
+					ps.setString(5, role);
+					ps.setString(6, name);
+					ps.executeUpdate();
+				} else {
+					System.out.println("else");
+					ps = con.prepareStatement("UPDATE EMPLOYEES SET PASSWORD=?, DATE=?, GENDER=? WHERE NAME=?");
+					ps.setString(1, password);
+					ps.setString(2, date);
+					ps.setString(3, gender);
+					ps.setString(4, name);
+					ps.executeUpdate();
+				}
+				if (count == 1) {
+					out.println("<h3 style=\"color: green;\">Sucessfully updated!</h3>");
+				} else {
+					out.println("<h3 style=\"color: red;\">Failed to update!</h3>");
+				}
 			} else {
-				ps = con.prepareStatement("UPDATE EMPLOYEES SET PASSWORD=?, DATE=?, GENDER=? WHERE NAME=?");
-				ps.setString(1, password);
-				ps.setString(2, date);
-				ps.setString(3, gender);
-				ps.setString(4, name);
-			}
-			ps.executeUpdate();
-			if (ps.executeUpdate() > 0) {
-				out.println("<h3 style=\"color: green;\">Sucessfully updated!</h3>");
-			} else {
-				out.println("<h3 style=\"color: red;\">Failed to update!</h3>");
+				out.println("<h3 style=\"color: red;\">Fill all details!</h3>");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

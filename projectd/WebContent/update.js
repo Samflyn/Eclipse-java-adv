@@ -7,16 +7,15 @@ $(document).ready(function () {
 		var gender = $("#gender").val();
 		var dept = $("#dept").val();
 		var role = $("#role").val();
-
 		$.ajax({
-			url: "register",
+			url: "update",
 			type: "post",
 			data: {
 				name, password, date, gender, dept, role
 			},
 			cache: false,
 			success: function (register) {
-				$("#content").html(register).slideDown('slow');
+				$("#message").html(register).slideDown('slow');
 			}
 		});
 	});

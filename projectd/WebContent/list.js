@@ -2,7 +2,6 @@ $(document).ready(function () {
     $("button").click(function (e) {
         var name = $(this).attr("value");
         var page = $(this).attr("id");
-        var test = "testing";
         if (page == "delete") {
             $.ajax({
                 url: page,
@@ -13,7 +12,8 @@ $(document).ready(function () {
                     $("#message").html(register).slideDown('slow');
                 }
             });
+        } else {
+        	$("#content").load("update.jsp?name=" + name);
         }
-        $("#content").load("update.jsp?name=" + name);
     });
 });
