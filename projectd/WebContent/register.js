@@ -1,6 +1,6 @@
 $(document).ready(function () {
-	$('#submit').click(function () {
-		e.preventDefault();
+	$('#submit').click(function (x) {
+		x.preventDefault();
 		var name = $("#name").val();
 		var password = $("#password").val();
 		var rpassword = $("#rpassword").val();
@@ -16,8 +16,8 @@ $(document).ready(function () {
 				name, password, rpassword, date, gender, dept, role
 			},
 			cache: false,
-			success: function (x) {
-				$("#message").html(x);
+			success: function (register) {
+				$("#message").html(register).slideDown('slow');
 			}
 		});
 	});

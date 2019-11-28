@@ -39,7 +39,7 @@
 		<h1 style="text-align: center;">Update Details</h1>
 		<hr>
 		<br> Name: <input type="text" name="name" id="name" disabled value="<%=rs.getString(1) %>"><br>
-		<br> Password: <input type="password" name="password" id="password" value="<%=rs.getString(2) %>"><br>
+		<br> Password: <input type="text" name="password" id="password" value="<%=rs.getString(2) %>"><br>
 		<br> Date Of Birth: <input type="date" name="date" id="date" value="<%=rs.getString(3) %>"><br>
 		<br> Gender: <select name="gender" id="gender">
 			<option value="none" selected disabled>
@@ -67,20 +67,10 @@
 			<option value="Dept Head">Dept Head</option>
 		</select><br> <%} %>
 		<br>
-		<%con.close();
-		}catch(Exception e){
+		<%}catch(Exception e){
 				e.printStackTrace();
-		} finally {
-			if(con!=null){
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}%>
-		<input type="submit" id="submit" value="submit">
-		<input type="reset" value="clear">
+			} %><input type="submit" id="submit" value="Submit">
+		<input type="reset" value="Clear">
 	</div>
 </body>
 

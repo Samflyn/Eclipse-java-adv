@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -37,42 +36,29 @@ public class RegisterServlet extends HttpServlet {
 			out.println("<h3 style=\"color: red;\">Password Mis-matched</h3>");
 			return;
 		}
-		if (name != null && password != null && date != null && gender != null && dept != null && role != null) {
-			try {
-				con = cont.getConnection(getServletContext());
-				PreparedStatement ps = con.prepareStatement("INSERT INTO EMPLOYEES VALUES (?,?,?,?,?,?)");
-				ps.setString(1, name);
-				ps.setString(2, password);
-				ps.setString(3, date);
-				ps.setString(4, gender);
-				ps.setString(5, dept);
-				ps.setString(6, role);
-				ver = con.prepareStatement("SELECT COUNT(*) FROM EMPLOYEES WHERE NAME=?");
-				ver.setString(1, name);
-				ResultSet executeQuery = ver.executeQuery();
-				executeQuery.next();
-				int count = executeQuery.getInt(1);
-				if (count > 1) {
-					out.println("<h3 style=\"color: red;\">Name already exists!</h3>");
-				} else {
-					ps.executeUpdate();
-					con.commit();
-					out.println("<h3 style=\"color: green;\">Sucessfully registered!</h3>");
-				}
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (con != null) {
-					try {
-						con.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
+		try {
+			con = cont.getConnection(getServletContext());
+			PreparedStatement ps = con.prepareStatement("INSERT INTO EMPLOYEES VALUES (?,?,?,?,?,?)");
+			ps.setString(1, name);
+			ps.setString(2, password);
+			ps.setString(3, date);
+			ps.setString(4, gender);
+			ps.setString(5, dept);
+			ps.setString(6, role);
+			ver = con.prepareStatement("SELECT COUNT(*) FROM EMPLOYEES WHERE NAME=?");
+			ver.setString(1, name);
+			ResultSet executeQuery = ver.executeQuery();
+			executeQuery.next();
+			int count = executeQuery.getInt(1);
+			if (count > 0) {
+				out.println("<h3 style=\"color: red;\">Name already exists!</h3>");
+			} else {
+				ps.executeUpdate();
+				out.println("<h3 style=\"color: green;\">Sucessfully registered!</h3>");
 			}
-		} else {
-			out.println("<h3 style=\"color: red;\">Please fill all details!</h3>");
+		} catch (Exception e) {
+			e.printStackTrace();
+			out.println("<h3 style=\"color: red;\">Failed to register!</h3>");
 		}
 	}
 

@@ -12,7 +12,8 @@
 	<meta charset="UTF-8">
 	<title>Profile Page</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="profile.js"></script>
+	<script src="profile.js">
+	</script>
 </head>
 
 <body>
@@ -36,18 +37,9 @@
 		<br>Department : <%=rs.getString(5) %> <br>
 		<br>Role : <%=rs.getString(6) %> <br>
 		<br><br><button id="update" value="<%=rs.getString(1)%>">update</button>
-		<%con.close();
-		}catch(Exception e){
+		<%}catch(Exception e){
 		e.printStackTrace();
-		} finally {
-			if(con!=null){
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}			
-			}
-		}%>
+		} %>
 	</div>
 </body>
 

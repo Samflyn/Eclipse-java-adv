@@ -1,12 +1,13 @@
 $(document).ready(function () {
-	$('#submit').click(function () {
-		e.preventDefault();
+	$('#submit').click(function (x) {
+		x.preventDefault();
 		var name = $("#name").val();
 		var password = $("#password").val();
 		var date = $("#date").val();
 		var gender = $("#gender").val();
 		var dept = $("#dept").val();
 		var role = $("#role").val();
+
 		$.ajax({
 			url: "update",
 			type: "post",
@@ -15,8 +16,8 @@ $(document).ready(function () {
 			},
 			cache: false,
 			success: function (x) {
-				$("#message").html(x);
+				$("#message").html(x).slideDown('slow');
 			}
 		});
 	});
-});
+});;

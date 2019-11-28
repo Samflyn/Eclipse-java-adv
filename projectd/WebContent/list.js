@@ -9,7 +9,8 @@ $(document).ready(function () {
                 data: { name },
                 cache: false,
                 success: function (x) {
-                    $("#message").html(x);
+                	$("#content").load("list.jsp");
+            	//    $("#message").html(x).slideDown('slow');
                 }
             });
         } else {
