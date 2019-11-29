@@ -3,18 +3,22 @@ $(document).ready(function () {
         var name = $(this).attr("value");
         var page = $(this).attr("id");
         if (page == "delete") {
-            $.ajax({
-                url: page,
-                type: "post",
-                data: { name },
-                cache: false,
-                success: function (x) {
-                	$("#content").load("list.jsp");
-            	//    $("#message").html(x).slideDown('slow');
-                }
-            });
+            var r = confirm("Are you sure to delete : " + name);
+            if (r == true) {
+                $.ajax({
+                    url: page,
+                    type: "post",
+                    data: { name },
+                    cache: false,
+                    success: function (x) {
+                        $("#body").load("list.jsp");
+                        alert(x);
+                        // $("#message").html(x).slideDown('slow');
+                    }
+                });
+            }
         } else {
-        	$("#content").load("update.jsp?name=" + name);
+            $("#content").load("update.jsp?name=" + name);
         }
     });
 });

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 public class DeleteServlet extends HttpServlet {
 	Connection con = null;
 	PreparedStatement ps = null;
-	PreparedStatement ver = null;
 	ConnectionGen cont = new ConnectionGen();
 	/**
 	 * 
@@ -31,9 +30,9 @@ public class DeleteServlet extends HttpServlet {
 			ps.setString(1, name);
 			int update = ps.executeUpdate();
 			if (update > 0) {
-				out.println("<h3 style=\"color: green;\">Sucessfully deleted!</h3>");
+				out.println("Sucessfully deleted!");
 			} else {
-				out.println("<h3 style=\"color: red;\">Failed to delete!</h3>");
+				out.println("Failed to delete!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

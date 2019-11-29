@@ -17,10 +17,11 @@
 </head>
 
 <body>
+<div id="body">
 	<div id="message"></div>
 	<div id="content">
 		<h2 style="text-align: center;">All User List</h2>
-		<table style="width: 100%" id="">
+		<table style="width: 75%" id="">
 			<tr>
 				<th>Name</th>
 				<th>Password</th>
@@ -52,6 +53,7 @@
 			out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
 			}%>
 		</table>
+	</div>
 	</div>
 </body>
 
