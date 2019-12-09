@@ -13,7 +13,8 @@
     <form action="login" method="post">
         <br>
         <h1 style="text-align: center;">Welcome to Sailotech</h1>
-        <hr>${message}
+        <hr><br><br>
+        <h3 style="text-align: center; color: red;">${message}</h3>
         <br><br>
         <h3 style="text-align: center;">
             User Name:<input type="text" name="name"><br><br>

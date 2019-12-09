@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 public class HibCon {
 	private static SessionFactory sessionFactory = null;
 
-	private synchronized static SessionFactory getSessionFactory() {
+	public synchronized static SessionFactory getSessionFactory() {
 		if (sessionFactory == null) {
 			try {
 				sessionFactory = new Configuration().configure().buildSessionFactory();

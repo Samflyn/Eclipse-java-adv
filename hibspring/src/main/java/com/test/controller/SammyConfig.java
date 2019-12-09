@@ -13,7 +13,7 @@ public class SammyConfig {
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver irvr = new InternalResourceViewResolver();
-		irvr.setPrefix("/jsp/");
+		irvr.setPrefix("/");
 		irvr.setSuffix(".jsp");
 		return irvr;
 	}
