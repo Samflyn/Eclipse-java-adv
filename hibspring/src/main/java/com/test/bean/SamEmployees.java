@@ -20,10 +20,11 @@ public class SamEmployees {
 	private String gender;
 	private String role;
 	@ManyToOne
-	@JoinColumn(name = "manager")
+	@JoinColumn(name = "id")
 	private SamEmployees manager;
 	private String task;
 	private String status;
+	private String assignedby;
 
 	public int getId() {
 		return id;
@@ -95,6 +96,14 @@ public class SamEmployees {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getAssignedby() {
+		return assignedby;
+	}
+
+	public void setAssignedby(String assignedby) {
+		this.assignedby = assignedby;
 	}
 
 }

@@ -1,3 +1,10 @@
+<%@page import="com.test.bean.SamEmployees"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="org.hibernate.query.Query"%>
+<%@page import="org.hibernate.Session"%>
+<%@page import="com.test.conn.HibCon"%>
+<%@page import="org.hibernate.SessionFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -27,7 +34,21 @@
 				<option value="Admin">Admin</option>
 				<option value="Employee">Employee</option>
 				<option value="Manager">Manager</option>
-			</select><br>
+			</select><br><br><br>
+			Manager: <select name="manager">
+			<%SessionFactory sf = HibCon.getSessionFactory();
+			Session s = sf.openSession();
+			Query query = s.createQuery("from SamEmployees");
+			List list = query.list();
+			Iterator itr = list.iterator();
+			while(itr.hasNext()){
+				SamEmployees se = (SamEmployees) itr.next();
+				if(se.getRole().equals("Manager") || se.getRole().equals("Admin")){
+			%>
+			<option value = <%=se.getName() %>><%=se.getName() %></option>
+			<%} }
+			s.close();%>
+			</select>
 			<br> <input type="submit" value="Submit">
 			<input type="reset" value="Clear">
 		</div>

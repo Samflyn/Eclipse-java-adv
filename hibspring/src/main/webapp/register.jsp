@@ -1,3 +1,7 @@
+<%@page import="com.test.bean.SamEmployees"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="org.hibernate.query.Query"%>
+<%@page import="java.util.List"%>
 <%@page import="org.hibernate.Session"%>
 <%@page import="org.hibernate.SessionFactory"%>
 <%@page import="com.test.conn.HibCon"%>
@@ -32,9 +36,16 @@
 			Manager: <select name="manager">
 			<%SessionFactory sf = HibCon.getSessionFactory();
 			Session s = sf.openSession();
-			s.createQuery("from ");
+			Query query = s.createQuery("from SamEmployees");
+			List list = query.list();
+			Iterator itr = list.iterator();
+			while(itr.hasNext()){
+				SamEmployees se = (SamEmployees) itr.next();
+				if(se.getRole().equals("Manager")){
 			%>
-			<option value = ></option>
+			<option value = <%=se.getName() %>><%=se.getName() %></option>
+			<%} }
+			s.close();%>
 			</select>
 			<br> <input type="submit" value="Submit">
 			<input type="reset" value="Clear">
