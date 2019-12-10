@@ -33,8 +33,7 @@ public class RegisterController {
 			s.setRole(role);
 			s.setManager(se);
 			String register = RegisterService.register(s);
-			mv = new ModelAndView();
-			mv.setViewName("register");
+			mv = new ModelAndView("register");
 			if (register.equals("fail")) {
 				mv.addObject("fail", "Failed to register!");
 			} else {
@@ -42,8 +41,7 @@ public class RegisterController {
 			}
 			return mv;
 		} else {
-			mv = new ModelAndView();
-			mv.setViewName("register");
+			mv = new ModelAndView("register");
 			mv.addObject("message", "Passwords do not match");
 			return mv;
 		}

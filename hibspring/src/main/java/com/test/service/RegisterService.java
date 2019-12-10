@@ -1,7 +1,5 @@
 package com.test.service;
 
-import java.io.Serializable;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,8 +15,7 @@ public class RegisterService {
 			SessionFactory sessionFactory = HibCon.getSessionFactory();
 			Session session = sessionFactory.openSession();
 			Transaction transaction = session.beginTransaction();
-			int i = (Integer) session.save(s);
-			System.out.println(i);
+			session.save(s);
 			transaction.commit();
 			register = "success";
 		} catch (Exception e) {

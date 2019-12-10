@@ -21,29 +21,38 @@ public class LoginController {
 		if (!(name.isBlank() || password.isBlank())) {
 			String role = LoginService.authenticate(name, password);
 			if (!role.equals("failed")) {
-				mv = new ModelAndView();
-				mv.setViewName("web");
+				mv = new ModelAndView("web");
 				mv.addObject("role", role);
 				mv.addObject("name", name);
 				HttpSession session = request.getSession();
+				session.setAttribute("role", role);
+				session.setAttribute("name", name);
 				mv.addObject("session", session);
-				return mv;
 			} else if (role.equals("error")) {
-				mv = new ModelAndView();
-				mv.setViewName("login");
-				mv.addObject("message", "Server Busy");
-				return mv;
+				mv = new ModelAndView("login");
+				mv.addObject("message", "Server Busy!");
 			} else {
-				mv = new ModelAndView();
-				mv.setViewName("login");
-				mv.addObject("message", "Wrong username or password");
-				return mv;
+				mv = new ModelAndView("login");
+				mv.addObject("message", "Wrong username or password!");
 			}
 		} else {
-			mv = new ModelAndView();
-			mv.setViewName("login");
-			mv.addObject("message", "Wrong username or password");
-			return mv;
+			mv = new ModelAndView("login");
+			mv.addObject("message", "Wrong username or password!");
 		}
+		return mv;
+	}
+
+	@RequestMapping(value = "logout", method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+			mv = new ModelAndView("login");
+			mv.addObject("message", "Please login first!");
+		} else {
+			mv = new ModelAndView("login");
+			mv.addObject("logout", "Sucessfully logged out!");
+		}
+		return mv;
 	}
 }

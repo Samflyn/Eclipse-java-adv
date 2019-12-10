@@ -15,6 +15,7 @@
         <h1 style="text-align: center;">Welcome to Sailotech</h1>
         <hr><br><br>
         <h3 style="text-align: center; color: red;">${message}</h3>
+        <h3 style="text-align: center; color: green;">${logout}</h3>
         <br><br>
         <h3 style="text-align: center;">
             User Name:<input type="text" name="name"><br><br>

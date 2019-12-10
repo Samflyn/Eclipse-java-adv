@@ -34,7 +34,7 @@
 				<option value="Employee">Employee</option>
 			</select><br><br>
 			Manager: <select name="manager">
-			<%SessionFactory sf = HibCon.getSessionFactory();
+				<%SessionFactory sf = HibCon.getSessionFactory();
 			Session s = sf.openSession();
 			Query query = s.createQuery("from SamEmployees");
 			List list = query.list();
@@ -43,9 +43,8 @@
 				SamEmployees se = (SamEmployees) itr.next();
 				if(se.getRole().equals("Manager")){
 			%>
-			<option value = <%=se.getId() %>><%=se.getName() %></option>
-			<%} }
-			s.close();%>
+				<option value=<%=se.getId() %>><%=se.getName() %></option>
+				<%} }%>
 			</select>
 			<br><br>
 			<input type="submit" value="Submit">
