@@ -19,7 +19,7 @@
 	<form action="register" method="post">
 		<div>
 			<h1 style="text-align: center;">Registration Form</h1>
-			<hr><br><br>
+			<hr><br>
 			<h3 style="text-align: center; color: red;">${fail}</h3>
 			<h3 style="text-align: center; color: green;">${success}</h3>
 			<br> Name: <input type="text" name="name"><br>
@@ -29,10 +29,10 @@
 			<br> Gender: <select name="gender">
 				<option value="Male">Male</option>
 				<option value="Female">Female</option>
-			</select><br><br><br>
+			</select><br><br>
 			Role: <select name="role">
 				<option value="Employee">Employee</option>
-			</select><br><br><br>
+			</select><br><br>
 			Manager: <select name="manager">
 			<%SessionFactory sf = HibCon.getSessionFactory();
 			Session s = sf.openSession();
@@ -43,11 +43,12 @@
 				SamEmployees se = (SamEmployees) itr.next();
 				if(se.getRole().equals("Manager")){
 			%>
-			<option value = <%=se.getName() %>><%=se.getName() %></option>
+			<option value = <%=se.getId() %>><%=se.getName() %></option>
 			<%} }
 			s.close();%>
 			</select>
-			<br> <input type="submit" value="Submit">
+			<br><br>
+			<input type="submit" value="Submit">
 			<input type="reset" value="Clear">
 		</div>
 	</form>

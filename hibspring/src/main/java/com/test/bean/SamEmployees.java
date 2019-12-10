@@ -20,7 +20,7 @@ public class SamEmployees {
 	private String gender;
 	private String role;
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "manager")
 	private SamEmployees manager;
 	private String task;
 	private String status;

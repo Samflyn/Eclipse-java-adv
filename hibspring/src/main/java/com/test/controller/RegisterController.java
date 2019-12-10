@@ -31,10 +31,15 @@ public class RegisterController {
 			s.setDob(date);
 			s.setGender(gender);
 			s.setRole(role);
-			s.setManager(se);	
+			s.setManager(se);
 			String register = RegisterService.register(s);
 			mv = new ModelAndView();
 			mv.setViewName("register");
+			if (register.equals("fail")) {
+				mv.addObject("fail", "Failed to register!");
+			} else {
+				mv.addObject("success", "Registered Sucessfully!");
+			}
 			return mv;
 		} else {
 			mv = new ModelAndView();

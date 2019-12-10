@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form action="./home" method="post">
+    <form action="home" method="post">
         <br>
         <h1 style="text-align: center;">Welcome to Sailotech</h1>
         <hr>

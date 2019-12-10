@@ -10,6 +10,7 @@
 <% 
 session = (HttpSession) request.getAttribute("session");
 String role = (String) request.getAttribute("role");
+session.setAttribute("role", role);
 if(session != null){
 if(role.equals("Admin")){
 %>
@@ -19,7 +20,7 @@ if(role.equals("Admin")){
     <h1 style="text-align: end;">
         <input type="button" onclick="window.location.href='login';" value="logout">
     </h1>
-    <br><br><br><br>
+    <br><br>
     <h3 style="text-align: center;">Since you are an Admin you can create Managers and employees.</h3>
     <br>
     <h3 style="text-align: center;">
@@ -32,7 +33,7 @@ if(role.equals("Admin")){
     <h1 style="text-align: end;">
         <input type="button" onclick="window.location.href='login';" value="logout">
     </h1>
-    <br><br><br><br>
+    <br><br>
     <h3 style="text-align: center;">Since you are a Manager, you can assign task to an employee.</h3>
     <h3 style="text-align: center;">You can also track the status of the tasks.</h3>
     <br>
@@ -47,7 +48,7 @@ if(role.equals("Admin")){
     <h1 style="text-align: end;">
         <input type="button" onclick="window.location.href='login';" value="logout">
     </h1>
-    <br><br><br><br>
+    <br><br>
     <h3 style="text-align: center;">You are an employee.</h3>
     <h3 style="text-align: center;">You can check the tasks assigned to you and update the status of it.</h3>
     <br>

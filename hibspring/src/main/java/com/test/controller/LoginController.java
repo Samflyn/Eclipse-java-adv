@@ -18,20 +18,27 @@ public class LoginController {
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
-		String role = LoginService.authenticate(name, password);
-		if (role != null) {
-			mv = new ModelAndView();
-			mv.setViewName("web");
-			mv.addObject("role", role);
-			mv.addObject("name", name);
-			HttpSession session = request.getSession();
-			mv.addObject("session", session);
-			return mv;
-		} else if (role.equals("error")) {
-			mv = new ModelAndView();
-			mv.setViewName("login");
-			mv.addObject("message", "Server Busy");
-			return mv;
+		if (!(name.isBlank() || password.isBlank())) {
+			String role = LoginService.authenticate(name, password);
+			if (!role.equals("failed")) {
+				mv = new ModelAndView();
+				mv.setViewName("web");
+				mv.addObject("role", role);
+				mv.addObject("name", name);
+				HttpSession session = request.getSession();
+				mv.addObject("session", session);
+				return mv;
+			} else if (role.equals("error")) {
+				mv = new ModelAndView();
+				mv.setViewName("login");
+				mv.addObject("message", "Server Busy");
+				return mv;
+			} else {
+				mv = new ModelAndView();
+				mv.setViewName("login");
+				mv.addObject("message", "Wrong username or password");
+				return mv;
+			}
 		} else {
 			mv = new ModelAndView();
 			mv.setViewName("login");

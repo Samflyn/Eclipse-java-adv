@@ -9,6 +9,9 @@
 <body>
 <%
 String task = (String) request.getAttribute("task");
+session = (HttpSession)request.getSession();
+String s = (String)session.getAttribute("role");
+out.print(s);
 if(task != null){ %>
 <br>
     <h1 style="text-align: center;">Your Assigned task</h1>
