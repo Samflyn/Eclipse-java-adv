@@ -9,12 +9,11 @@
 </head>
 
 <body>
-    <%String task = (String) request.getParameter("task");
-if(task!=null){
-%>
+   
     <br>
     <h1 style="text-align: center;">Assigned task</h1>
     <hr><br><br>
+    <h3 style="text-align: center;">${ok }</h3>
     <div style="text-align: center;">
         To Employee : ${employee}<br><br>
         Assigned Task : <br>
@@ -23,12 +22,10 @@ if(task!=null){
     <br><br>
     <div style="text-align: center;">
         Status : <br>
-        <textarea name="status" cols="100" rows="10" disabled>${status}</textarea>
+        <textarea name="status" cols="100" rows="10" disabled>${status_value}</textarea>
     </div>
-    <%}else{ %>
     <br>
     <h1 style="text-align: center;">No tasks assigned!</h1>
-    <%} %>
 </body>
 
 </html>

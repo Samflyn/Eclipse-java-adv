@@ -10,12 +10,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Status</title>
+    <title>Tasks</title>
 </head>
 
 <body>
+
     <%
-session = (HttpSession) request.getAttribute("session");
+    session = request.getSession(false);
 String name = (String) session.getAttribute("name");
 String task = null;
 String status = null;
@@ -32,29 +33,30 @@ try{
 }
 if(task != null){ %>
     <form action="tasks" method="post">
-        <br>
-        <h1 style="text-align: center;">Your Assigned task</h1>
-        <hr>
-        <h3 style="text-align: center; color: red;">${fail}</h3>
-        <h3 style="text-align: center; color: green;">${success}</h3>
-        <br><br>
-        <div style="text-align: center;">
-            <textarea name="status" id="status" cols="100" rows="10" disabled><%=task%></textarea>
-        </div>
-        <br>
-        <h3 style="text-align: center;">Your Status</h3>
-        <div style="text-align: center;">
-            <textarea name="status" id="status" cols="100" rows="10"><%=status%></textarea>
-        </div>
-        <h3 style="text-align: center;">
-            Update Status : <button type="submit">status</button>
-        </h3>
+    <br>
+    <h1 style="text-align: center;">Your Assigned task</h1>
+    <hr>
+    <h3 style="text-align: center; color: red;">${fail}</h3>
+    <h3 style="text-align: center; color: green;">${success}</h3>
+    <br><br>
+    <div style="text-align: center;">
+        <textarea name="task" id="task" cols="100" rows="10" disabled><%=task%></textarea>
+    </div>
+    <br>
+    <h3 style="text-align: center; color: red;">Your Status</h3>
+    <div style="text-align: center;">
+        <textarea name="status_value" id="status" cols="100" rows="10"><%if(status!=null){ %><%=status %><%} %></textarea>
+    </div>
+    <h3 style="text-align: center;">
+        Update Status : <input type="submit" value="Submit">
+    </h3>
     </form>
     <%} else {%>
     <br><br><br><br>
     <h1 style="text-align: center;">Your Have no tasks assigned</h1>
     <hr>
     <%} %>
+</form>
 </body>
 
 </html>

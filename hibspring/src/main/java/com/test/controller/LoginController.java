@@ -48,10 +48,10 @@ public class LoginController {
 		if (session != null) {
 			session.invalidate();
 			mv = new ModelAndView("login");
-			mv.addObject("message", "Please login first!");
+			mv.addObject("logout", "Sucessfully logged out!");
 		} else {
 			mv = new ModelAndView("login");
-			mv.addObject("logout", "Sucessfully logged out!");
+			mv.addObject("message", "Please login first!");			
 		}
 		return mv;
 	}

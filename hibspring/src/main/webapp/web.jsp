@@ -11,6 +11,8 @@
 <body>
     <% 
 session = (HttpSession) request.getAttribute("session");
+    String name = (String) session.getAttribute("name");
+    session.setAttribute("name", name);
 String role = (String) request.getAttribute("role");
 if(session != null){
 if(role.equals("Admin")){
@@ -39,8 +41,8 @@ if(role.equals("Admin")){
     <h3 style="text-align: center;">You can also track the status of the tasks.</h3>
     <br>
     <h3 style="text-align: center;">
-        Create Task : <input type="button" onclick="window.location.href='task.jsp';" value="Task"><br><br>
-        Check Status : <input type="button" onclick="window.location.href='status.jsp';" value="Status">
+        Create Task : <input type="button" onclick="window.location.href='createtask.jsp';" value="Task"><br><br>
+        Check Status : <input type="button" onclick="window.location.href='getstatus';" value="Status">
     </h3>
     <%}else{ %>
     <br><br>

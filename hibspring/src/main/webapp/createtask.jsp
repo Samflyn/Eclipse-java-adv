@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <%session = (HttpSession) request.getAttribute("session");
-String name = (String) session.getAttribute("name");
+    <%session = request.getSession(false);
+    String name = (String) session.getAttribute("name");
 %>
     <form action="createtask" method="post">
         <br>

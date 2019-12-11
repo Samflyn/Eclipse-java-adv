@@ -19,7 +19,7 @@ public class TasksController {
 	public ModelAndView tasks(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 		HttpSession session = request.getSession(false);
 		String name = (String) session.getAttribute("name");
-		String status = request.getParameter("status");
+		String status = request.getParameter("status_value");
 		if (!status.isBlank()) {
 			String result = TaskService.setStatus(name, status);
 			if (result.equals("success")) {
@@ -63,20 +63,21 @@ public class TasksController {
 		return mv;
 	}
 
-	@RequestMapping(value = "getstatus", method = RequestMethod.POST)
+	@RequestMapping(value = "getstatus", method = RequestMethod.GET)
 	public ModelAndView getstatus(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 		HttpSession session = request.getSession(false);
 		String name = (String) session.getAttribute("name");
 		if (name != null) {
 			SamEmployees task = TaskService.getStatus(name);
-			if (task == null) {
-				mv = new ModelAndView("getstatus");
-				mv.addObject("task", task);
-			} else {
-				mv = new ModelAndView("getstatus");
+			String nada = null;
+			if (task != null) {
+				mv = new ModelAndView("status");
 				mv.addObject("employee", task.getName());
 				mv.addObject("task", task.getTask());
-				mv.addObject("status", task.getStatus());
+				mv.addObject("status_value", task.getStatus());
+			} else {
+				mv = new ModelAndView("status");
+				mv.addObject("ok", "No task Assigned yet");
 			}
 		} else {
 			mv = new ModelAndView("login");
