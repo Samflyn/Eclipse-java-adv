@@ -1,5 +1,8 @@
 package com.test.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,5 +48,14 @@ public class RegisterController {
 			mv.addObject("message", "Passwords do not match");
 			return mv;
 		}
+	}
+
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public void delete(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) throws IOException {
+		int i = Integer.parseInt(request.getParameter("name"));
+		String result = RegisterService.delete(i);
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.print(result);		
 	}
 }

@@ -19,7 +19,8 @@
 	<form action="register" method="post">
 		<div>
 			<h1 style="text-align: center;">Registration Form</h1>
-			<hr><br>
+			<hr>
+			<input type="button" onclick="window.location.href='login.jsp';" value="Login" style="text-align: end;">
 			<h3 style="text-align: center; color: red;">${fail}</h3>
 			<h3 style="text-align: center; color: green;">${success}</h3>
 			<br> Name: <input type="text" name="name"><br>

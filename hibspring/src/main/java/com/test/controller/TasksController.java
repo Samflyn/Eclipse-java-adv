@@ -69,7 +69,6 @@ public class TasksController {
 		String name = (String) session.getAttribute("name");
 		if (name != null) {
 			SamEmployees task = TaskService.getStatus(name);
-			String nada = null;
 			if (task != null) {
 				mv = new ModelAndView("status");
 				mv.addObject("employee", task.getName());

@@ -1,5 +1,3 @@
-import java.io.Serializable;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -15,14 +13,15 @@ public class Testing {
 		SamEmployees se = new  SamEmployees();
 		se.setId(1);
 		SamEmployees s = new SamEmployees();
-		s.setName("sammy");
-		s.setPassword("sammy");
+		s.setName("root");
+		s.setPassword("root");
 		s.setDob("2019-11-21");
 		s.setGender("Male");
-		s.setRole("Manager");
+		s.setRole("Admin");
 		s.setManager(se);
 		session.save(s);
 		ss.commit();
 		session.close();
+		System.out.println("ok");
 	}
 }

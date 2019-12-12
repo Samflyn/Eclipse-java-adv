@@ -45,7 +45,6 @@
 				<td><%out.print(rs.getString(4));%></td>
 				<td><%out.print(rs.getString(5));%></td>
 				<td><%out.print(rs.getString(6));%></td>
-				<td> <button id="update" value="<%out.print(rs.getString(1));%>">update</button></td>
 				<td> <button id="delete" value="<%out.print(rs.getString(1));%>">delete</button></td>
 			</tr>
 			<%} } catch (Exception e) {

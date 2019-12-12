@@ -10,7 +10,6 @@
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@192.168.1.189:1523:sailodba</property>
 		<property name="hibernate.connection.username">apps</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
-		<property name="hibernate.show_sql">true</property>
 		<mapping class="com.test.bean.SamEmployees" />
 	</session-factory>
 </hibernate-configuration>

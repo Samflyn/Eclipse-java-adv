@@ -11,8 +11,8 @@
 <body>
     <% 
 session = (HttpSession) request.getAttribute("session");
-    String name = (String) session.getAttribute("name");
-    session.setAttribute("name", name);
+String name = (String) session.getAttribute("name");
+session.setAttribute("name", name);
 String role = (String) request.getAttribute("role");
 if(session != null){
 if(role.equals("Admin")){
@@ -27,7 +27,8 @@ if(role.equals("Admin")){
     <h3 style="text-align: center;">Since you are an Admin you can create Managers and employees.</h3>
     <br>
     <h3 style="text-align: center;">
-        Register : <input type="button" onclick="window.location.href='rootregister.jsp';" value="Register">
+        Register : <input type="button" onclick="window.location.href='rootregister.jsp';" value="Register"><br><br>
+        User List : <input type="button" onclick="window.location.href='list.jsp';" value="List">
     </h3>
     <%}else if(role.equals("Manager")) {%>
     <br><br>
