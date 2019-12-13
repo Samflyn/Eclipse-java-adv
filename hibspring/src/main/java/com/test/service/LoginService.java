@@ -14,24 +14,19 @@ public class LoginService {
 		try {
 			SessionFactory sessionFactory = HibCon.getSessionFactory();
 			Session session = sessionFactory.openSession();
-			Query query = session
-					.createQuery("select count(*) from SamEmployees e where e.name = :name and e.password = :password");
+			Query query = session.createQuery("from SamEmployees e where e.name = :name and e.password = :password");
 			query.setParameter("name", name);
 			query.setParameter("password", password);
-			Long l = (Long) query.uniqueResult();
-			if (l > 0) {
-				query = session.createQuery("from SamEmployees e where e.name = :name and e.password = :password");
-				query.setParameter("name", name);
-				query.setParameter("password", password);
-				SamEmployees result = (SamEmployees) query.uniqueResult();
-				role = result.getRole();
-				return role;
+			SamEmployees s = (SamEmployees) query.uniqueResult();
+			if (s != null) {
+				role = s.getRole();
 			} else {
 				return role = "failed";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return role = "error";
+			role = "error";
 		}
+		return role;
 	}
 }
