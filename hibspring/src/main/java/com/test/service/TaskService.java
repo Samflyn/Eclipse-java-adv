@@ -1,5 +1,7 @@
 package com.test.service;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -39,10 +41,11 @@ public class TaskService {
 			SessionFactory sessionFactory = HibCon.getSessionFactory();
 			Session session = sessionFactory.openSession();
 			Transaction transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("update SamEmployees set task = :task , assignedby = :assignedby where id = :id");
+			Query query = session.createQuery(
+					"update SamEmployees set task = :task , assignedby = :assignedby , status =:status where id = :id");
 			query.setParameter("task", task);
 			query.setParameter("assignedby", assignedby);
+			query.setParameter("status", null);
 			query.setParameter("id", id);
 			int i = query.executeUpdate();
 			transaction.commit();
@@ -58,14 +61,39 @@ public class TaskService {
 		return result;
 	}
 
-	public static SamEmployees getStatus(String name) {
-		SamEmployees result = null;
+	public static List getStatus(String name) {
+		List list = null;
 		try {
 			SessionFactory sessionFactory = HibCon.getSessionFactory();
 			Session session = sessionFactory.openSession();
 			Query query = session.createQuery("from SamEmployees where assignedby = :name");
 			query.setParameter("name", name);
-			result = (SamEmployees) query.uniqueResult();
+			list = query.list();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public static String removeTask(String name) {
+		String result = null;
+		try {
+			SessionFactory sessionFactory = HibCon.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			Query query = session.createQuery(
+					"update SamEmployees s set s.task= :task , s.assignedby = :assignedby , status =:status where s.name= :name");
+			query.setParameter("task", null);
+			query.setParameter("assignedby", null);
+			query.setParameter("status", null);
+			query.setParameter("name", name);
+			int i = query.executeUpdate();
+			transaction.commit();
+			if (i > 0) {
+				result = "Task removed";
+			} else {
+				result = "Task failed to remove";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

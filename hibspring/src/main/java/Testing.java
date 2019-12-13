@@ -11,14 +11,14 @@ public class Testing {
 		Session session = factory.openSession();
 		Transaction ss = session.beginTransaction();
 		SamEmployees se = new  SamEmployees();
-		se.setId(1);
+		//se.setId(1);
 		SamEmployees s = new SamEmployees();
 		s.setName("root");
 		s.setPassword("root");
 		s.setDob("2019-11-21");
 		s.setGender("Male");
 		s.setRole("Admin");
-		s.setManager(se);
+		//s.setManager(se);
 		session.save(s);
 		ss.commit();
 		session.close();

@@ -17,8 +17,13 @@ import com.test.service.RegisterService;
 @Controller
 public class RegisterController {
 
+	@RequestMapping(value = "register", method = RequestMethod.GET)
+	public String register() {
+		return "register";
+	}
+
 	@RequestMapping(value = "register", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
+	public ModelAndView register(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String rpassword = request.getParameter("rpassword");
@@ -27,27 +32,37 @@ public class RegisterController {
 		String role = request.getParameter("role");
 		SamEmployees se = new SamEmployees();
 		se.setId(Integer.parseInt(request.getParameter("manager")));
-		if (password.equals(rpassword)) {
-			SamEmployees s = new SamEmployees();
-			s.setName(name);
-			s.setPassword(password);
-			s.setDob(date);
-			s.setGender(gender);
-			s.setRole(role);
-			s.setManager(se);
-			String register = RegisterService.register(s);
-			mv = new ModelAndView("register");
-			if (register.equals("fail")) {
-				mv.addObject("fail", "Failed to register!");
+		if (!password.isBlank()) {
+			if (password.equals(rpassword)) {
+				Long i = RegisterService.check(name);
+				if (i == 0) {
+					SamEmployees s = new SamEmployees();
+					s.setName(name);
+					s.setPassword(password);
+					s.setDob(date);
+					s.setGender(gender);
+					s.setRole(role);
+					s.setManager(se);
+					String register = RegisterService.register(s);
+					mv = new ModelAndView("register");
+					if (register.equals("fail")) {
+						mv.addObject("fail", "Failed to register!");
+					} else {
+						mv.addObject("success", "Registered Sucessfully!");
+					}
+				} else {
+					mv = new ModelAndView("register");
+					mv.addObject("fail", "username already exists!");
+				}
 			} else {
-				mv.addObject("success", "Registered Sucessfully!");
+				mv = new ModelAndView("register");
+				mv.addObject("fail", "Passwords do not match");
 			}
-			return mv;
 		} else {
 			mv = new ModelAndView("register");
-			mv.addObject("message", "Passwords do not match");
-			return mv;
+			mv.addObject("fail", "Passwords do not match");
 		}
+		return mv;
 	}
 
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
@@ -56,6 +71,6 @@ public class RegisterController {
 		String result = RegisterService.delete(i);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		out.print(result);		
+		out.print(result);
 	}
 }

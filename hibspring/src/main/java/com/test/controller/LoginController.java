@@ -14,6 +14,11 @@ import com.test.service.LoginService;
 @Controller
 public class LoginController {
 
+	@RequestMapping(value = "login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 		String name = request.getParameter("name");
@@ -51,7 +56,7 @@ public class LoginController {
 			mv.addObject("logout", "Sucessfully logged out!");
 		} else {
 			mv = new ModelAndView("login");
-			mv.addObject("message", "Please login first!");			
+			mv.addObject("message", "Please login first!");
 		}
 		return mv;
 	}

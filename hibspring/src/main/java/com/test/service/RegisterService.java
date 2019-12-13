@@ -10,6 +10,20 @@ import com.test.conn.HibCon;
 
 public class RegisterService {
 
+	public static Long check(String name) {
+		Long i = (long) 0;
+		try {
+			SessionFactory sessionFactory = HibCon.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			Query query = session.createQuery("select count(*) from SamEmployees s where s.name = :name");
+			query.setParameter("name", name);
+			i = (Long) query.uniqueResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
+
 	public static String register(SamEmployees s) {
 		String register = null;
 		try {

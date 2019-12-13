@@ -11,7 +11,8 @@ public class Testa {
 		SessionFactory factory = new Configuration().configure().buildSessionFactory();
 		Session session = factory.openSession();
 		Transaction transaction = session.beginTransaction();
-		Query query = session.createQuery("update SamEmployees s set s.task= null where s.id=");
+		Query query = session.createQuery("update SamEmployees s set s.task= :task where s.id=36").setParameter("task",
+				null);
 		int i = query.executeUpdate();
 		System.out.println(i);
 		transaction.commit();

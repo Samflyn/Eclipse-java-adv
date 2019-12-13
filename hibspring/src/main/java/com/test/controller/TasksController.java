@@ -1,5 +1,7 @@
 package com.test.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -63,17 +65,22 @@ public class TasksController {
 		return mv;
 	}
 
+	@RequestMapping(value = "removetask", method = RequestMethod.POST)
+	public String removetask(HttpServletRequest request, HttpServletResponse response) {
+		String name = request.getParameter("name");
+		String result = TaskService.removeTask(name);
+		return result;
+	}
+
 	@RequestMapping(value = "getstatus", method = RequestMethod.GET)
 	public ModelAndView getstatus(HttpServletRequest request, HttpServletResponse response, ModelAndView mv) {
 		HttpSession session = request.getSession(false);
 		String name = (String) session.getAttribute("name");
 		if (name != null) {
-			SamEmployees task = TaskService.getStatus(name);
+			List task = TaskService.getStatus(name);
 			if (task != null) {
 				mv = new ModelAndView("status");
-				mv.addObject("employee", task.getName());
-				mv.addObject("task", task.getTask());
-				mv.addObject("status_value", task.getStatus());
+				mv.addObject("result", task);
 			} else {
 				mv = new ModelAndView("status");
 				mv.addObject("ok", "No task Assigned yet");

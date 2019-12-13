@@ -11,10 +11,11 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>All Users</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
+<meta charset="UTF-8">
+<title>All Users</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
 		$(document).ready(function () {
 			$("button").click(function () {
 				var name = $(this).attr("value");
@@ -37,7 +38,9 @@
 
 <body>
 	<div id="body">
-		<%String name = (String) session.getAttribute("name"); %>
+		<%
+			String name = (String) session.getAttribute("name");
+		%>
 		<h2 style="text-align: center;">All User List</h2>
 		<table style="width: 100%">
 			<tr>
@@ -48,16 +51,17 @@
 				<th>Role</th>
 				<th>Manager</th>
 			</tr>
-			<%try {
+			<%
+				try {
 					SessionFactory sf = HibCon.getSessionFactory();
 					Session s = sf.openSession();
 					Query query = s.createQuery("from SamEmployees");
 					List list = query.list();
 					Iterator itr = list.iterator();
-				while(itr.hasNext()){ 
-				SamEmployees se = (SamEmployees) itr.next();
-				if(!se.getName().equals(name)){
-				%>
+					while (itr.hasNext()) {
+						SamEmployees se = (SamEmployees) itr.next();
+						if (!se.getName().equals(name)) {
+			%>
 			<tr>
 				<td><%=se.getId()%></td>
 				<td><%=se.getName()%></td>
@@ -65,12 +69,18 @@
 				<td><%=se.getDob()%></td>
 				<td><%=se.getRole()%></td>
 				<td><%=se.getManager().getName()%></td>
-				<td> <button id="delete" value="<%=se.getId()%>">delete</button></td>
+				<td>
+					<button id="delete" value="<%=se.getId()%>">delete</button>
+				</td>
 			</tr>
-			<%} }} catch (Exception e) {
-			e.printStackTrace();
-			out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
-			}%>
+			<%
+				}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					out.print("<h1 style=\"color: red;\">Server Busy!</h1>");
+				}
+			%>
 		</table>
 	</div>
 </body>
