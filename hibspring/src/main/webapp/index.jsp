@@ -15,7 +15,7 @@
         <br>
         <h3 style="text-align: center;">
             Existing user:<input type="button" onclick="window.location.href='login.jsp';" value="Login"><br><br>
-            New user:<input type="button" onclick="window.location.href='register.jsp';" value="Register">
+            New user:<input type="button" onclick="window.location.href='reg';" value="Register">
         </h3>
     </form>
 </body>

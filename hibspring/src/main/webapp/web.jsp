@@ -11,8 +11,6 @@
 <body>
     <% 
 session = (HttpSession) request.getAttribute("session");
-String name = (String) session.getAttribute("name");
-session.setAttribute("name", name);
 String role = (String) request.getAttribute("role");
 if(session != null){
 if(role.equals("Admin")){
@@ -27,8 +25,8 @@ if(role.equals("Admin")){
     <h3 style="text-align: center;">Since you are an Admin you can create Managers and employees.</h3>
     <br>
     <h3 style="text-align: center;">
-        Register : <input type="button" onclick="window.location.href='rootregister.jsp';" value="Register"><br><br>
-        User List : <input type="button" onclick="window.location.href='list.jsp';" value="List">
+        Register : <input type="button" onclick="window.location.href='rootreg';" value="Register"><br><br>
+        User List : <input type="button" onclick="window.location.href='list';" value="List">
     </h3>
     <%}else if(role.equals("Manager")) {%>
     <br><br>
@@ -42,7 +40,7 @@ if(role.equals("Admin")){
     <h3 style="text-align: center;">You can also track the status of the tasks.</h3>
     <br>
     <h3 style="text-align: center;">
-        Create Task : <input type="button" onclick="window.location.href='createtask.jsp';" value="Task"><br><br>
+        Create Task : <input type="button" onclick="window.location.href='ctask';" value="Task"><br><br>
         Check Status : <input type="button" onclick="window.location.href='getstatus';" value="Status">
     </h3>
     <%}else{ %>
@@ -57,7 +55,7 @@ if(role.equals("Admin")){
     <h3 style="text-align: center;">You can check the tasks assigned to you and update the status of it.</h3>
     <br>
     <h3 style="text-align: center;">
-        Check Task : <input type="button" onclick="window.location.href='tasks.jsp';" value="Task"><br><br>
+        Check Task : <input type="button" onclick="window.location.href='etask';" value="Task"><br><br>
     </h3>
     <%} } else {%>
     <br><br><br>

@@ -1,3 +1,4 @@
+<%@page import="com.test.service.ListService"%>
 <%@page import="com.test.bean.SamEmployees"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -39,7 +40,8 @@
 <body>
 	<div id="body">
 		<%
-			String name = (String) session.getAttribute("name");
+		String name = (String) request.getAttribute("name");
+		List list = (List) request.getAttribute("list");
 		%>
 		<h2 style="text-align: center;">All User List</h2>
 		<table style="width: 100%">
@@ -53,10 +55,6 @@
 			</tr>
 			<%
 				try {
-					SessionFactory sf = HibCon.getSessionFactory();
-					Session s = sf.openSession();
-					Query query = s.createQuery("from SamEmployees");
-					List list = query.list();
 					Iterator itr = list.iterator();
 					while (itr.hasNext()) {
 						SamEmployees se = (SamEmployees) itr.next();

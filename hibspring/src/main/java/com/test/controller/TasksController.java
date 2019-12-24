@@ -25,17 +25,17 @@ public class TasksController {
 		if (!status.isBlank()) {
 			String result = TaskService.setStatus(name, status);
 			if (result.equals("success")) {
-				mv = new ModelAndView("tasks");
+				mv.setViewName("tasks");
 				mv.addObject("success", "Sucessfully updated status!");
 			} else if (result.equals("fail")) {
-				mv = new ModelAndView("tasks");
+				mv.setViewName("tasks");
 				mv.addObject("fail", "Failed updating status!");
 			} else {
-				mv = new ModelAndView("tasks");
+				mv.setViewName("tasks");
 				mv.addObject("fail", result);
 			}
 		} else {
-			mv = new ModelAndView("tasks");
+			mv.setViewName("tasks");
 			mv.addObject("fail", "Please set a status first!");
 		}
 		return mv;
@@ -49,17 +49,17 @@ public class TasksController {
 		if (!task.isBlank()) {
 			String result = TaskService.setTask(id, task, assignedby);
 			if (result.equals("success")) {
-				mv = new ModelAndView("createtask");
+				mv.setViewName("createtask");
 				mv.addObject("success", "Sucessfully updated status!");
 			} else if (result.equals("fail")) {
-				mv = new ModelAndView("createtask");
+				mv.setViewName("createtask");
 				mv.addObject("fail", "Failed updating status!");
 			} else {
-				mv = new ModelAndView("createtask");
+				mv.setViewName("createtask");
 				mv.addObject("fail", result);
 			}
 		} else {
-			mv = new ModelAndView("createtask");
+			mv.setViewName("createtask");
 			mv.addObject("fail", "Please set a task first!");
 		}
 		return mv;
@@ -79,14 +79,14 @@ public class TasksController {
 		if (name != null) {
 			List task = TaskService.getStatus(name);
 			if (task != null) {
-				mv = new ModelAndView("status");
+				mv.setViewName("status");
 				mv.addObject("result", task);
 			} else {
-				mv = new ModelAndView("status");
+				mv.setViewName("status");
 				mv.addObject("ok", "No task Assigned yet");
 			}
 		} else {
-			mv = new ModelAndView("login");
+			mv.setViewName("login");
 			mv.addObject("fail", "Please login first!");
 		}
 		return mv;

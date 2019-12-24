@@ -26,7 +26,7 @@ public class LoginController {
 		if (!(name.isBlank() || password.isBlank())) {
 			String role = LoginService.authenticate(name, password);
 			if (!role.equals("failed")) {
-				mv = new ModelAndView("web");
+				mv.setViewName("web");
 				mv.addObject("role", role);
 				mv.addObject("name", name);
 				HttpSession session = request.getSession();
@@ -34,14 +34,14 @@ public class LoginController {
 				session.setAttribute("name", name);
 				mv.addObject("session", session);
 			} else if (role.equals("error")) {
-				mv = new ModelAndView("login");
+				mv.setViewName("login");
 				mv.addObject("message", "Server Busy!");
 			} else {
-				mv = new ModelAndView("login");
+				mv.setViewName("login");
 				mv.addObject("message", "Wrong username or password!");
 			}
 		} else {
-			mv = new ModelAndView("login");
+			mv.setViewName("login");
 			mv.addObject("message", "Wrong username or password!");
 		}
 		return mv;
@@ -52,10 +52,10 @@ public class LoginController {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
-			mv = new ModelAndView("login");
+			mv.setViewName("login");
 			mv.addObject("logout", "Sucessfully logged out!");
 		} else {
-			mv = new ModelAndView("login");
+			mv.setViewName("login");
 			mv.addObject("message", "Please login first!");
 		}
 		return mv;

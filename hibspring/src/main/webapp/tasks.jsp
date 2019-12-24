@@ -1,3 +1,4 @@
+<%@page import="com.test.service.ListService"%>
 <%@page import="com.test.bean.SamEmployees"%>
 <%@page import="org.hibernate.query.Query"%>
 <%@page import="org.hibernate.Session"%>
@@ -14,18 +15,10 @@
 </head>
 
 <body>
-
+<%!String task, status; %>
     <%
-    session = request.getSession(false);
-String name = (String) session.getAttribute("name");
-String task = null;
-String status = null;
 try{
-	SessionFactory sf = HibCon.getSessionFactory();
-	Session s = sf.openSession();
-	Query query = s.createQuery("from SamEmployees s where s.name = :name");
-	query.setParameter("name", name);
-	SamEmployees se = (SamEmployees) query.uniqueResult();
+	SamEmployees se = (SamEmployees) request.getAttribute("result");
 	task = se.getTask();
 	status = se.getStatus();
 }catch(Exception e){
