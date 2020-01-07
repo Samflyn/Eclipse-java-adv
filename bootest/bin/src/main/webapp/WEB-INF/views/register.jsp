@@ -10,8 +10,8 @@
 </head>
 
 <body>
-	<form action="register" method="post">	
-	<div>
+	<form action="register" method="post">
+		<div>
 			<h1 style="text-align: center;">Registration Form</h1>
 			<hr>
 			<h3 style="text-align: center; color: red;">${fail}</h3>
@@ -25,14 +25,14 @@
 				<option value="Female">Female</option>
 			</select><br><br>
 			Role: <select name="role">
-			<c:if test="${employee.role == 'Admin'}">
-				<option value="Admin">Admin</option>
+				<c:if test="${employee.role == 'Admin'}">
+					<option value="Admin">Admin</option>
 				</c:if>
 				<option value="Employee">Employee</option>
-			</select>			
+			</select>
 			<br><br> <input type="submit" value="Submit">
 			<input type="reset" value="Clear">
-		</div>		
+		</div>
 	</form>
 </body>
 

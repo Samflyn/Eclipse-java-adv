@@ -1,7 +1,5 @@
 package com.test.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.test.bean.Employee;
 import com.test.service.EmployeeService;
@@ -41,15 +38,16 @@ public class Test implements ErrorController {
 	public String authenticate(String name, String password, ModelAndView mv, HttpSession session,
 			RedirectAttributes redirectAttributes) {
 		mv = service.login(name, password, mv, session);
-		int i = 10;
-		redirectAttributes.addFlashAttribute("data", i);
 		return "redirect:web";
 	}
 
 	@GetMapping("/web")
-	public ModelAndView web(HttpServletRequest request,ModelAndView mv, RedirectAttributes redirectAttributes) {
-		Map<String, ?> m = RequestContextUtils.getInputFlashMap(request);
-		System.out.println(m.get("data"));
+	public ModelAndView web(HttpServletRequest request, ModelAndView mv, RedirectAttributes redirectAttributes) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			mv.setViewName("login");
+			mv.addObject("message", "Session timed out, Please login again!");
+		}
 		return mv;
 	}
 
@@ -60,14 +58,26 @@ public class Test implements ErrorController {
 	}
 
 	@GetMapping("/list")
-	public ModelAndView list(ModelAndView mv) {
-		mv = service.list(mv);
+	public ModelAndView list(ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			mv.setViewName("login");
+			mv.addObject("message", "Session timed out, Please login again!");
+		} else {
+			mv = service.list(mv);
+		}
 		return mv;
 	}
 
 	@GetMapping("/update")
-	public ModelAndView update(Integer id, ModelAndView mv, HttpSession session) {
-		mv = service.update(id, mv, session);
+	public ModelAndView update(Integer id, ModelAndView mv, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			mv.setViewName("login");
+			mv.addObject("message", "Session timed out, Please login again!");
+		} else {
+			mv = service.update(id, mv, session);
+		}
 		return mv;
 	}
 

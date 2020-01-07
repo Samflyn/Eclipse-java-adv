@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <br><br>
+    <br>
     <h1 style="text-align: center;">Welcome , Mr. <c:out value="${employee.name}"></c:out>
     </h1>
     <hr>
@@ -20,9 +20,12 @@
         </h1>
         <h3 style="text-align: center;">Your last login time is: <c:out value="${employee.loginDate}"></c:out></h3>
         <h3 style="text-align: center;">Since you are an Admin, you can create Admin and employees.</h3>
-        <br>
         <h3 style="text-align: center;">
-            Register : <input type="button" onclick="window.location.href='register';" value="Register"><br><br>
+        	Profile Details :
+        	ID : <c:out value="${employee.id}"></c:out><br><br>
+        	Date of Birth : <c:out value="${employee.dob}"></c:out><br><br>
+        	Gender : <c:out value="${employee.gender}"></c:out><br><br>
+        	Role : <c:out value="${employee.role}"></c:out><br><br>
             User List : <input type="button" onclick="window.location.href='list';" value="List"><br><br>
             Update Profile : <input type="button" onclick="window.location.href='update';" value="update">
         </h3>
@@ -35,6 +38,11 @@
         <h3 style="text-align: center;">Since you are Employee you can check only your profile.</h3>
         <br>
         <h3 style="text-align: center;">
+        	Profile Details :
+        	ID : <c:out value="${employee.id}"></c:out>
+        	Date of Birth : <c:out value="${employee.dob}"></c:out>
+        	Gender : <c:out value="${employee.gender}"></c:out>
+        	Role : <c:out value="${employee.role}"></c:out>
             Update Profile : <input type="button" onclick="window.location.href='update';" value="update">
         </h3>
     </c:if>

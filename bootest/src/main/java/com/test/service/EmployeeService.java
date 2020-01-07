@@ -1,11 +1,13 @@
 package com.test.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.test.bean.Employee;
@@ -25,11 +27,15 @@ public class EmployeeService {
 		repository.save(e);
 	}
 
+	@Transactional
 	public ModelAndView login(String name, String password, ModelAndView mv, HttpSession session) {
 		Employee emp = repository.findByNameAndPassword(name, password);
-		session.setAttribute("employee", emp);
 		if (emp != null) {
+			session.setAttribute("employee", emp);
+			session.setMaxInactiveInterval(30);
 			mv.setViewName("web");
+			Date date = new Date();
+			repository.setLoginDate(emp.getId(), date.toString());
 		} else {
 			mv.setViewName("login");
 			mv.addObject("message", "Username or password incorrect!");
