@@ -1,18 +1,24 @@
 package com.test.controller;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.test.bean.Employee;
 import com.test.service.EmployeeService;
 
 @Controller
-public class Test {
+public class Test implements ErrorController {
 	@Autowired
 	EmployeeService service;
 
@@ -32,8 +38,18 @@ public class Test {
 	}
 
 	@PostMapping("/login")
-	public ModelAndView authenticate(String name, String password, ModelAndView mv, HttpSession session) {
+	public String authenticate(String name, String password, ModelAndView mv, HttpSession session,
+			RedirectAttributes redirectAttributes) {
 		mv = service.login(name, password, mv, session);
+		int i = 10;
+		redirectAttributes.addFlashAttribute("data", i);
+		return "redirect:web";
+	}
+
+	@GetMapping("/web")
+	public ModelAndView web(HttpServletRequest request,ModelAndView mv, RedirectAttributes redirectAttributes) {
+		Map<String, ?> m = RequestContextUtils.getInputFlashMap(request);
+		System.out.println(m.get("data"));
 		return mv;
 	}
 
@@ -80,4 +96,15 @@ public class Test {
 		}
 		return mv;
 	}
+
+	@Override
+	public String getErrorPath() {
+		return "/error";
+	}
+
+	@GetMapping("/error")
+	public String error() {
+		return "error";
+	}
+
 }

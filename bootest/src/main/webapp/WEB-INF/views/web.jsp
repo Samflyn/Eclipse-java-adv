@@ -18,6 +18,7 @@
         <h1 style="text-align: end;">
             <input type="button" onclick="window.location.href='logout';" value="logout">
         </h1>
+        <h3 style="text-align: center;">Your last login time is: <c:out value="${employee.loginDate}"></c:out></h3>
         <h3 style="text-align: center;">Since you are an Admin, you can create Admin and employees.</h3>
         <br>
         <h3 style="text-align: center;">
@@ -30,6 +31,7 @@
         <h1 style="text-align: end;">
             <input type="button" onclick="window.location.href='logout';" value="logout">
         </h1>
+        <h3 style="text-align: center;">Your last login time is: <c:out value="${employee.loginDate}"></c:out></h3>
         <h3 style="text-align: center;">Since you are Employee you can check only your profile.</h3>
         <br>
         <h3 style="text-align: center;">

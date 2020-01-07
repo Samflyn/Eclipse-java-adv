@@ -18,6 +18,7 @@ public class Employee {
 	private String dob;
 	private String gender;
 	private String role;
+	private String loginDate;
 
 	public Integer getId() {
 		return id;
@@ -75,10 +76,18 @@ public class Employee {
 		this.role = role;
 	}
 
+	public String getLoginDate() {
+		return loginDate;
+	}
+
+	public void setLoginDate(String loginDate) {
+		this.loginDate = loginDate;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", password=" + password + ", dob=" + dob + ", gender="
-				+ gender + ", role=" + role + "]";
+		return "Employee [id=" + id + ", name=" + name + ", dob=" + dob + ", gender=" + gender + ", role=" + role
+				+ ", loginDate=" + loginDate + "]";
 	}
 
 }
