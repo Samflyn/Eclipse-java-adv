@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,11 @@ public class UserService {
 		return list;
 	}
 
-	public Optional<User> getUser(Integer id) {
-		Optional<User> user = repo.findById(id);
+	public User getUser(Integer id) {
+		User user = null;
+		if (repo.existsById(id)) {
+			user = repo.findById(id).get();
+		}
 		return user;
 	}
 

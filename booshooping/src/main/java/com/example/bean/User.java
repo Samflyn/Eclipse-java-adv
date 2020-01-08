@@ -20,8 +20,4 @@ public class User {
 	private List address;
 	private List transaction;
 	private List data;
-
-	void testing(){
-		transaction.add
-	}
 }

@@ -1,7 +1,6 @@
 package com.demo.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,8 +42,8 @@ public class Test {
 	}
 
 	@GetMapping(path = "{id}", produces = "application/json")
-	public Optional<User> getUser(@PathVariable Integer id) {
-		Optional<User> user = service.getUser(id);
+	public User getUser(@PathVariable Integer id) {
+		User user = service.getUser(id);
 		return user;
 	}
 
@@ -62,14 +61,15 @@ public class Test {
 	@GetMapping(path = "/update/{id}", produces = "application/json")
 	public ModelAndView update(@PathVariable Integer id, ModelAndView mv) {
 		mv.setViewName("update");
-		Optional<User> user = service.getUser(id);
+		User user = service.getUser(id);
 		mv.addObject("user", user);
 		return mv;
 	}
 
 	@PutMapping(path = "/update", consumes = "application/json")
 	public void updating(@RequestBody String data) throws JsonMappingException, JsonProcessingException {
-		User user = new ObjectMapper().readValue(data, User.class);
-		service.register(user);
+		System.out.println(data);
+		//User user = new ObjectMapper().readValue(data, User.class);
+		//service.register(user);
 	}
 }
