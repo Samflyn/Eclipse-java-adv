@@ -32,7 +32,7 @@ public class EmployeeService {
 		Employee emp = repository.findByNameAndPassword(name, password);
 		if (emp != null) {
 			session.setAttribute("employee", emp);
-			session.setMaxInactiveInterval(30);
+			session.setMaxInactiveInterval(5);
 			mv.setViewName("web");
 			Date date = new Date();
 			repository.setLoginDate(emp.getId(), date.toString());

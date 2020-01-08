@@ -1072,3 +1072,18 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
 	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+2020-01-08 09:36:02 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_SEQUENCE" not found; SQL statement:
+select * from user_sequence [42102-200]
+2020-01-08 09:36:24 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "INFORMATION_SCHEMA" not found; SQL statement:
+select * from INFORMATION_SCHEMA [42102-200]
+2020-01-08 09:36:46 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM *[*]"; expected "identifier"; SQL statement:
+select * from * [42001-200]
+2020-01-08 09:37:02 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HIBERNATE_SEQUENCE" not found; SQL statement:
+select * from hibernate_sequence [42102-200]
+2020-01-08 09:37:25 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INFORMATION_SCHEMA[*].SEQUENCES"; expected "INSERT"; SQL statement:
+INFORMATION_SCHEMA.SEQUENCES [42001-200]

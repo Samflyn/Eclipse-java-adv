@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.test.bean.Employee;
 import com.test.service.EmployeeService;
@@ -35,14 +34,13 @@ public class Test implements ErrorController {
 	}
 
 	@PostMapping("/login")
-	public String authenticate(String name, String password, ModelAndView mv, HttpSession session,
-			RedirectAttributes redirectAttributes) {
+	public String authenticate(String name, String password, ModelAndView mv, HttpSession session) {
 		mv = service.login(name, password, mv, session);
 		return "redirect:web";
 	}
 
 	@GetMapping("/web")
-	public ModelAndView web(HttpServletRequest request, ModelAndView mv, RedirectAttributes redirectAttributes) {
+	public ModelAndView web(HttpServletRequest request, ModelAndView mv) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			mv.setViewName("login");
