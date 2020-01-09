@@ -20,10 +20,10 @@
 					url: 'update',
 					type: 'put',
 					data: son,
-					dataType: 'json',
 					contentType: 'application/json',
 					cache: false,
 				});
+				alert("data sent : "+son);
 				return false;
 			});
 		});

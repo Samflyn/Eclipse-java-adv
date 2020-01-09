@@ -20,8 +20,9 @@
 					data: son,
 					dataType: 'json',
 					contentType: 'application/json',
-					cache: false,
+					cache: false
 				});
+				alert("data sent : "+son);
 				return false;
 			});
 		});

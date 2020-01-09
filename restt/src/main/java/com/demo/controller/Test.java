@@ -68,8 +68,8 @@ public class Test {
 
 	@PutMapping(path = "/update", consumes = "application/json")
 	public void updating(@RequestBody String data) throws JsonMappingException, JsonProcessingException {
+		User user = new ObjectMapper().readValue(data, User.class);
+		service.register(user);
 		System.out.println(data);
-		//User user = new ObjectMapper().readValue(data, User.class);
-		//service.register(user);
 	}
 }

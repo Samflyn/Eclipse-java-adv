@@ -31,7 +31,9 @@ public class UserService {
 	}
 
 	public void delete(Integer id) {
-		repo.deleteById(id);
+		if (repo.existsById(id)) {
+			repo.deleteById(id);
+		}
 	}
 
 }

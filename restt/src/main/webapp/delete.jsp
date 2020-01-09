@@ -12,7 +12,7 @@
 			$('#submit').click(function (x) {
 				var id = $("#idd").val();
 				var urll = "delete/" + id;
-				var r = confirm("Are you sure to delete : " + name);
+				var r = confirm("Are you sure to delete : " + id);
 				if (r == true) {
 					$.ajax({
 						url: urll,
@@ -23,6 +23,7 @@
 						cache: false,
 					});
 				}
+				alert("data sent : "+id);
 				return false;
 			});
 		});
