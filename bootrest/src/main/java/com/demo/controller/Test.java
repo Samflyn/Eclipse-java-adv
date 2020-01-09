@@ -72,4 +72,5 @@ public class Test {
 		service.register(user);
 		System.out.println(data);
 	}
+
 }

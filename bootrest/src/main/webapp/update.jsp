@@ -1,16 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Update</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function (x) {
-			$('#submit').click(function (x) {
+		$(document).ready(function () {
+			$('#submit').click(function () {
 				var id = $("#id").val();
 				var name = $("#name").val();
 				var about = $("#about").val();
@@ -20,6 +20,7 @@
 					url: 'update',
 					type: 'put',
 					data: son,
+					dataType: 'json',
 					contentType: 'application/json',
 					cache: false,
 				});

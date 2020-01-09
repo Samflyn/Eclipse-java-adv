@@ -8,8 +8,8 @@
 	<title>Register</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function (x) {
-			$('#submit').click(function (x) {
+		$(document).ready(function () {
+			$('#submit').click(function () {
 				var name = $("#name").val();
 				var about = $("#about").val();
 				var jdata = { "name": name, "about": about };

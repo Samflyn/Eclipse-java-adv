@@ -8,8 +8,8 @@
 	<title>Delete</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function (x) {
-			$('#submit').click(function (x) {
+		$(document).ready(function () {
+			$('#submit').click(function () {
 				var id = $("#idd").val();
 				var urll = "delete/" + id;
 				var r = confirm("Are you sure to delete : " + id);
