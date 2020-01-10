@@ -2,12 +2,12 @@ package com.example.bean;
 
 import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
@@ -19,12 +19,12 @@ public class Customer {
 	private String password;
 	@Transient
 	private String rpassword;
-	@ElementCollection(targetClass = String.class)
-	private List<String> address;
-	@ElementCollection(targetClass = String.class)
-	private List<String> transaction;
-	@ElementCollection(targetClass = Products.class, fetch = FetchType.EAGER)
-	private List<Products> cart;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Address> address;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Transactions> transactions;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Cart> cart;
 
 	public int getId() {
 		return id;
@@ -58,28 +58,27 @@ public class Customer {
 		this.rpassword = rpassword;
 	}
 
-	public List<String> getAddress() {
+	public List<Address> getAddress() {
 		return address;
 	}
 
-	public void setAddress(List<String> address) {
+	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
 
-	public List<String> getTransaction() {
-		return transaction;
+	public List<Transactions> getTransactions() {
+		return transactions;
 	}
 
-	public void setTransaction(List<String> transaction) {
-		this.transaction = transaction;
+	public void setTransactions(List<Transactions> transactions) {
+		this.transactions = transactions;
 	}
 
-	public List<Products> getCart() {
+	public List<Cart> getCart() {
 		return cart;
 	}
 
-	public void setCart(List<Products> cart) {
+	public void setCart(List<Cart> cart) {
 		this.cart = cart;
 	}
-
 }

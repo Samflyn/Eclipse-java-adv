@@ -6,12 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Products {
+public class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private String about;
+	private int quantity;
 	private int price;
 
 	public int getId() {
@@ -30,12 +30,12 @@ public class Products {
 		this.name = name;
 	}
 
-	public String getAbout() {
-		return about;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setAbout(String about) {
-		this.about = about;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getPrice() {
@@ -44,6 +44,11 @@ public class Products {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "Cart [id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price + "]";
 	}
 
 }
