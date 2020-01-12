@@ -103,28 +103,33 @@ public class CommonService {
 
 	@Transactional
 	public ModelAndView addToCart(Cart cart, HttpServletRequest request, ModelAndView mav) {
+		System.out.println("add request:");
 		System.out.println(cart);
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			Customer customer = (Customer) session.getAttribute("customer");
+			System.out.println("session:");
 			System.out.println(customer.getCart());
-			List<Cart> updateCart = new ArrayList<Cart>();
 			if (!customer.getCart().isEmpty()) {
-				List<Cart> customerCart = customer.getCart();
-				for (Cart product : customerCart) {
-					if (product.getProductid() == cart.getProductid()) {
-						product.setQuantity(product.getQuantity() + cart.getQuantity());
+				List<Cart> updateCart = new ArrayList<Cart>();
+				for (Cart each : customer.getCart()) {
+					each.setId(0);
+					if (each.getProductid() == cart.getProductid()) {
+						each.setQuantity(each.getQuantity() + cart.getQuantity());
+						updateCart.add(each);
+					} else {
+						System.out.println("else");
+						updateCart.add(each);
+						updateCart.add(cart);
 					}
-					updateCart.add(product);
 				}
+				System.out.println(updateCart);
 			} else {
+				List<Cart> updateCart = new ArrayList<Cart>();
 				updateCart.add(cart);
+				customer.setCart(updateCart);
+				customerRepository.save(customer);
 			}
-			System.out.println("final");
-			System.out.println(updateCart);
-			customer.setCart(updateCart);
-			customerRepository.save(customer);
-			mav.setViewName("web");
 			session.setAttribute("customer", customer);
 		} else {
 			mav.setViewName("login");

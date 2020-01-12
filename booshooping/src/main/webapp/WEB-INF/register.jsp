@@ -16,9 +16,9 @@
 			<hr>
 			<h3 style="text-align: center; color: red;">${fail}</h3>
 			<h3 style="text-align: center; color: green;">${success}</h3>
-			<br> Name: <input type="text" name="name"><br>
-			<br> Password: <input type="password" name="password"><br>
-			<br> Re-Password: <input type="password" name="rpassword"><br>
+			<br> Name: <input type="text" name="name" required><br>
+			<br> Password: <input type="password" name="password" required><br>
+			<br> Re-Password: <input type="password" name="rpassword" required><br>
 			<br><br> <input type="submit" value="Submit">
 			<input type="reset" value="Clear">
 		</div>

@@ -18,8 +18,8 @@
         <h3 style="text-align: center; color: green;">${logout}</h3>
         <br><br>
         <h3 style="text-align: center;">
-            User Name:<input type="text" name="name"><br><br>
-            Password:<input type="password" name="password">
+            User Name:<input type="text" name="name" required><br><br>
+            Password:<input type="password" name="password" required>
         </h3>
         <h2 style="text-align: center;"><input type="submit" value="Login"></h2>
     </form>
