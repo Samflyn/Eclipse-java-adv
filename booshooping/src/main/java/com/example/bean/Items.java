@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Products implements Serializable {
+public class Items implements Serializable {
 	/**
 	 * 
 	 */
@@ -18,7 +18,7 @@ public class Products implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	private String about;
+	private int quantity;
 	private int price;
 
 	public int getId() {
@@ -37,12 +37,12 @@ public class Products implements Serializable {
 		this.name = name;
 	}
 
-	public String getAbout() {
-		return about;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setAbout(String about) {
-		this.about = about;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getPrice() {

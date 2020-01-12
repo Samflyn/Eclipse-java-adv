@@ -1,15 +1,23 @@
 package com.example.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Cart {
+public class Cart implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private int productid;
 	private String name;
 	private int quantity;
 	private int price;
@@ -20,6 +28,14 @@ public class Cart {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getProductid() {
+		return productid;
+	}
+
+	public void setProductid(int productid) {
+		this.productid = productid;
 	}
 
 	public String getName() {
@@ -48,7 +64,8 @@ public class Cart {
 
 	@Override
 	public String toString() {
-		return "Cart [id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price + "]";
+		return "Cart [id=" + id + ", productid=" + productid + ", name=" + name + ", quantity=" + quantity + ", price="
+				+ price + "]";
 	}
 
 }
