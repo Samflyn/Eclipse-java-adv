@@ -105,7 +105,7 @@
                         url: "tocart",
                         type: "post",
                         data: {
-                        	productid, name, quantity, price
+                            productid, name, quantity, price
                         }
                     });
                 }

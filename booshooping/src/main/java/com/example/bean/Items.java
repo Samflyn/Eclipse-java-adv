@@ -53,4 +53,9 @@ public class Items implements Serializable {
 		this.price = price;
 	}
 
+	@Override
+	public String toString() {
+		return "Items [id=" + id + ", name=" + name + ", quantity=" + quantity + ", price=" + price + "]";
+	}
+
 }

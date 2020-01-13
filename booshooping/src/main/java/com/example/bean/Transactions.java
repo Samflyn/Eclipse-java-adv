@@ -21,11 +21,12 @@ public class Transactions implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String txid;
-	private int date;
+	private String date;
 	private String address;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Items> items;
 	private int total;
+	private String status;
 
 	public int getId() {
 		return id;
@@ -43,11 +44,11 @@ public class Transactions implements Serializable {
 		this.txid = txid;
 	}
 
-	public int getdate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setdate(int date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -73,6 +74,20 @@ public class Transactions implements Serializable {
 
 	public void setTotal(int total) {
 		this.total = total;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "Transactions [id=" + id + ", txid=" + txid + ", date=" + date + ", address=" + address + ", items="
+				+ items + ", total=" + total + ", status=" + status + "]";
 	}
 
 }

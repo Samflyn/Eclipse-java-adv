@@ -34,4 +34,9 @@ public class Address implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", address=" + address + "]";
+	}
 }

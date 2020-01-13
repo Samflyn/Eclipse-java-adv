@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.bean.Address;
 import com.example.bean.Cart;
 import com.example.bean.Customer;
 import com.example.service.CommonService;
@@ -21,7 +22,7 @@ public class Test {
 	@GetMapping
 	public ModelAndView start(ModelAndView mav) {
 		mav.setViewName("start");
-		service.begin();
+		// service.begin();
 		return mav;
 	}
 
@@ -60,8 +61,43 @@ public class Test {
 		return service.addToCart(cart, request, mav);
 	}
 
+	@PostMapping("/removecart")
+	public void removeCart(Cart cart, HttpServletRequest request) {
+		service.removeCart(cart, request);
+	}
+
+	@PostMapping("/minus")
+	public void minus(Cart cart, HttpServletRequest request) {
+		service.minus(cart, request);
+	}
+
 	@GetMapping("/mycart")
 	public ModelAndView getCart(ModelAndView mav, HttpServletRequest request) {
 		return service.getCart(mav, request);
+	}
+
+	@GetMapping("/address")
+	public ModelAndView getAddress(ModelAndView mav, HttpServletRequest request) {
+		return service.getAddress(mav, request);
+	}
+
+	@PostMapping("/addaddress")
+	public void addAddress(Address address, HttpServletRequest request) {
+		service.addAddress(address, request);
+	}
+
+	@PostMapping("/removeaddress")
+	public void removeAddress(Integer id, HttpServletRequest request) {
+		service.removeAddress(id, request);
+	}
+
+	@PostMapping("/pay")
+	public ModelAndView pay(Integer total, String address, HttpServletRequest request, ModelAndView mav) {
+		return service.pay(total, address, request, mav);
+	}
+
+	@GetMapping("/orders")
+	public ModelAndView getOrders(ModelAndView mav, HttpServletRequest request) {
+		return service.getOrders(mav, request);
 	}
 }

@@ -7,6 +7,44 @@
 <head>
     <meta charset="UTF-8">
     <title>My Address</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                var address = $.trim($("#address").val());
+                if (address != "") {
+                    $.ajax({
+                        url: "addaddress",
+                        type: "post",
+                        data: {
+                            address
+                        }
+                    });
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    alert("Please enter an address!");
+                    return false;
+                }
+            });
+            $("#remove1,#remove2,#remove3,#remove4,#remove5").click(function () {
+                var vaa = this.id;
+                var pid = vaa.replace("remove", "");
+                var id = $("#id" + pid).val();
+                $.ajax({
+                    url: "removeaddress",
+                    type: "post",
+                    data: {
+                        id
+                    }
+                });
+                setTimeout(function () {
+                    location.reload();
+                }, 500);
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -17,22 +55,25 @@
             <th>Id</th>
             <th>Address</th>
         </tr>
-        <c:forEach items="${address}" var="addr" varStatus="roll">
-            <tr>
-                <td style="text-align: center;" id="id${roll.count}">${roll.count}</td>
-                <td style="text-align: center;" id="address${roll.count}">${addr.address}</td>
-            </tr>
-        </c:forEach>
+        <c:if test="${not empty address}">
+            <c:forEach items="${address}" var="addr" varStatus="roll">
+                <tr>
+                    <td style="text-align: center;">${roll.count}</td>
+                    <input type="text" name="id" id="id${roll.count}" value="${addr.id}" hidden>
+                    <td style="text-align: center;" id="address${roll.count}">${addr.address}</td>
+                    <td style="text-align: center;"><input type="button" value="remove" id="remove${roll.count}"></td>
+                </tr>
+            </c:forEach>
+        </c:if>
     </table>
     <br><br>
-    <form action="addaddress" method="post">
-        <div style="text-align: center;">
-            <h3>Or add a new address</h3>
-            <textarea name="add" id="address" cols="100" rows="10"></textarea><br><br>
-            <input type="submit" value="add">
-            <input type="reset" value="clear">
-        </div>
-    </form>
+    <div style="text-align: center;">
+        <h3>Or add a new address</h3>
+        <textarea id="address" cols="100" rows="10"></textarea>
+        <br><br>
+        <input type="submit" value="submit" id="submit">
+        <input type="reset" value="clear">
+    </div>
 </body>
 
 </html>

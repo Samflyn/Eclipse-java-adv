@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 @Entity
 public class Customer implements Serializable {
 	/**
@@ -27,6 +30,7 @@ public class Customer implements Serializable {
 	@Transient
 	private String rpassword;
 	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Address> address;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Transactions> transactions;
@@ -87,5 +91,11 @@ public class Customer implements Serializable {
 
 	public void setCart(List<Cart> cart) {
 		this.cart = cart;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", transactions=" + transactions
+				+ ", cart=" + cart + "]";
 	}
 }
