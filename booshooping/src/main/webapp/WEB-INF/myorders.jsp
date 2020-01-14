@@ -34,7 +34,7 @@
     </table>
     <br><br>
     <h3 style="text-align: center;">
-        Go Home : <input type="button" onclick="window.location.href='web';" value="home">
+        Go Home : <input type="button" onclick="window.location.href='dashboard';" value="home">
     </h3>
 </body>
 

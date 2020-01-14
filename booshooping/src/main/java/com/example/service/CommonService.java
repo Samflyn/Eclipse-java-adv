@@ -39,8 +39,8 @@ public class CommonService {
 			session.setMaxInactiveInterval(100);
 			List<Products> products = productRepository.findAll();
 			session.setAttribute("products", products);
-			mav.setViewName("web");
-			return "redirect:web";
+			mav.setViewName("dashboard");
+			return "redirect:dashboard";
 		} else {
 			mav.setViewName("login");
 			mav.addObject("message", "Username or password incorrect!");
@@ -154,13 +154,13 @@ public class CommonService {
 		return mav;
 	}
 
-	public ModelAndView web(ModelAndView mav, HttpServletRequest request) {
+	public ModelAndView productList(ModelAndView mav, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			mav.setViewName("login");
 			mav.addObject("message", "Session timed out, Please login again!");
 		} else {
-			mav.setViewName("web");
+			mav.setViewName("productlist");
 		}
 		return mav;
 	}
@@ -229,17 +229,33 @@ public class CommonService {
 		}
 	}
 
-	public ModelAndView pay(Integer total, String address, HttpServletRequest request, ModelAndView mav) {
+	public ModelAndView pay(Integer total, String address, String add, HttpServletRequest request, ModelAndView mav) {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			Customer customer = (Customer) session.getAttribute("customer");
 			Transactions tx = new Transactions();
 			tx.setTxid(UUID.randomUUID().toString());
 			Date date = new Date();
-			tx.setDate(date.toString());
-			tx.setAddress(address);
+			tx.setDate(date.toString());			
 			List<Items> items = new ArrayList<Items>();
 			customer = customerRepository.findById(customer.getId()).get();
+			if (add != null) {
+				address = add.trim();
+				List<Address> list = customer.getAddress();
+				boolean test = false;
+				for (Address a : list) {
+					if (a.getAddress().contentEquals(address)) {
+						test = true;
+					}
+				}
+				if (!test) {
+					Address a = new Address();
+					a.setAddress(address);
+					list.add(a);
+					customer.setAddress(list);
+					customerRepository.save(customer);
+				}
+			}
 			List<Cart> cart = customer.getCart();
 			for (Cart temp : cart) {
 				Items item = new Items();
@@ -251,11 +267,13 @@ public class CommonService {
 			tx.setItems(items);
 			tx.setTotal(total);
 			tx.setStatus("Success");
-			List<Transactions> transactions = customer.getTransactions();
-			transactions.add(tx);
+			tx.setAddress(address);
+			List<Transactions> transactions = customer.getTransactions();			
+			transactions.add(tx);			
 			customer.setCart(null);
 			customer.setTransactions(transactions);
 			customerRepository.save(customer);
+			session.setAttribute("tx", tx);
 			mav.setViewName("payment");
 			mav.addObject("tx", tx);
 		} else {
@@ -274,9 +292,9 @@ public class CommonService {
 			for (Cart temp : list) {
 				if (temp.getProductid() == cart.getProductid()) {
 					temp.setQuantity(temp.getQuantity() - 1);
-					if (temp.getQuantity() > 0) {
-						updateCart.add(temp);
-					}
+				}
+				if (temp.getQuantity() > 0) {
+					updateCart.add(temp);
 				}
 			}
 			customer.setCart(updateCart);
@@ -311,6 +329,34 @@ public class CommonService {
 				}
 			}
 			customer.setAddress(updateAddress);
+			customerRepository.save(customer);
+		}
+	}
+
+	public ModelAndView dashboard(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			mav.setViewName("login");
+			mav.addObject("message", "Session timed out, Please login again!");
+		} else {
+			mav.setViewName("dashboard");
+		}
+		return mav;
+	}
+
+	public void plus(Cart cart, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			Customer customer = (Customer) session.getAttribute("customer");
+			List<Cart> list = customerRepository.findById(customer.getId()).get().getCart();
+			List<Cart> updateCart = new ArrayList<Cart>();
+			for (Cart temp : list) {
+				if (temp.getProductid() == cart.getProductid()) {
+					temp.setQuantity(temp.getQuantity() + 1);
+				}
+				updateCart.add(temp);
+			}
+			customer.setCart(updateCart);
 			customerRepository.save(customer);
 		}
 	}

@@ -143,13 +143,9 @@
     </table>
     <br><br>
     <h1 style="text-align: center;">
-        <input type="button" onclick="window.location.href='orders';" value="My Orders">
-        <input type="button" onclick="window.location.href='address';" value="Addresses">
+        <input type="button" onclick="window.location.href='address';" value="My Address">
     </h1>
     <br><br>
-    <h1 style="text-align: center;">
-        <input type="button" onclick="window.location.href='logout';" value="Logout">
-    </h1>
 </body>
 
 </html>

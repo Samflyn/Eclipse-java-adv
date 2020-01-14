@@ -46,9 +46,14 @@ public class Test {
 		return service.login(name, password, mav, session);
 	}
 
-	@GetMapping("/web")
-	public ModelAndView web(ModelAndView mav, HttpServletRequest request) {
-		return service.web(mav, request);
+	@GetMapping("/dashboard")
+	public ModelAndView dashboard(ModelAndView mav, HttpServletRequest request) {
+		return service.dashboard(mav, request);
+	}
+
+	@GetMapping("/productlist")
+	public ModelAndView productList(ModelAndView mav, HttpServletRequest request) {
+		return service.productList(mav, request);
 	}
 
 	@GetMapping("/logout")
@@ -69,6 +74,11 @@ public class Test {
 	@PostMapping("/minus")
 	public void minus(Cart cart, HttpServletRequest request) {
 		service.minus(cart, request);
+	}
+
+	@PostMapping("/plus")
+	public void plus(Cart cart, HttpServletRequest request) {
+		service.plus(cart, request);
 	}
 
 	@GetMapping("/mycart")
@@ -92,8 +102,8 @@ public class Test {
 	}
 
 	@PostMapping("/pay")
-	public ModelAndView pay(Integer total, String address, HttpServletRequest request, ModelAndView mav) {
-		return service.pay(total, address, request, mav);
+	public ModelAndView pay(Integer total, String address, String add, HttpServletRequest request, ModelAndView mav) {
+		return service.pay(total, address, add, request, mav);
 	}
 
 	@GetMapping("/orders")
