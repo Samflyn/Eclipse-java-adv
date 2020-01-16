@@ -12,7 +12,7 @@
 <body>
     <h3 style="text-align: center;">Success !<br>
         Your payment has been successfull <br><br>
-        Items will be delivered in next two days. <br><br>
+        Estimated Delivery date - <c:out value="${day}"></c:out> <br><br>
         Payment Details : <br><br>
         Transaction Id : <c:out value="${tx.txid}"></c:out><br><br>
         Date of purchase : <c:out value="${tx.date}"></c:out><br><br>

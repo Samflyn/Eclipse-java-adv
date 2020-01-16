@@ -22,7 +22,7 @@ public class Test {
 	@GetMapping
 	public ModelAndView start(ModelAndView mav) {
 		mav.setViewName("start");
-		// service.begin();
+		// service.begin();		//Creating
 		return mav;
 	}
 
@@ -109,5 +109,10 @@ public class Test {
 	@GetMapping("/orders")
 	public ModelAndView getOrders(ModelAndView mav, HttpServletRequest request) {
 		return service.getOrders(mav, request);
+	}
+
+	@PostMapping("/item")
+	public ModelAndView getItem(Integer id, ModelAndView mav, HttpServletRequest request) {
+		return service.getItem(id, mav, request);
 	}
 }

@@ -7,6 +7,25 @@
 <head>
     <meta charset="UTF-8">
     <title>My Orders</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".item").click(function () {
+                var id = this.id;
+                $.ajax({
+                    url: "item",
+                    type: "post",
+                    data: {
+                        id
+                    },
+                    cache: false,
+                    success: function (x) {
+                        $("#items").html(x);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -18,6 +37,7 @@
             <th>Transaction Id</th>
             <th>Date of Purchase</th>
             <th>Address</th>
+            <th>Items</th>
             <th>Total</th>
             <th>Status</th>
         </tr>
@@ -27,11 +47,14 @@
                 <td style="text-align: center;">${ts.txid}</td>
                 <td style="text-align: center;">${ts.date}</td>
                 <td style="text-align: center;">${ts.address}</td>
+                <td style="text-align: center;"><input type="button" value="items" class="item" id="${ts.id}"></td>
                 <td style="text-align: center;">${ts.total}</td>
                 <td style="text-align: center;">${ts.status}</td>
             </tr>
         </c:forEach>
     </table>
+    <br><br>
+    <div id="items" style="text-align: center;"></div>
     <br><br>
     <h3 style="text-align: center;">
         Go Home : <input type="button" onclick="window.location.href='dashboard';" value="home">

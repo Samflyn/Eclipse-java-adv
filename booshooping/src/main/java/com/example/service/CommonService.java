@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,7 +70,7 @@ public class CommonService {
 		return productRepository.findAll();
 	}
 
-	@Transactional
+	@Transactional//Creating
 	public void begin() {
 		Products p = new Products();
 		p.setName("Apple");
@@ -236,7 +238,7 @@ public class CommonService {
 			Transactions tx = new Transactions();
 			tx.setTxid(UUID.randomUUID().toString());
 			Date date = new Date();
-			tx.setDate(date.toString());			
+			tx.setDate(date.toString());
 			List<Items> items = new ArrayList<Items>();
 			customer = customerRepository.findById(customer.getId()).get();
 			if (add != null) {
@@ -268,12 +270,14 @@ public class CommonService {
 			tx.setTotal(total);
 			tx.setStatus("Success");
 			tx.setAddress(address);
-			List<Transactions> transactions = customer.getTransactions();			
-			transactions.add(tx);			
+			List<Transactions> transactions = customer.getTransactions();
+			transactions.add(tx);
 			customer.setCart(null);
 			customer.setTransactions(transactions);
 			customerRepository.save(customer);
+			String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM"));
 			session.setAttribute("tx", tx);
+			session.setAttribute("day", day);
 			mav.setViewName("payment");
 			mav.addObject("tx", tx);
 		} else {
@@ -359,5 +363,25 @@ public class CommonService {
 			customer.setCart(updateCart);
 			customerRepository.save(customer);
 		}
+	}
+
+	public ModelAndView getItem(Integer id, ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			mav.setViewName("login");
+			mav.addObject("message", "Session timed out, Please login again!");
+		} else {
+			mav.setViewName("item");
+			Customer customer = (Customer) session.getAttribute("customer");
+			List<Transactions> list = customerRepository.findById(customer.getId()).get().getTransactions();
+			List<Items> item = new ArrayList<Items>();
+			for (Transactions t : list) {
+				if (t.getId() == id) {
+					item = t.getItems();
+				}
+			}
+			mav.addObject("items", item);
+		}
+		return mav;
 	}
 }
