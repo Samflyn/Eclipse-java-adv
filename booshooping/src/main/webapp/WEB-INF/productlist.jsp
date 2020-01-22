@@ -30,7 +30,7 @@
             })
             $('.tocart').click(function () {
                 var id = this.id;
-                var i = "quantity" + id.replace("tocart", "");
+                var i = id.replace("tocart", "");
                 var productid = $("#id" + i).text();
                 var name = $("#name" + i).text();
                 var quantity = $("#quantity" + i).val();

@@ -22,7 +22,7 @@ public class Test {
 	@GetMapping
 	public ModelAndView start(ModelAndView mav) {
 		mav.setViewName("start");
-		// service.begin();		//Creating
+		service.begin();		//Creating
 		return mav;
 	}
 

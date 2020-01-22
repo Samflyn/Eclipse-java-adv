@@ -19,6 +19,7 @@ public class Products implements Serializable {
 	private int id;
 	private String name;
 	private String about;
+	private String category;
 	private int price;
 
 	public int getId() {
@@ -45,6 +46,14 @@ public class Products implements Serializable {
 		this.about = about;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public int getPrice() {
 		return price;
 	}
@@ -55,7 +64,8 @@ public class Products implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Products [id=" + id + ", name=" + name + ", about=" + about + ", price=" + price + "]";
+		return "Products [id=" + id + ", name=" + name + ", about=" + about + ", category=" + category + ", price="
+				+ price + "]";
 	}
 
 }
