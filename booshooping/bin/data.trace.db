@@ -1,0 +1,3 @@
+2020-01-13 16:43:38 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "update transactions set status=[*]'success;"; SQL statement:
+update transactions set status='success; [42000-200]

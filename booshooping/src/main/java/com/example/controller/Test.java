@@ -22,7 +22,7 @@ public class Test {
 	@GetMapping
 	public ModelAndView start(ModelAndView mav) {
 		mav.setViewName("start");
-		service.begin();		//Creating
+		// service.begin(); // Creating
 		return mav;
 	}
 
@@ -49,6 +49,16 @@ public class Test {
 	@GetMapping("/dashboard")
 	public ModelAndView dashboard(ModelAndView mav, HttpServletRequest request) {
 		return service.dashboard(mav, request);
+	}
+
+	@GetMapping("/category")
+	public ModelAndView category(ModelAndView mav, HttpServletRequest request) {
+		return service.category(mav, request);
+	}
+
+	@GetMapping("/shop")
+	public String category(String id, ModelAndView mav, HttpServletRequest request) {
+		return service.category(id, mav, request);
 	}
 
 	@GetMapping("/productlist")

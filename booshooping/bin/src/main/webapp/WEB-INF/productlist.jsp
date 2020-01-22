@@ -30,7 +30,7 @@
             })
             $('.tocart').click(function () {
                 var id = this.id;
-                var i = id.replace("tocart", "");
+                var i = "quantity" + id.replace("tocart", "");
                 var productid = $("#id" + i).text();
                 var name = $("#name" + i).text();
                 var quantity = $("#quantity" + i).val();
@@ -81,7 +81,6 @@
     </table>
     <br><br>
     <h1 style="text-align: center;">
-        <input type="button" onclick="window.location.href='category';" value="Category">
         <input type="button" onclick="window.location.href='address';" value="My Address">
     </h1>
     <br><br>

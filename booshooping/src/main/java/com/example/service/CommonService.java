@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.TreeSet;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +40,6 @@ public class CommonService {
 			Customer customer = optional.get();
 			session.setAttribute("customer", customer);
 			session.setMaxInactiveInterval(100);
-			List<Products> products = productRepository.findAll();
-			session.setAttribute("products", products);
 			mav.setViewName("dashboard");
 			return "redirect:dashboard";
 		} else {
@@ -458,6 +457,30 @@ public class CommonService {
 				}
 			}
 			mav.addObject("items", item);
+		}
+		return mav;
+	}
+
+	public String category(String category, ModelAndView mav, HttpServletRequest request) {
+		 List<Products> products = productRepository.findByCategory(category);
+		 HttpSession session = request.getSession(false);
+		 session.setAttribute("products", products);
+		return "redirect:productlist";
+	}
+
+	public ModelAndView category(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			mav.setViewName("login");
+			mav.addObject("message", "Session timed out, Please login again!");
+		} else {
+			mav.setViewName("category");
+			List<Products> all = productRepository.findAll();
+			TreeSet<String> ts = new TreeSet<String>();
+			for (Products p : all) {
+				ts.add(p.getCategory());
+			}
+			mav.addObject("category", ts);
 		}
 		return mav;
 	}
