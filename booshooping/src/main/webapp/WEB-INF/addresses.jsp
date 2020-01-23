@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -50,7 +50,7 @@
 <body>
     <h1 style="text-align: center;">Addressess</h1>
     <hr>
-    <table style="width:100%" id="product">
+    <table style="width: 100%" id="product">
         <tr>
             <th>Id</th>
             <th>Address</th>
@@ -66,12 +66,12 @@
             </c:forEach>
         </c:if>
     </table>
-    <br><br>
+    <br>
+    <br>
     <div style="text-align: center;">
         <h3>Or add a new address</h3>
         <textarea id="address" cols="100" rows="10"></textarea>
-        <br><br>
-        <input type="submit" value="submit" id="submit">
+        <br> <br> <input type="submit" value="submit" id="submit">
         <input type="reset" value="clear">
     </div>
 </body>

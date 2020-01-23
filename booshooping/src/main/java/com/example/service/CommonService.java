@@ -317,7 +317,7 @@ public class CommonService {
 			tx.setDate(date.toString());
 			List<Items> items = new ArrayList<Items>();
 			customer = customerRepository.findById(customer.getId()).get();
-			if (add != null) {
+			if (add != null && !add.isEmpty()) {
 				address = add.trim();
 				List<Address> list = customer.getAddress();
 				boolean test = false;
@@ -462,9 +462,9 @@ public class CommonService {
 	}
 
 	public String category(String category, ModelAndView mav, HttpServletRequest request) {
-		 List<Products> products = productRepository.findByCategory(category);
-		 HttpSession session = request.getSession(false);
-		 session.setAttribute("products", products);
+		List<Products> products = productRepository.findByCategory(category);
+		HttpSession session = request.getSession(false);
+		session.setAttribute("products", products);
 		return "redirect:productlist";
 	}
 

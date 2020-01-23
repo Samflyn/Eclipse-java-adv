@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -54,8 +54,9 @@
 <body>
     <h1 style="text-align: center;">Product List</h1>
     <h1 style="text-align: end;">
-        <input type="button" onclick="window.location.href='mycart';" value="My Cart"></h1>
-    <table style="width:100%" id="product">
+        <input type="button" onclick="window.location.href='mycart';" value="My Cart">
+    </h1>
+    <table style="width: 100%" id="product">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -68,8 +69,8 @@
                 <td style="text-align: center;" id="id${roll.count}">${product.id}</td>
                 <td style="text-align: center;" id="name${roll.count}">${product.name}</td>
                 <td style="text-align: center;">
-                    <button id="minus${roll.count}" class="minus">-</button>
-                    <input type="text" id="quantity${roll.count}" value="0" size="1">
+                    <button id="minus${roll.count}" class="minus">-</button> <input type="text"
+                        id="quantity${roll.count}" value="0" size="1">
                     <button id="add${roll.count}" class="add">+</button>
                 </td>
                 <td style="text-align: center;" id="about">${product.about}</td>
@@ -79,12 +80,14 @@
             </tr>
         </c:forEach>
     </table>
-    <br><br>
+    <br>
+    <br>
     <h1 style="text-align: center;">
-        <input type="button" onclick="window.location.href='category';" value="Category">
-        <input type="button" onclick="window.location.href='address';" value="My Address">
+        <input type="button" onclick="window.location.href='category';" value="Category"> <input type="button"
+            onclick="window.location.href='address';" value="My Address">
     </h1>
-    <br><br>
+    <br>
+    <br>
 </body>
 
 </html>
