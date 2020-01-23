@@ -24,7 +24,8 @@
 	<h3 style="text-align: center;">
 		Shop by Category : <input type="button" onclick="window.location.href='category';" value="Category"><br>
 		<br> My Cart : <input type="button" onclick="window.location.href='mycart';" value="Cart"><br>
-		<br> My Orders : <input type="button" onclick="window.location.href='orders';" value="Orders">
+		<br> My Address : <input type="button" onclick="window.location.href='address';" value="My Address"><br>
+		<br> My Orders : <input type="button" onclick="window.location.href='orders';" value="Orders"><br>
 	</h3>
 </body>
 

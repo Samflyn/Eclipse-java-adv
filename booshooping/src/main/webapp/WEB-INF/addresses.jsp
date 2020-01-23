@@ -28,7 +28,7 @@
                     return false;
                 }
             });
-            $("#remove1,#remove2,#remove3,#remove4,#remove5").click(function () {
+            $(".remove").click(function () {
                 var vaa = this.id;
                 var pid = vaa.replace("remove", "");
                 var id = $("#id" + pid).val();
@@ -61,7 +61,8 @@
                     <td style="text-align: center;">${roll.count}</td>
                     <input type="text" name="id" id="id${roll.count}" value="${addr.id}" hidden>
                     <td style="text-align: center;" id="address${roll.count}">${addr.address}</td>
-                    <td style="text-align: center;"><input type="button" value="remove" id="remove${roll.count}"></td>
+                    <td style="text-align: center;"><input type="button" value="remove" id="remove${roll.count}"
+                            class="remove"></td>
                 </tr>
             </c:forEach>
         </c:if>
@@ -74,6 +75,9 @@
         <br> <br> <input type="submit" value="submit" id="submit">
         <input type="reset" value="clear">
     </div>
+    <h3 style="text-align: center;">
+        Or go home : <input type="button" onclick="window.location.href='dashboard';" value="Dashboard">
+    </h3>
 </body>
 
 </html>

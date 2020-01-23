@@ -52,13 +52,6 @@
 					location.reload();
 				}, 500);
 			});
-			$("#pay").click(function () {
-				var total = $('#total').text();
-				if (total == 0) {
-					alert("Please add few products to cart!");
-					return false;
-				}
-			});
 		});
 	</script>
 </head>
@@ -96,24 +89,34 @@
 	<br>
 	<br>
 	<br>
-	<h3 style="text-align: center;">
-		Total :
-		<div id="total">
-			<c:out value="${total}"></c:out>
-		</div>
-		<br> <br> Shipping Address : <br> <br>
-		<form action="pay" method="post">
-			<c:forEach items="${address}" var="addr" varStatus="roll">
-				<input type="radio" name="address" value="${addr.address}" id="address" checked> ${addr.address}<br>
-			</c:forEach>
-			<br> <br> <input type="text" name="total" id="total" hidden value="<c:out value=" ${total}"></c:out>"> Or
-			Add address: <br>
-			<br> <br>
-			<textarea name="add" id="add" cols="70" rows="10"></textarea>
-			<br> <br> <input type="submit" value="pay" id="pay">
-			<input type="button" onclick="window.location.href='dashboard';" value="Cancel">
-		</form>
-	</h3>
+	<c:if test="${empty cart}">
+		<h3 style="text-align: center;">Your cart is empty. <br><br>
+			Go Shopping... <br><br>
+			<input type="button" onclick="window.location.href='category';" value="Shopping"><br><br><br>
+			Or go Home : <input type="button" onclick="window.location.href='dashboard';" value="Dashboard">
+		</h3>
+	</c:if>
+	<c:if test="${not empty cart}">
+		<h3 style="text-align: center;">
+			Total :
+			<div id="total">
+				<c:out value="${total}"></c:out>
+			</div>
+			<br> <br> Shipping Address : <br> <br>
+			<form action="pay" method="post">
+				<c:forEach items="${address}" var="addr" varStatus="roll">
+					<input type="radio" name="address" value="${addr.address}" id="address" checked> ${addr.address}<br>
+				</c:forEach>
+				<br> <br> <input type="text" name="total" id="total" hidden value="<c:out value=" ${total}"></c:out>">
+				Or
+				Add address: <br>
+				<br> <br>
+				<textarea name="add" id="add" cols="70" rows="10"></textarea>
+				<br> <br> <input type="submit" value="pay" id="pay">
+				<input type="button" onclick="window.location.href='dashboard';" value="Cancel">
+			</form>
+		</h3>
+	</c:if>
 </body>
 
 </html>
