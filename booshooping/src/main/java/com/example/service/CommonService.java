@@ -34,6 +34,12 @@ public class CommonService {
 	@Autowired
 	ProductRepository productRepository;
 
+	private ModelAndView toLogin(ModelAndView mav) {
+		mav.setViewName("login");
+		mav.addObject("message", "Session timed out, Please login again!");
+		return mav;
+	}
+
 	public String login(String name, String password, ModelAndView mav, HttpSession session) {
 		Optional<Customer> optional = customerRepository.findByNameAndPassword(name, password);
 		if (!optional.isEmpty()) {
@@ -49,13 +55,25 @@ public class CommonService {
 		}
 	}
 
+	public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
+		mav.setViewName("login");
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+			mav.addObject("logout", "Sucessfully logged out!");
+		} else {
+			mav.addObject("message", "Please login first!");
+		}
+		return mav;
+	}
+
 	public ModelAndView register(Customer customer, ModelAndView mav) {
 		if (customer.getPassword().equals(customer.getRpassword())) {
 			mav.setViewName("register");
 			Optional<Customer> customers = customerRepository.findByName(customer.getName());
 			if (customers.isEmpty()) {
 				customerRepository.save(customer);
-				mav.addObject("success", "Successful!");
+				mav.addObject("success", "Successfully registered!");
 			} else {
 				mav.addObject("fail", "User already exists!");
 			}
@@ -65,123 +83,30 @@ public class CommonService {
 		return mav;
 	}
 
-	public List<Products> getProducts() {
-		return productRepository.findAll();
+	public ModelAndView dashboard(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			mav.setViewName("dashboard");
+		}
+		return mav;
 	}
 
-	@Transactional // Creating
-	public void begin() {
-		Products p = new Products();
-		p.setName("Apple");
-		p.setAbout("It's a fruit");
-		p.setPrice(50);
-		p.setCategory("Foods");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Ben & Jerry's");
-		p.setAbout("It's a very good ice cream");
-		p.setPrice(150);
-		p.setCategory("Foods");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Coca Cola");
-		p.setAbout("It's the best soft drink");
-		p.setPrice(30);
-		p.setCategory("Foods");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Lays Max");
-		p.setAbout("Potato Chip's");
-		p.setPrice(20);
-		p.setCategory("Foods");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Pringles");
-		p.setAbout("Popular Chip's in world");
-		p.setPrice(300);
-		p.setCategory("Foods");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Docker");
-		p.setAbout("It's a phone dock");
-		p.setPrice(80);
-		p.setCategory("Electronics");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Echo");
-		p.setAbout("Amazon's speaker");
-		p.setPrice(8000);
-		p.setCategory("Electronics");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("iPod");
-		p.setAbout("Apple's Music Player");
-		p.setPrice(6000);
-		p.setCategory("Electronics");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Beats");
-		p.setAbout("Headphone's from Dr. Dre");
-		p.setPrice(10000);
-		p.setCategory("Electronics");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Elastic Band");
-		p.setAbout("It's an elastic band");
-		p.setPrice(20);
-		p.setCategory("Fashion");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Jacket");
-		p.setAbout("Waterproof Jacket");
-		p.setPrice(2000);
-		p.setCategory("Fashion");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Blue Jeans");
-		p.setAbout("Blue Jeans");
-		p.setPrice(900);
-		p.setCategory("Fashion");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Air Jordan");
-		p.setAbout("Sneaker's");
-		p.setPrice(20);
-		p.setCategory("Fashion");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("No Limits");
-		p.setAbout("Science of high performance");
-		p.setPrice(300);
-		p.setCategory("Books");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Witcher");
-		p.setAbout("An adventure book");
-		p.setPrice(450);
-		p.setCategory("Books");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Cyberpunk");
-		p.setAbout("Sci-fi book");
-		p.setPrice(400);
-		p.setCategory("Books");
-		productRepository.save(p);
-		p = new Products();
-		p.setName("Dexter");
-		p.setAbout("Thriller book");
-		p.setPrice(450);
-		p.setCategory("Books");
-		productRepository.save(p);
-		List<Address> alist = new ArrayList<Address>();
-		Address a = new Address();
-		a.setAddress("Flat no:1, Hitex, Hyderabad");
-		alist.add(a);
-		Customer c = new Customer();
-		c.setName("user");
-		c.setPassword("user");
-		c.setAddress(alist);
-		customerRepository.save(c);
+	public ModelAndView category(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			mav.setViewName("category");
+			List<Products> all = productRepository.findAll();
+			TreeSet<String> ts = new TreeSet<String>();
+			for (Products p : all) {
+				ts.add(p.getCategory());
+			}
+			mav.addObject("category", ts);
+		}
+		return mav;
 	}
 
 	@Transactional
@@ -214,20 +139,7 @@ public class CommonService {
 			}
 			session.setAttribute("customer", customer);
 		} else {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
-		}
-		return mav;
-	}
-
-	public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
-		mav.setViewName("login");
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.invalidate();
-			mav.addObject("logout", "Sucessfully logged out!");
-		} else {
-			mav.addObject("message", "Please login first!");
+			return toLogin(mav);
 		}
 		return mav;
 	}
@@ -235,8 +147,7 @@ public class CommonService {
 	public ModelAndView productList(ModelAndView mav, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
+			return toLogin(mav);
 		} else {
 			mav.setViewName("productlist");
 		}
@@ -246,8 +157,7 @@ public class CommonService {
 	public ModelAndView getCart(ModelAndView mav, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
+			return toLogin(mav);
 		} else {
 			Customer customer = (Customer) session.getAttribute("customer");
 			Optional<Customer> optional = customerRepository.findById(customer.getId());
@@ -265,8 +175,7 @@ public class CommonService {
 	public ModelAndView getAddress(ModelAndView mav, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
+			return toLogin(mav);
 		} else {
 			Customer customer = (Customer) session.getAttribute("customer");
 			List<Address> address = customerRepository.findById(customer.getId()).get().getAddress();
@@ -390,8 +299,7 @@ public class CommonService {
 			session.setAttribute("tx", customer.getTransactions());
 			mav.setViewName("myorders");
 		} else {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
+			return toLogin(mav);
 		}
 		return mav;
 	}
@@ -411,17 +319,6 @@ public class CommonService {
 			customer.setAddress(updateAddress);
 			customerRepository.save(customer);
 		}
-	}
-
-	public ModelAndView dashboard(ModelAndView mav, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
-		} else {
-			mav.setViewName("dashboard");
-		}
-		return mav;
 	}
 
 	public void plus(Cart cart, HttpServletRequest request) {
@@ -444,8 +341,7 @@ public class CommonService {
 	public ModelAndView getItem(Integer id, ModelAndView mav, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
+			return toLogin(mav);
 		} else {
 			mav.setViewName("item");
 			Customer customer = (Customer) session.getAttribute("customer");
@@ -466,22 +362,5 @@ public class CommonService {
 		HttpSession session = request.getSession(false);
 		session.setAttribute("products", products);
 		return "redirect:productlist";
-	}
-
-	public ModelAndView category(ModelAndView mav, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-			mav.setViewName("login");
-			mav.addObject("message", "Session timed out, Please login again!");
-		} else {
-			mav.setViewName("category");
-			List<Products> all = productRepository.findAll();
-			TreeSet<String> ts = new TreeSet<String>();
-			for (Products p : all) {
-				ts.add(p.getCategory());
-			}
-			mav.addObject("category", ts);
-		}
-		return mav;
 	}
 }

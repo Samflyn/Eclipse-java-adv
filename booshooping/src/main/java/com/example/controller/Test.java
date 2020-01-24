@@ -22,7 +22,6 @@ public class Test {
 	@GetMapping
 	public ModelAndView start(ModelAndView mav) {
 		mav.setViewName("start");
-		// service.begin(); // Creating
 		return mav;
 	}
 
@@ -36,14 +35,19 @@ public class Test {
 		return "register";
 	}
 
+	@PostMapping("/login")
+	public String authenticate(String name, String password, ModelAndView mav, HttpSession session) {
+		return service.login(name, password, mav, session);
+	}
+
 	@PostMapping("/register")
 	public ModelAndView signup(Customer customer, ModelAndView mav) {
 		return service.register(customer, mav);
 	}
 
-	@PostMapping("/login")
-	public String authenticate(String name, String password, ModelAndView mav, HttpSession session) {
-		return service.login(name, password, mav, session);
+	@GetMapping("/logout")
+	public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
+		return service.logout(mav, request);
 	}
 
 	@GetMapping("/dashboard")
@@ -64,11 +68,6 @@ public class Test {
 	@GetMapping("/productlist")
 	public ModelAndView productList(ModelAndView mav, HttpServletRequest request) {
 		return service.productList(mav, request);
-	}
-
-	@GetMapping("/logout")
-	public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
-		return service.logout(mav, request);
 	}
 
 	@PostMapping("/tocart")

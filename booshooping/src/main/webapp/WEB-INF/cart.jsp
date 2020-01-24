@@ -52,6 +52,12 @@
 					location.reload();
 				}, 500);
 			});
+			$('input:radio').click(function () {
+				$("#add").prop("disabled", true);
+				if ($(this).hasClass('add')) {
+					$("#add").prop("disabled", false);
+				}
+			});
 		});
 	</script>
 </head>
@@ -102,16 +108,15 @@
 			<div id="total">
 				<c:out value="${total}"></c:out>
 			</div>
-			<br> <br> Shipping Address : <br> <br>
+			<br> <br>Select a Shipping Address : <br> <br>
 			<form action="pay" method="post">
 				<c:forEach items="${address}" var="addr" varStatus="roll">
 					<input type="radio" name="address" value="${addr.address}" id="address" checked> ${addr.address}<br>
 				</c:forEach>
-				<br> <br> <input type="text" name="total" id="total" hidden value="<c:out value=" ${total}"></c:out>">
-				Or
-				Add address: <br>
-				<br> <br>
-				<textarea name="add" id="add" cols="70" rows="10"></textarea>
+				<br>
+				<input type="radio" name="address" value="" class="add">Or add a new address :<br>
+				<br><input type="text" name="total" id="total" hidden value="<c:out value=" ${total}"></c:out>">
+				<textarea name="add" id="add" cols="60" rows="4" disabled="disabled"></textarea>
 				<br> <br> <input type="submit" value="pay" id="pay">
 				<input type="button" onclick="window.location.href='dashboard';" value="Cancel">
 			</form>
