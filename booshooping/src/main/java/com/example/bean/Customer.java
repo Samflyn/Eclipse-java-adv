@@ -29,6 +29,9 @@ public class Customer implements Serializable {
 	private String password;
 	@Transient
 	private String rpassword;
+	private String email;
+	private String dob;
+	private String gender;
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Address> address;
@@ -69,6 +72,30 @@ public class Customer implements Serializable {
 		this.rpassword = rpassword;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getDob() {
+		return dob;
+	}
+
+	public void setDob(String dob) {
+		this.dob = dob;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public List<Address> getAddress() {
 		return address;
 	}
@@ -93,9 +120,4 @@ public class Customer implements Serializable {
 		this.cart = cart;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", transactions=" + transactions
-				+ ", cart=" + cart + "]";
-	}
 }

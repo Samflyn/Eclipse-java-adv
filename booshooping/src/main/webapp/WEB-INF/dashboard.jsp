@@ -26,6 +26,7 @@
 		<br> My Cart : <input type="button" onclick="window.location.href='mycart';" value="Cart"><br>
 		<br> My Address : <input type="button" onclick="window.location.href='address';" value="My Address"><br>
 		<br> My Orders : <input type="button" onclick="window.location.href='orders';" value="Orders"><br>
+		<br> My Profile : <input type="button" onclick="window.location.href='profile';" value="Profile"><br>
 	</h3>
 </body>
 

@@ -36,8 +36,8 @@ public class Test {
 	}
 
 	@PostMapping("/login")
-	public String authenticate(String name, String password, ModelAndView mav, HttpSession session) {
-		return service.login(name, password, mav, session);
+	public String authenticate(String email, String password, ModelAndView mav, HttpSession session) {
+		return service.login(email, password, mav, session);
 	}
 
 	@PostMapping("/register")
@@ -53,6 +53,21 @@ public class Test {
 	@GetMapping("/dashboard")
 	public ModelAndView dashboard(ModelAndView mav, HttpServletRequest request) {
 		return service.dashboard(mav, request);
+	}
+
+	@GetMapping("/profile")
+	public String profile() {
+		return "profile";
+	}
+
+	@GetMapping("/editProfile")
+	public String edit() {
+		return "editprofile";
+	}
+
+	@PostMapping("/updateProfile")
+	public ModelAndView updateProfile(Customer customer, ModelAndView mav, HttpServletRequest request) {
+		return service.updateProfile(customer, mav, request);
 	}
 
 	@GetMapping("/category")

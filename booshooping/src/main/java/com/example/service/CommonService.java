@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,8 +41,8 @@ public class CommonService {
 		return mav;
 	}
 
-	public String login(String name, String password, ModelAndView mav, HttpSession session) {
-		Optional<Customer> optional = customerRepository.findByNameAndPassword(name, password);
+	public String login(String email, String password, ModelAndView mav, HttpSession session) {
+		Optional<Customer> optional = customerRepository.findByEmailAndPassword(email, password);
 		if (!optional.isEmpty()) {
 			Customer customer = optional.get();
 			session.setAttribute("customer", customer);
@@ -50,7 +51,7 @@ public class CommonService {
 			return "redirect:dashboard";
 		} else {
 			mav.setViewName("login");
-			mav.addObject("message", "Username or password incorrect!");
+			mav.addObject("message", "Email or password incorrect!");
 			return "redirect:login";
 		}
 	}
@@ -70,12 +71,12 @@ public class CommonService {
 	public ModelAndView register(Customer customer, ModelAndView mav) {
 		if (customer.getPassword().equals(customer.getRpassword())) {
 			mav.setViewName("register");
-			Optional<Customer> customers = customerRepository.findByName(customer.getName());
+			Optional<Customer> customers = customerRepository.findByEmail(customer.getEmail());
 			if (customers.isEmpty()) {
 				customerRepository.save(customer);
 				mav.addObject("success", "Successfully registered!");
 			} else {
-				mav.addObject("fail", "User already exists!");
+				mav.addObject("fail", "Email already exists!");
 			}
 		} else {
 			mav.addObject("fail", "Passwords do not match!");
@@ -363,4 +364,23 @@ public class CommonService {
 		session.setAttribute("products", products);
 		return "redirect:productlist";
 	}
+
+	@Transactional
+	public ModelAndView updateProfile(Customer customer, ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			mav.setViewName("editprofile");
+			if (customer.getPassword().equals(customer.getRpassword())) {
+				customerRepository.updateCustomer(customer.getId(), customer.getName(), customer.getPassword(),
+						customer.getDob(), customer.getGender());
+				mav.addObject("success", "Sucessfully updated!");
+			} else {
+				mav.addObject("fail", "Passwords do not match!");
+			}
+		}
+		return mav;
+	}
+
 }
