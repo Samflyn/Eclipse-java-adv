@@ -45,6 +45,7 @@
                             productid, name, quantity, price
                         }
                     });
+                    alert("Added to Cart!");
                 }
             });
         });

@@ -32,6 +32,7 @@ public class Customer implements Serializable {
 	private String email;
 	private String dob;
 	private String gender;
+	private String role;
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Address> address;
@@ -96,6 +97,14 @@ public class Customer implements Serializable {
 		this.gender = gender;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public List<Address> getAddress() {
 		return address;
 	}
@@ -119,5 +128,4 @@ public class Customer implements Serializable {
 	public void setCart(List<Cart> cart) {
 		this.cart = cart;
 	}
-
 }

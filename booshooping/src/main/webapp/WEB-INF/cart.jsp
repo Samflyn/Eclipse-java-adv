@@ -108,7 +108,8 @@
 			<div id="total">
 				<c:out value="${total}"></c:out>
 			</div>
-			<br> <br>Select a Shipping Address : <br> <br>
+			<br> <br>Select a Shipping Address :
+			Would you like to select Address from your profile??<br> <br>
 			<form action="pay" method="post">
 				<c:forEach items="${address}" var="addr" varStatus="roll">
 					<input type="radio" name="address" value="${addr.address}" id="address" checked> ${addr.address}<br>

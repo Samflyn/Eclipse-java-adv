@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,7 +46,6 @@ public class CommonService {
 			Customer customer = optional.get();
 			session.setAttribute("customer", customer);
 			session.setMaxInactiveInterval(100);
-			mav.setViewName("dashboard");
 			return "redirect:dashboard";
 		} else {
 			mav.setViewName("login");
