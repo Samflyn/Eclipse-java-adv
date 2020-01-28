@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Items</title>
+	<meta charset="ISO-8859-1">
+	<title>Items</title>
 </head>
+
 <body>
 	<table style="width: 75%" id="product">
 		<tr>
@@ -23,4 +25,5 @@
 		</c:forEach>
 	</table>
 </body>
+
 </html>

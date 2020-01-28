@@ -5,8 +5,8 @@
 <html>
 
 <head>
-<meta charset="ISO-8859-1">
-<title>Payment</title>
+	<meta charset="ISO-8859-1">
+	<title>Payment</title>
 </head>
 
 <body>
@@ -24,19 +24,18 @@
 		<br> <br> Items :
 		<c:forEach items="${tx.items}" var="i">
 			<br>
-        Name : <c:out value="${i.name}"></c:out>
+			Name : <c:out value="${i.name}"></c:out>
 			<br>
-        Quantity : <c:out value="${i.quantity}"></c:out>
+			Quantity : <c:out value="${i.quantity}"></c:out>
 			<br>
-        Price : <c:out value="${i.price}"></c:out>
+			Price : <c:out value="${i.price}"></c:out>
 			<br>
 		</c:forEach>
 		<br>
 		<hr>
 		Total :
 		<c:out value="${tx.total}"></c:out>
-		<br> <br> <input type="button"
-			onclick="window.location.href='dashboard';" value="Go home">
+		<br> <br> <input type="button" onclick="window.location.href='dashboard';" value="Go home">
 	</h3>
 </body>
 

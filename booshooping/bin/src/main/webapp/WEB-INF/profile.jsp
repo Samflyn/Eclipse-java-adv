@@ -20,9 +20,9 @@
     <br> Gender: ${customer.gender}<br><br>
     <input type="button" onclick="window.location.href='editProfile';" value="edit">
     <br>
-    <h3 style="text-align: center;">
-        Go Home: <br> <br> <br> <input type="button" onclick="window.location.href='dashboard';" value="Dashboard">
-    </h3>
+	<h3 style="text-align: center;">
+		Go Home: <br> <br> <br> <input type="button" onclick="window.location.href='dashboard';" value="Dashboard">
+	</h3>
 </body>
 
 </html>

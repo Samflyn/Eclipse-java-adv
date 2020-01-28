@@ -24,8 +24,9 @@
 	<c:if test="${customer.role == 'Admin'}">
 		<h3 style="text-align: center;">
 			<br> Register : <input type="button" onclick="window.location.href='register';" value="Register"><br>
-			<br> Add Products : <input type="button" onclick="window.location.href='register';" value="Register"><br>
-			<br> Manage Products : <input type="button" onclick="window.location.href='register';" value="Register"><br>
+			<br> Add Products : <input type="button" onclick="window.location.href='addproduct';"
+				value="Add Products"><br>
+			<br> Manage Products : <input type="button" onclick="window.location.href='manage';" value="List"><br>
 		</h3>
 	</c:if>
 	<c:if test="${customer.role == 'Customer'}">

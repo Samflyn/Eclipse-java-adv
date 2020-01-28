@@ -381,4 +381,51 @@ public class CommonService {
 		return mav;
 	}
 
+	public ModelAndView addProducts(Products product, ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			productRepository.save(product);
+			mav.setViewName("addproducts");
+			mav.addObject("message", "Sucessfully added product to list!");
+		}
+		return mav;
+	}
+
+	public void delProduct(Integer id, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			productRepository.deleteById(id);
+		}
+	}
+
+	public ModelAndView manage(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			List<Products> list = productRepository.findAll();
+			mav.setViewName("manage");
+			mav.addObject("list", list);
+		}
+		return mav;
+	}
+
+	public ModelAndView addProduct(ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			List<Products> list = productRepository.findAll();
+			TreeSet<String> category = new TreeSet<String>();
+			for (Products product : list) {
+				category.add(product.getCategory());
+			}
+			mav.setViewName("addproducts");
+			mav.addObject("category", category);
+		}
+		return mav;
+	}
+
 }

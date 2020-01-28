@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.bean.Address;
 import com.example.bean.Cart;
 import com.example.bean.Customer;
+import com.example.bean.Products;
 import com.example.service.CommonService;
 
 @Controller
@@ -138,5 +139,25 @@ public class Test {
 	@PostMapping("/item")
 	public ModelAndView getItem(Integer id, ModelAndView mav, HttpServletRequest request) {
 		return service.getItem(id, mav, request);
+	}
+
+	@GetMapping("/addproduct")
+	public ModelAndView addProduct(ModelAndView mav, HttpServletRequest request) {
+		return service.addProduct(mav, request);
+	}
+
+	@PostMapping("/addproducts")
+	public ModelAndView addProducts(Products product, ModelAndView mav, HttpServletRequest request) {
+		return service.addProducts(product, mav, request);
+	}
+
+	@PostMapping("/delproduct")
+	public void delProduct(Integer pid, HttpServletRequest request) {
+		service.delProduct(pid, request);
+	}
+
+	@GetMapping("/manage")
+	public ModelAndView manage(ModelAndView mav, HttpServletRequest request) {
+		return service.manage(mav, request);
 	}
 }

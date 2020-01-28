@@ -4,8 +4,8 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>Welcome</title>
+	<meta charset="UTF-8">
+	<title>Welcome</title>
 </head>
 
 <body>
@@ -14,10 +14,8 @@
 	<hr>
 	<br>
 	<h3 style="text-align: center;">
-		Existing user:<input type="button"
-			onclick="window.location.href='login';" value="Login"><br>
-		<br> New user:<input type="button"
-			onclick="window.location.href='register';" value="Register">
+		Existing user:<input type="button" onclick="window.location.href='login';" value="Login"><br>
+		<br> New user:<input type="button" onclick="window.location.href='register';" value="Register">
 	</h3>
 </body>
 

@@ -34,8 +34,8 @@
 			<br> <br> <input type="submit" value="Submit"> <input type="reset" value="Clear">
 		</div>
 	</form>
-	<br>
-	<a href="javascript:history.back()">Go Back</a>
+	<br><br>
+	<input type="button" onclick="window.location.href='javascript:history.back()';" value="Go back">
 </body>
 
 </html>

@@ -5,63 +5,61 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>My Cart</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript">
-        $(document).ready(function () {
-            $(".remove").click(function () {
-                var id = this.id;
-                var productid = id.replace("remove", "");
-                $.ajax({
-                    url: "removecart",
-                    type: "post",
-                    data: {
-                        productid
-                    }
-                });
-                setTimeout(function () {
-                    location.reload();
-                }, 500);
-            });
-            $(".minus").click(function () {
-                var id = this.id;
-                var productid = id.replace("minus", "");
-                $.ajax({
-                    url: "minus",
-                    type: "post",
-                    data: {
-                        productid
-                    }
-                });
-                setTimeout(function () {
-                    location.reload();
-                }, 500);
-            });
-            $(".plus").click(function () {
-                var id = this.id;
-                var productid = id.replace("plus", "");
-                $.ajax({
-                    url: "plus",
-                    type: "post",
-                    data: {
-                        productid
-                    }
-                });
-                setTimeout(function () {
-                    location.reload();
-                }, 500);
-            });
-            $("#pay").click(function () {
-                var total = $('#total').text();
-                if (total == 0) {
-                    alert("Please add few products to cart!");
-                    return false;
-                }
-            });
-        });
-    </script>
+	<meta charset="UTF-8">
+	<title>My Cart</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".remove").click(function () {
+				var id = this.id;
+				var productid = id.replace("remove", "");
+				$.ajax({
+					url: "removecart",
+					type: "post",
+					data: {
+						productid
+					}
+				});
+				setTimeout(function () {
+					location.reload();
+				}, 500);
+			});
+			$(".minus").click(function () {
+				var id = this.id;
+				var productid = id.replace("minus", "");
+				$.ajax({
+					url: "minus",
+					type: "post",
+					data: {
+						productid
+					}
+				});
+				setTimeout(function () {
+					location.reload();
+				}, 500);
+			});
+			$(".plus").click(function () {
+				var id = this.id;
+				var productid = id.replace("plus", "");
+				$.ajax({
+					url: "plus",
+					type: "post",
+					data: {
+						productid
+					}
+				});
+				setTimeout(function () {
+					location.reload();
+				}, 500);
+			});
+			$('input:radio').click(function () {
+				$("#add").prop("disabled", true);
+				if ($(this).hasClass('add')) {
+					$("#add").prop("disabled", false);
+				}
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -82,41 +80,49 @@
 			<tr>
 				<td style="text-align: center;">${product.productid}</td>
 				<td style="text-align: center;">${product.name}</td>
-				<td style="text-align: center;"><input type="button" value="-"
-					id="minus${product.productid}" class="minus"></td>
+				<td style="text-align: center;"><input type="button" value="-" id="minus${product.productid}"
+						class="minus"></td>
 				<td style="text-align: center;">${product.quantity}</td>
-				<td style="text-align: center;"><input type="button" value="+"
-					id="plus${product.productid}" class="plus"></td>
+				<td style="text-align: center;"><input type="button" value="+" id="plus${product.productid}"
+						class="plus"></td>
 				<td style="text-align: center;" id="price${roll.count}">${product.price}</td>
 				<c:set var="total" value="${total + product.price*product.quantity}" />
-				<td style="text-align: center;"><input type="button"
-					value="remove" id="remove${product.productid}" class="remove"></td>
+				<td style="text-align: center;"><input type="button" value="remove" id="remove${product.productid}"
+						class="remove"></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<br>
 	<br>
 	<br>
-	<h3 style="text-align: center;">
-		Total :
-		<div id="total">
-			<c:out value="${total}"></c:out>
-		</div>
-		<br> <br> Shipping Address : <br> <br>
-		<form action="pay" method="post">
-			<c:forEach items="${address}" var="addr" varStatus="roll">
-				<input type="radio" name="address" value="${addr.address}"
-					id="address" checked> ${addr.address}<br>
-			</c:forEach>
-			<br> <br> <input type="text" name="total" id="total" hidden
-				value="<c:out value=" ${total}"></c:out>"> Or Add address: <br>
-			<br> <br>
-			<textarea name="add" id="add" cols="70" rows="10"></textarea>
-			<br> <br> <input type="submit" value="pay" id="pay">
-			<input type="button" onclick="window.location.href='dashboard';"
-				value="Cancel">
-		</form>
-	</h3>
+	<c:if test="${empty cart}">
+		<h3 style="text-align: center;">Your cart is empty. <br><br>
+			Go Shopping... <br><br>
+			<input type="button" onclick="window.location.href='category';" value="Shopping"><br><br><br>
+			Or go Home : <input type="button" onclick="window.location.href='dashboard';" value="Dashboard">
+		</h3>
+	</c:if>
+	<c:if test="${not empty cart}">
+		<h3 style="text-align: center;">
+			Total :
+			<div id="total">
+				<c:out value="${total}"></c:out>
+			</div>
+			<br> <br>Select a Shipping Address :
+			Would you like to select Address from your profile??<br> <br>
+			<form action="pay" method="post">
+				<c:forEach items="${address}" var="addr" varStatus="roll">
+					<input type="radio" name="address" value="${addr.address}" id="address" checked> ${addr.address}<br>
+				</c:forEach>
+				<br>
+				<input type="radio" name="address" value="" class="add">Or add a new address :<br>
+				<br><input type="text" name="total" id="total" hidden value="<c:out value=" ${total}"></c:out>">
+				<textarea name="add" id="add" cols="60" rows="4" disabled="disabled"></textarea>
+				<br> <br> <input type="submit" value="pay" id="pay">
+				<input type="button" onclick="window.location.href='dashboard';" value="Cancel">
+			</form>
+		</h3>
+	</c:if>
 </body>
 
 </html>
