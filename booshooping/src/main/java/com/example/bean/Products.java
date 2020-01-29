@@ -21,6 +21,7 @@ public class Products implements Serializable {
 	private String about;
 	private String category;
 	private int price;
+	private int stock;
 
 	public int getId() {
 		return id;
@@ -62,10 +63,12 @@ public class Products implements Serializable {
 		this.price = price;
 	}
 
-	@Override
-	public String toString() {
-		return "Products [id=" + id + ", name=" + name + ", about=" + about + ", category=" + category + ", price="
-				+ price + "]";
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 }

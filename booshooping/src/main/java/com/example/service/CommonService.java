@@ -48,8 +48,8 @@ public class CommonService {
 			session.setMaxInactiveInterval(100);
 			return "redirect:dashboard";
 		} else {
-			mav.setViewName("login");
-			mav.addObject("message", "Email or password incorrect!");
+			session.setAttribute("message", "Invalid Email or password!");
+			session.setMaxInactiveInterval(5);
 			return "redirect:login";
 		}
 	}
@@ -219,51 +219,68 @@ public class CommonService {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			Customer customer = (Customer) session.getAttribute("customer");
-			Transactions tx = new Transactions();
-			tx.setTxid(UUID.randomUUID().toString());
-			Date date = new Date();
-			tx.setDate(date.toString());
-			List<Items> items = new ArrayList<Items>();
 			customer = customerRepository.findById(customer.getId()).get();
-			if (add != null && !add.isEmpty()) {
-				address = add.trim();
-				List<Address> list = customer.getAddress();
-				boolean test = false;
-				for (Address a : list) {
-					if (a.getAddress().contentEquals(address)) {
-						test = true;
+			List<Cart> cart = customer.getCart();
+			List<Cart> noproduct = new ArrayList<Cart>();
+			List<Products> products = productRepository.findAll();
+			ArrayList<Integer> pid = new ArrayList<Integer>();
+			for (Products p : products) {
+				pid.add(p.getId());
+			}
+			for (Cart c : cart) {
+//				if (!productRepository.existsById(c.getProductid()))
+//					noproduct.add(c);
+				if (!pid.contains(c.getProductid()))
+					noproduct.add(c);
+			}
+			if (noproduct.isEmpty()) {
+				Transactions tx = new Transactions();
+				tx.setTxid(UUID.randomUUID().toString());
+				Date date = new Date();
+				tx.setDate(date.toString());
+				List<Items> items = new ArrayList<Items>();
+				if (add != null && !add.isEmpty()) {
+					address = add.trim();
+					List<Address> list = customer.getAddress();
+					boolean test = false;
+					for (Address a : list) {
+						if (a.getAddress().contentEquals(address)) {
+							test = true;
+						}
+					}
+					if (!test) {
+						Address a = new Address();
+						a.setAddress(address);
+						list.add(a);
+						customer.setAddress(list);
+						customerRepository.save(customer);
 					}
 				}
-				if (!test) {
-					Address a = new Address();
-					a.setAddress(address);
-					list.add(a);
-					customer.setAddress(list);
-					customerRepository.save(customer);
+				for (Cart temp : cart) {
+					Items item = new Items();
+					item.setName(temp.getName());
+					item.setPrice(temp.getPrice());
+					item.setQuantity(temp.getQuantity());
+					items.add(item);
 				}
+				tx.setItems(items);
+				tx.setTotal(total);
+				tx.setStatus("Success");
+				tx.setAddress(address);
+				List<Transactions> transactions = customer.getTransactions();
+				transactions.add(tx);
+				customer.setCart(null);
+				customer.setTransactions(transactions);
+				customerRepository.save(customer);
+				String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM"));
+				session.setAttribute("tx", tx);
+				session.setAttribute("day", day);
+				mav.addObject("tx", tx);
+				mav.setViewName("payment");
+			} else {
+				mav.setViewName("noproducts");
+				mav.addObject("products", noproduct);
 			}
-			List<Cart> cart = customer.getCart();
-			for (Cart temp : cart) {
-				Items item = new Items();
-				item.setName(temp.getName());
-				item.setPrice(temp.getPrice());
-				item.setQuantity(temp.getQuantity());
-				items.add(item);
-			}
-			tx.setItems(items);
-			tx.setTotal(total);
-			tx.setStatus("Success");
-			tx.setAddress(address);
-			List<Transactions> transactions = customer.getTransactions();
-			transactions.add(tx);
-			customer.setCart(null);
-			customer.setTransactions(transactions);
-			customerRepository.save(customer);
-			String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM"));
-			session.setAttribute("tx", tx);
-			session.setAttribute("day", day);
-			mav.setViewName("payment");
-			mav.addObject("tx", tx);
 		} else {
 			mav.setViewName("login");
 			mav.addObject("message", "Session timed out, Please login again!");

@@ -31,6 +31,9 @@
 					<option value="Admin">Admin</option>
 				</select>
 			</c:if>
+			<c:if test="${customer.role != 'Admin'}">
+				<input type="text" name="role" id="role" value="Customer">
+			</c:if>
 			<br> <br> <input type="submit" value="Submit"> <input type="reset" value="Clear">
 		</div>
 	</form>
