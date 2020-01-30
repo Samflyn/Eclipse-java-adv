@@ -109,38 +109,33 @@ public class CommonService {
 	}
 
 	@Transactional
-	public ModelAndView addToCart(Cart cart, HttpServletRequest request, ModelAndView mav) {
-		Boolean contain = false;
+	public void addToCart(Cart cart, HttpServletRequest request, ModelAndView mav) {
+		Boolean contains = false;
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			Customer customer = (Customer) session.getAttribute("customer");
 			customer = customerRepository.findById(customer.getId()).get();
+			List<Cart> updateCart = new ArrayList<Cart>();
 			if (!customer.getCart().isEmpty()) {
-				List<Cart> updateCart = new ArrayList<Cart>();
-				List<Cart> ccart = customer.getCart();
-				for (Cart each : ccart) {
+				List<Cart> customerCart = customer.getCart();
+				for (Cart each : customerCart) {
 					if (each.getProductid() == cart.getProductid()) {
 						each.setQuantity(each.getQuantity() + cart.getQuantity());
-						contain = true;
+						contains = true;
 					}
 					updateCart.add(each);
 				}
-				if (!contain) {
+				if (!contains) {
 					updateCart.add(cart);
 				}
 				customer.setCart(updateCart);
-				customerRepository.save(customer);
 			} else {
-				List<Cart> updateCart = new ArrayList<Cart>();
 				updateCart.add(cart);
 				customer.setCart(updateCart);
-				customerRepository.save(customer);
 			}
+			customerRepository.save(customer);
 			session.setAttribute("customer", customer);
-		} else {
-			return toLogin(mav);
 		}
-		return mav;
 	}
 
 	public ModelAndView productList(ModelAndView mav, HttpServletRequest request) {
@@ -222,10 +217,20 @@ public class CommonService {
 			customer = customerRepository.findById(customer.getId()).get();
 			List<Cart> cart = customer.getCart();
 			List<Cart> noproduct = new ArrayList<Cart>();
+			List<Cart> nostock = new ArrayList<Cart>();
+			List<Products> stock = new ArrayList<Products>();
 			List<Products> products = productRepository.findAll();
 			ArrayList<Integer> pid = new ArrayList<Integer>();
 			for (Products p : products) {
 				pid.add(p.getId());
+				for (Cart c : cart) {
+					if (c.getProductid() == p.getId()) {
+						if (c.getQuantity() > p.getStock()) {
+							nostock.add(c);
+							stock.add(p);
+						}
+					}
+				}
 			}
 			for (Cart c : cart) {
 //				if (!productRepository.existsById(c.getProductid()))
@@ -234,49 +239,63 @@ public class CommonService {
 					noproduct.add(c);
 			}
 			if (noproduct.isEmpty()) {
-				Transactions tx = new Transactions();
-				tx.setTxid(UUID.randomUUID().toString());
-				Date date = new Date();
-				tx.setDate(date.toString());
-				List<Items> items = new ArrayList<Items>();
-				if (add != null && !add.isEmpty()) {
-					address = add.trim();
-					List<Address> list = customer.getAddress();
-					boolean test = false;
-					for (Address a : list) {
-						if (a.getAddress().contentEquals(address)) {
-							test = true;
+				if (nostock.isEmpty()) {
+					Transactions tx = new Transactions();
+					tx.setTxid(UUID.randomUUID().toString());
+					Date date = new Date();
+					tx.setDate(date.toString());
+					List<Items> items = new ArrayList<Items>();
+					if (add != null && !add.isEmpty()) {
+						address = add.trim();
+						List<Address> list = customer.getAddress();
+						boolean test = false;
+						for (Address a : list) {
+							if (a.getAddress().contentEquals(address)) {
+								test = true;
+							}
+						}
+						if (!test) {
+							Address a = new Address();
+							a.setAddress(address);
+							list.add(a);
+							customer.setAddress(list);
+							customerRepository.save(customer);
 						}
 					}
-					if (!test) {
-						Address a = new Address();
-						a.setAddress(address);
-						list.add(a);
-						customer.setAddress(list);
-						customerRepository.save(customer);
+					List<Products> update = new ArrayList<Products>();
+					for (Cart temp : cart) {
+						Items item = new Items();
+						item.setName(temp.getName());
+						item.setPrice(temp.getPrice());
+						item.setQuantity(temp.getQuantity());
+						items.add(item);
+						for (Products p : products) {
+							if (temp.getProductid() == p.getId()) {
+								p.setStock(p.getStock() - temp.getQuantity());
+								update.add(p);
+							}
+						}
 					}
+					productRepository.saveAll(update);
+					tx.setItems(items);
+					tx.setTotal(total);
+					tx.setStatus("Success");
+					tx.setAddress(address);
+					List<Transactions> transactions = customer.getTransactions();
+					transactions.add(tx);
+					customer.setCart(null);
+					customer.setTransactions(transactions);
+					customerRepository.save(customer);
+					String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM"));
+					session.setAttribute("tx", tx);
+					session.setAttribute("day", day);
+					mav.addObject("tx", tx);
+					mav.setViewName("payment");
+				} else {
+					mav.setViewName("nostock");
+					mav.addObject("carts", nostock);
+					mav.addObject("products", stock);
 				}
-				for (Cart temp : cart) {
-					Items item = new Items();
-					item.setName(temp.getName());
-					item.setPrice(temp.getPrice());
-					item.setQuantity(temp.getQuantity());
-					items.add(item);
-				}
-				tx.setItems(items);
-				tx.setTotal(total);
-				tx.setStatus("Success");
-				tx.setAddress(address);
-				List<Transactions> transactions = customer.getTransactions();
-				transactions.add(tx);
-				customer.setCart(null);
-				customer.setTransactions(transactions);
-				customerRepository.save(customer);
-				String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM"));
-				session.setAttribute("tx", tx);
-				session.setAttribute("day", day);
-				mav.addObject("tx", tx);
-				mav.setViewName("payment");
 			} else {
 				mav.setViewName("noproducts");
 				mav.addObject("products", noproduct);
@@ -445,4 +464,23 @@ public class CommonService {
 		return mav;
 	}
 
+	public ModelAndView editProduct(Integer id, ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return toLogin(mav);
+		} else {
+			Products product = productRepository.findById(id).get();
+			mav.setViewName("editproduct");
+			mav.addObject("product", product);
+		}
+		return mav;
+	}
+
+	public String editProduct(Products product, ModelAndView mav, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			productRepository.save(product);
+		}
+		return "redirect:manage";
+	}
 }

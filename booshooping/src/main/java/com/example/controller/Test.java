@@ -87,8 +87,8 @@ public class Test {
 	}
 
 	@PostMapping("/tocart")
-	public ModelAndView addToCart(Cart cart, HttpServletRequest request, ModelAndView mav) {
-		return service.addToCart(cart, request, mav);
+	public void addToCart(Cart cart, HttpServletRequest request, ModelAndView mav) {
+		service.addToCart(cart, request, mav);
 	}
 
 	@PostMapping("/removecart")
@@ -159,5 +159,15 @@ public class Test {
 	@GetMapping("/manage")
 	public ModelAndView manage(ModelAndView mav, HttpServletRequest request) {
 		return service.manage(mav, request);
+	}
+
+	@GetMapping("/editproduct")
+	public ModelAndView editProduct(Integer id, ModelAndView mav, HttpServletRequest request) {
+		return service.editProduct(id, mav, request);
+	}
+
+	@PostMapping("/editproduct")
+	public String editProduct(Products product, ModelAndView mav, HttpServletRequest request) {
+		return service.editProduct(product, mav, request);
 	}
 }

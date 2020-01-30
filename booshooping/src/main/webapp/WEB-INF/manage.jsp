@@ -24,8 +24,8 @@
                         }
                     });
                     setTimeout(function () {
-    					location.reload();
-    				}, 500);
+                        location.reload();
+                    }, 500);
                 }
             });
         });
@@ -35,25 +35,31 @@
 <body>
     <h1 style="text-align: center;">Product List</h1>
     <h1 style="text-align: end;">
-        <input type="button" onclick="window.location.href='javascript:history.back()';" value="Go back">
+        <input type="button" onclick="window.location.href='dashboard';" value="Dashboard">
     </h1>
     <table style="width: 100%" id="product">
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>About</th>
+            <th>Category</th>
+            <th>Available Stock</th>
             <th>Price</th>
-            <th></th>
+            <th>Remove</th>
+            <th>Edit</th>
         </tr>
         <c:forEach items="${list}" var="product" varStatus="roll">
             <tr>
                 <td style="text-align: center;" id="id${roll.count}">${product.id}</td>
                 <td style="text-align: center;" id="name${roll.count}">${product.name}</td>
-                <td style="text-align: center;">${product.about}</td>
+                <td style="text-align: center;">${product.category}</td>
+                <td style="text-align: center;">${product.stock}</td>
                 <td style="text-align: center;">${product.price}</td>
                 <td style="text-align: center;"><input type="button" value="remove" id="remove${roll.count}"
                         class="remove"></td>
+                <td style="text-align: center;"><input type="button" onclick="window.location.href='editproduct?id=${product.id}';" value="edit">
+                </td>
             </tr>
+
         </c:forEach>
     </table>
 </body>
