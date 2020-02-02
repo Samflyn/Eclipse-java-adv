@@ -23,6 +23,19 @@ public class Products implements Serializable {
 	private int price;
 	private int stock;
 
+	public Products() {
+		super();
+	}
+
+	public Products(String name, String about, String category, int price, int stock) {
+		super();
+		this.name = name;
+		this.about = about;
+		this.category = category;
+		this.price = price;
+		this.stock = stock;
+	}
+
 	public int getId() {
 		return id;
 	}

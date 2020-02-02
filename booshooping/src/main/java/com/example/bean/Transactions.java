@@ -28,6 +28,20 @@ public class Transactions implements Serializable {
 	private int total;
 	private String status;
 
+	public Transactions() {
+		super();
+	}
+
+	public Transactions(String txid, String date, String address, List<Items> items, int total, String status) {
+		super();
+		this.txid = txid;
+		this.date = date;
+		this.address = address;
+		this.items = items;
+		this.total = total;
+		this.status = status;
+	}
+
 	public int getId() {
 		return id;
 	}

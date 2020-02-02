@@ -240,10 +240,6 @@ public class CommonService {
 			}
 			if (noproduct.isEmpty()) {
 				if (nostock.isEmpty()) {
-					Transactions tx = new Transactions();
-					tx.setTxid(UUID.randomUUID().toString());
-					Date date = new Date();
-					tx.setDate(date.toString());
 					List<Items> items = new ArrayList<Items>();
 					if (add != null && !add.isEmpty()) {
 						address = add.trim();
@@ -255,8 +251,7 @@ public class CommonService {
 							}
 						}
 						if (!test) {
-							Address a = new Address();
-							a.setAddress(address);
+							Address a = new Address(address);
 							list.add(a);
 							customer.setAddress(list);
 							customerRepository.save(customer);
@@ -264,10 +259,7 @@ public class CommonService {
 					}
 					List<Products> update = new ArrayList<Products>();
 					for (Cart temp : cart) {
-						Items item = new Items();
-						item.setName(temp.getName());
-						item.setPrice(temp.getPrice());
-						item.setQuantity(temp.getQuantity());
+						Items item = new Items(temp.getName(), temp.getPrice(), temp.getQuantity());
 						items.add(item);
 						for (Products p : products) {
 							if (temp.getProductid() == p.getId()) {
@@ -277,16 +269,15 @@ public class CommonService {
 						}
 					}
 					productRepository.saveAll(update);
-					tx.setItems(items);
-					tx.setTotal(total);
-					tx.setStatus("Success");
-					tx.setAddress(address);
+					Date date = new Date();
+					Transactions tx = new Transactions(UUID.randomUUID().toString(), date.toString(), address, items,
+							total, "Success");
 					List<Transactions> transactions = customer.getTransactions();
 					transactions.add(tx);
 					customer.setCart(null);
 					customer.setTransactions(transactions);
 					customerRepository.save(customer);
-					String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM"));
+					String day = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd-MMM-YYYY"));
 					session.setAttribute("tx", tx);
 					session.setAttribute("day", day);
 					mav.addObject("tx", tx);
