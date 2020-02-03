@@ -216,17 +216,19 @@ public class CommonService {
 			Customer customer = (Customer) session.getAttribute("customer");
 			customer = customerRepository.findById(customer.getId()).get();
 			List<Cart> cart = customer.getCart();
-			List<Cart> noproduct = new ArrayList<Cart>();
-			List<Cart> nostock = new ArrayList<Cart>();
+			List<Cart> noProduct = new ArrayList<Cart>();
+			List<Cart> noStock = new ArrayList<Cart>();
 			List<Products> stock = new ArrayList<Products>();
-			List<Products> products = productRepository.findAll();
+			List<Integer> cartId = new ArrayList<Integer>();
+			List<Products> products = productRepository.findAllById(cartId);
 			ArrayList<Integer> pid = new ArrayList<Integer>();
 			for (Products p : products) {
 				pid.add(p.getId());
 				for (Cart c : cart) {
+					cartId.add(c.getProductid());
 					if (c.getProductid() == p.getId()) {
 						if (c.getQuantity() > p.getStock()) {
-							nostock.add(c);
+							noStock.add(c);
 							stock.add(p);
 						}
 					}
@@ -236,10 +238,10 @@ public class CommonService {
 //				if (!productRepository.existsById(c.getProductid()))
 //					noproduct.add(c);
 				if (!pid.contains(c.getProductid()))
-					noproduct.add(c);
+					noProduct.add(c);
 			}
-			if (noproduct.isEmpty()) {
-				if (nostock.isEmpty()) {
+			if (noProduct.isEmpty()) {
+				if (noStock.isEmpty()) {
 					List<Items> items = new ArrayList<Items>();
 					if (add != null && !add.isEmpty()) {
 						address = add.trim();
@@ -284,12 +286,12 @@ public class CommonService {
 					mav.setViewName("payment");
 				} else {
 					mav.setViewName("nostock");
-					mav.addObject("carts", nostock);
+					mav.addObject("carts", noStock);
 					mav.addObject("products", stock);
 				}
 			} else {
 				mav.setViewName("noproducts");
-				mav.addObject("products", noproduct);
+				mav.addObject("products", noProduct);
 			}
 		} else {
 			mav.setViewName("login");
