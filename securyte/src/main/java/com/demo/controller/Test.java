@@ -9,10 +9,10 @@ public class Test {
 	@GetMapping("/login")
 	public String login(Model model, String error, String logout) {
 		if (error != null)
-			model.addAttribute("errorMsg", "Your username and password are invalid.");
+			model.addAttribute("error", "Your username and password are invalid.");
 
 		if (logout != null)
-			model.addAttribute("msg", "You have been logged out successfully.");
+			model.addAttribute("message", "You have been logged out successfully.");
 
 		return "login";
 	}

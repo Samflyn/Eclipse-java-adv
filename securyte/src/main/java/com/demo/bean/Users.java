@@ -1,13 +1,16 @@
 package com.demo.bean;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 @Entity
-public class Employee {
+public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -15,7 +18,8 @@ public class Employee {
 	private String password;
 	@Transient
 	private String rpassword;
-	private String role;
+	@OneToMany
+	private List<Roles> roles;
 
 	public Long getId() {
 		return id;
@@ -49,12 +53,11 @@ public class Employee {
 		this.rpassword = rpassword;
 	}
 
-	public String getRole() {
-		return role;
+	public List<Roles> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
 	}
-
 }
