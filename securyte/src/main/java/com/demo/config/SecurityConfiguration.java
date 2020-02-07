@@ -18,6 +18,8 @@ import com.demo.service.UserDetailsServiceImpl;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
+	@Autowired
+	private CustomSuccessHandler customSuccessHandler;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user/**").authenticated()
 			.antMatchers("/admin/**").hasRole("ADMIN")
 			.and()
-			.formLogin()
+			.formLogin().loginPage("/login").successHandler(customSuccessHandler)
 			.and()
             .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
             .and()
