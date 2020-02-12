@@ -23,7 +23,6 @@
 	<br>
 	<br>
 	<sec:authorize access="hasRole('ADMIN')">
-
 		<h3 style="text-align: center;">
 			<br> Register : <input type="button" onclick="window.location.href='register';" value="Register"><br>
 			<br> Add Products : <input type="button" onclick="window.location.href='addproduct';"

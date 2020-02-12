@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +11,6 @@ import com.example.bean.Cart;
 import com.example.bean.Customer;
 import com.example.bean.Products;
 import com.example.service.CommonService;
-import com.example.service.UserDetailsImpl;
 
 @Controller
 public class Test {
