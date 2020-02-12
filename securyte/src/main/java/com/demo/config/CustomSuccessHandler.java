@@ -23,17 +23,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-//		boolean isAdmin = false;
-//		boolean isUser = false;
-//		authentication.getAuthorities().forEach(authority -> {
-//			if (authority.getAuthority().equals("ROLE_ADMIN")) {
-//				isAdmin = true;
-//				break;
-//			} else if (authority.getAuthority().equals("ROLE_USER")) {
-//				isUser = true;
-//				break;
-//			}
-//		});
 		DefaultSavedRequest defaultSavedRequest = (DefaultSavedRequest) request.getSession()
 				.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
 		String url = "";

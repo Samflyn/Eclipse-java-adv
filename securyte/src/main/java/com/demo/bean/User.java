@@ -16,6 +16,7 @@ public class User {
 	@Transient
 	private String rpassword;
 	private String role;
+	private String email;
 
 	public long getId() {
 		return id;
@@ -55,6 +56,14 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
