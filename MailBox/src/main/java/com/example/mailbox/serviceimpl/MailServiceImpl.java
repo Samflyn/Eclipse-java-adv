@@ -71,7 +71,6 @@ public class MailServiceImpl implements MailService {
 			}
 			// close the store and folder objects
 			// emailFolder.close(false);
-
 			// mailConnectionUtils.CloseMailStore();
 		} catch (FolderClosedException ex) {
 			ex.printStackTrace();
@@ -148,7 +147,6 @@ public class MailServiceImpl implements MailService {
 				extractFromZIP(filePath, part, fileName);
 			} else if (Props.extensions.contains(extension)) {
 				saveFile(filePath, part, fileName);
-
 			}
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block

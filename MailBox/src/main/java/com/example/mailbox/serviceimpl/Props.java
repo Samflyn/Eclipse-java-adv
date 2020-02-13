@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Props {
 
-	
 	public static final int BUFFER_SIZE = 4096;
 
 	public static String saveDirectory;
@@ -16,17 +15,17 @@ public class Props {
 	public static String port;
 
 	public static String username;
-	
+
 	public static String password;
-	
+
 	public static String extensions;
 
 	public static String protocol;
 
 	public static String folder = "INBOX";
 
-	public static String emailFile ;
-	
+	public static String emailFile;
+
 	public static String FILE_TYPE_ZIP = "zip";
 
 	@Value("${file.output.save}")
@@ -35,10 +34,9 @@ public class Props {
 	}
 
 	@Value("${file.email.input}")
-	public  void setEmailFile(String emailFile) {
+	public void setEmailFile(String emailFile) {
 		Props.emailFile = emailFile;
 	}
-
 
 	@Value("${mail.config.host}")
 	public void setHostname(String hostname) {
@@ -70,5 +68,4 @@ public class Props {
 		this.protocol = protocol;
 	}
 
-	
 }
