@@ -12,7 +12,18 @@ import java.util.zip.ZipFile;
 
 public class Test {
 	public static void main(String[] args) throws InterruptedException, ZipException, IOException {
-		extractFolder("E:\\MailBox.zip");
+		// extractFolder("E:\\MailBox.zip");
+		int i = 10;
+		int j = 20;
+		int c = 0;
+		for (int k = 0; k < 100; k++) {
+			c += k + 1;
+		}
+		User user = new User();
+		user.setId(c);
+		user.setName("ads");
+		user.setTee("teeeee");
+		user = new User();
 	}
 
 	public static void extractFolder(String zipFile) throws ZipException, IOException {
