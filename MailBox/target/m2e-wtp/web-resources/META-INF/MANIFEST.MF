@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
+Built-By: sam
+Build-Jdk: 13.0.2
 Implementation-Title: MailBox
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: saiakhil.sadineni
 Implementation-Vendor-Id: com.example
-Build-Jdk: 1.8.0_121
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/MailBox
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/MailBox
 Created-By: Maven Integration for Eclipse
 
