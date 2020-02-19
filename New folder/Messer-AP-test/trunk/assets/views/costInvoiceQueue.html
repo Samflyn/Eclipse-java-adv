@@ -1,0 +1,101 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h3 class="">Cost Invoice Queue</h3><span id="saveMsg"></span>
+	</div>
+</div>
+
+<div class="row margin-bottom-10"
+	data-ng-controller="savedCostInvoiceQueueCtrl as showCase"
+	data-ng-cloak>
+	<div class="margin-top-10 eway-bill-tab-box bulk-upload-status-box">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<ul id="ewayBillQueuestabs" class="nav nav-tabs">
+				<li  ng-hide="isManager" class="active" ng-click="toOpen()"><a class="bg-primary"
+					data-target="#q5" data-toggle="tab">SAVED</a></li>
+				<li ng-click="transactions()"><a
+					class="bg-primary" data-target="#q7" data-toggle="tab">{{isManager ? 'TO BE APPROVED' : 'TRANSACTIONS
+						ENTERED'}}</a></li>
+				<li ng-click="reject()" ng-hide="isManager">
+				<a class="bg-danger" 
+					data-target="#q8" data-toggle="tab">Rejected</a></li>
+				<li ng-click="toCompleted()"><a class="bg-success"
+					data-target="#q2" data-toggle="tab">APPROVED</a></li>
+				<li ng-hide="isManager" ng-click="toFailed()"><a class="bg-warning"
+					data-target="#q3" data-toggle="tab">PAYMENT</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="q5">
+					<div class="row padding-top-5 padding-bottom-5">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="table-responsive">
+
+								<table datatable="" dt-options="showCase.dtOptions"
+									dt-instance="dtInstance" dt-columns="showCase.dtColumns"
+									class="table table-bordered"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div class="tab-pane fade" id="q7">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="table-responsive">
+								<div ng-controller="transactionCostInvoiceQueueCtrl as showCase">
+									<table datatable="" dt-options="showCase.dtOptions"
+										dt-instance="dtInstance" dt-columns="showCase.dtColumns"
+										class="table table-bordered"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="q2">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="table-responsive">
+								<div ng-controller="approvedCostInvoiceQueueCtrl as showCase">
+									<table datatable="" dt-options="showCase.dtOptions"
+										dt-instance="dtInstance" dt-columns="showCase.dtColumns"
+										class="table table-bordered"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="q3">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="table-responsive">
+								<div ng-controller="paymentCostInvoiceQueueCtrl as showCase">
+									<table datatable="" dt-options="showCase.dtOptions"
+										dt-instance="dtInstance" dt-columns="showCase.dtColumns"
+										class="table table-bordered"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="q8">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="table-responsive">
+								<div ng-controller="rejectedQueueCtrl as showCase">
+									<table datatable="" dt-options="showCase.dtOptions"
+										dt-instance="dtInstance" dt-columns="showCase.dtColumns"
+										class="table table-bordered"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+

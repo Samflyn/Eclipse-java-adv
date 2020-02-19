@@ -1,0 +1,301 @@
+<!-- start: DASHBOARD TITLE -->
+<!-- <section id="page-title" class="padding-top-15 padding-bottom-15">
+	<div class="row">
+		<div class="col-sm-12">
+			<h1 class="mainTitle" translate="dashboard.WELCOME" translate-values="{ appName: app.name }">WELCOME TO CLIP-TWO</h1>
+			<!-- <span class="mainDescription">overview &amp; stats </span> -->
+		<!--</div>
+	</div>
+</section> -->
+<!-- end: DASHBOARD TITLE -->
+<!-- start: FEATURED BOX LINKS -->
+<div class="container-fluid container-fullw eway-count-container" ng-controller="dashCustomerInvoiceCount">
+	<div class="row" ng-show="tenantPrevilages.indexOf('statusCounts') > -1">
+		<div class="col-sm-12">
+			<div class="row">
+		<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center info-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box info-bg">{{invoiceCounts[2]}}</div>
+					<h5 class="StepTitle">Saved</h5>
+					
+				</div>
+			</div>
+		</div>
+			<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center generate-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box generate-bg">{{invoiceCounts[3]}}</div>
+					<h5 class="StepTitle">Matched</h5>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center reject-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box reject-bg">{{invoiceCounts[4]}}</div>
+					<h5 class="StepTitle">Not Matched</h5>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center generate-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box generate-bg">{{invoiceCounts[5]}}</div>
+					<h5 class="StepTitle">Approved</h5>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center paid-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box paid-bg">{{invoiceCounts[6]}}</div>
+					<h5 class="StepTitle">Payment</h5>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+	</div>
+
+<!-- end: FEATURED BOX LINKS -->
+
+<!-- end: FIRST SECTION -->
+<div class="container-fluid container-fullw" ng-show="tenantPrevilages.indexOf('statusCounts') > -1">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-white no-radius">
+						<div class="panel-heading border-light">
+							<h4 class="panel-title">Monthly Invoice Report </h4>
+						</div>
+						<div class="panel-body">
+						
+							<div class="margin-top-10"> 
+								<canvas class="tc-chart" tc-chartjs-bar chart-options="options" chart-data="data"></canvas>
+							</div>
+						</div>
+					</div>
+				</div>
+		<div class="col-sm-6">
+			<div class="panel panel-white no-radius">
+				<div class="panel-heading border-bottom">
+					<h4 class="panel-title">Monthly Invoice Report</h4>
+				</div>
+				<div class="panel-body">
+					<!-- /// controller:  'OnotherCtrl' -  localtion: assets/js/controllers/dashboardCtrl.js /// -->
+					<div >
+						<div class="text-center">
+							<span class="mini-pie"> 
+								<canvas class="tc-chart" tc-chartjs-doughnut chart-options="pieoptions" chart-data="data1" chart-legend="chart3"></canvas> 
+								<span>{{total}}</span> 
+							</span>
+							<!-- <span class="inline text-large no-wrap">Acquisition</span> -->
+						</div>
+						<div class="margin-top-20 text-center legend-xs">
+							<div tc-chartjs-legend chart-legend="chart3" class="inline"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid container-fullw margin-bottom-10" ng-show="tenantPrevilages.indexOf('apiCalls') > -1">
+<div class="row">
+<div class="col-sm-6">
+<div class="panel-heading border-bottom">
+					<h4 class="panel-title">PO Invoice Yearly FileUploads Report</h4>
+	</div></div>
+<div class="col-sm-6">
+<div class="panel-heading border-bottom">
+					<h4 class="panel-title">Cost Invoice Yearly FileUploads Report</h4>
+	</div></div>
+
+	<
+</div>
+	<div class="row">
+	<div class="col-sm-2">
+	<div class="panel panel-white no-radius text-center info-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box info-bg">{{PIUploaded}}</div>
+					<h5 class="StepTitle">Uploaded</h5>
+					
+				</div>
+			</div>
+		</div>	
+		<div class="col-sm-2">
+				<div class="panel panel-white no-radius text-center generate-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box generate-bg">{{PIProcessed}}</div>
+					<h5 class="StepTitle">Processed</h5>
+					
+				</div>
+			</div>
+				</div>	
+			<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center reject-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box reject-bg">{{PIFailed}}</div>
+					<h5 class="StepTitle">Failed</h5>
+					
+				</div>
+			</div>
+			</div>
+				<div class="col-sm-2">
+	<div class="panel panel-white no-radius text-center info-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box info-bg">{{CIUploaded}}</div>
+					<h5 class="StepTitle">Uploaded</h5>
+					
+				</div>
+			</div>
+		</div>	
+		<div class="col-sm-2">
+				<div class="panel panel-white no-radius text-center generate-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box generate-bg">{{CIProcessed}}</div>
+					<h5 class="StepTitle">Processed</h5>
+					
+				</div>
+			</div>
+				</div>	
+			<div class="col-sm-2">
+			<div class="panel panel-white no-radius text-center reject-border bill-count-shadow">
+				<div class="panel-body">
+					<div class="eway-count-box reject-bg">{{CIFailed}}</div>
+					<h5 class="StepTitle">Failed</h5>
+					
+				</div>
+			</div>
+			</div>
+					
+		
+</div>
+</div>
+
+<!-- start: SECOND SECTION -->
+<div class="container-fluid container-fullw margin-bottom-10"   >
+	<div class="row">
+		<div class="col-sm-6" ng-show="tenantPrevilages.indexOf('apiCalls') > -1">
+			<div class="panel panel-white no-radius">
+				<div class="panel-body">
+					<div class="partition-light-grey padding-5 text-center margin-bottom-5">
+						<h4 class="no-margin">Monthly PI Uploaded Invoices</h4>
+<!-- 						<span class="text-light link-small-font"><a href="#">View Previous Months Transactions</a></span>
+ -->					</div>
+					<v-accordion class="vAccordion--default">
+						<!-- add expanded attribute to open first section -->
+						<v-pane expanded>
+							<v-pane-header>
+							</v-pane-header>
+							<v-pane-content>
+								<table class="table margin-bottom-0">
+								<thead>
+								<th>MonthlyWise</th>
+								<th class="center">Open</th>
+								<th class="center">Completed</th>
+								<th class="center">Failed</th>
+								</thead>
+									<tbody ng-repeat="pivalue in PIReport | orderBy:'month'">
+										<tr >
+											<td ng-if="pivalue.month<=9">{{pivalue.month| monthName}} {{PIYear}}</td>
+											<td ng-if="pivalue.month>9">{{pivalue.month | monthName}} {{PIYear}}</td>
+										    <td class="center">{{pivalue.OPEN}}</td>
+										    <td class="center">{{pivalue.COMPLETED}}</td>
+										    <td class="center">{{pivalue.FAILED}}</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</v-pane-content>
+						</v-pane>
+					</v-accordion>
+				</div>
+			</div>
+		</div>
+			<div class="col-sm-6" ng-show="tenantPrevilages.indexOf('apiCalls') > -1">
+			<div class="panel panel-white no-radius">
+				<div class="panel-body">
+					<div class="partition-light-grey padding-5 text-center margin-bottom-5">
+						<h4 class="no-margin">Monthly Cost Uploaded Invoices</h4>
+<!-- 						<span class="text-light link-small-font"><a href="#">View Previous Months Transactions</a></span>
+ -->					</div>
+					<v-accordion class="vAccordion--default">
+						<!-- add expanded attribute to open first section -->
+						<v-pane expanded>
+							<v-pane-header>
+							</v-pane-header>
+							<v-pane-content>
+								<table class="table margin-bottom-0">
+								<thead>
+								<th>MonthlyWise</th>
+								<th class="center">Open</th>
+								<th class="center">Completed</th>
+								<th class="center">Failed</th>
+								</thead>
+									<tbody ng-repeat="civalue in CIReport | orderBy:'month'">
+										<tr >
+											<td ng-if="civalue.month<=9">{{civalue.month| monthName}} {{CIYear}}</td>
+											<td ng-if="civalue.month>9">{{civalue.month | monthName}} {{CIYear}}</td>
+										    <td class="center">{{civalue.OPEN}}</td>
+										    <td class="center">{{civalue.COMPLETED}}</td>
+										    <td class="center">{{civalue.FAILED}}</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</v-pane-content>
+						</v-pane>
+					</v-accordion>
+				</div>
+			</div>
+		</div>
+</div>		
+		
+
+
+<!-- start: SECOND SECTION -->
+<div class="container-fluid container-fullw margin-bottom-10"   >
+	<div class="row">
+	
+		<!-- <div class="col-md-6 col-lg-6" ng-show="tenantPrevilages.indexOf('yearlyReport') > -1">
+					<div class="panel panel-white no-radius" id="visits">
+						<div class="panel-heading border-light">
+							<h4 class="panel-title"> Yearly Report </h4>
+							
+							<ul class="panel-heading-tabs border-light">
+								<li class="panel-tools">
+									<ct-paneltool tool-refresh="load1"></ct-paneltool>
+								</li>
+							</ul>
+						</div>
+						<div uib-collapse="visits" ng-init="visits=false" class="panel-wrapper">
+							<div class="panel-body">
+								/// controller:  'VisitsCtrl' -  localtion: assets/js/controllers/dashboardCtrl.js ///
+								<div  class="height-242">
+									<canvas class="tc-chart" tc-chartjs-line chart-options="options" chart-data="yearData" chart-legend="chart1" width="100%"></canvas>
+									<div class="margin-top-20">
+										<div tc-chartjs-legend chart-legend="chart1" class="inline pull-left"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+
+				
+	</div>
+</div>
+
+
+<!-- end: SECOND SECTION -->
+

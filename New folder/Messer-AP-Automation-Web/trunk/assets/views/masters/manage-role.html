@@ -1,0 +1,82 @@
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+<div ng-controller="manageRoleCtrl as disController">
+	<!-- start: PAGE TITLE -->
+	<section id="page-title">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="mainTitle">Manage Role</h1>
+			</div>
+		</div>
+	</section>
+	<!-- end: PAGE TITLE -->
+	<div class="container-fluid container-fullw form-box">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="inner-page-box">
+				<!-- 	<form name="Form" novalidate ng-submit="form.submit(Form)">
+						<div class="" id="hidestateform">
+
+							<div class="col-md-12 margin-bottom-10 sales_heading no-padding">
+								<div class="col-md-4 alert-box">
+									<span id="saveMsg"></span>
+								</div>
+
+								<div class="col-md-6 text-right pull-right no-padding">
+									<button type="submit" ng-click="submitted=true"
+										class="btn btn-primary">
+										<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+									</button>
+									<button type="reset" ng-click="clear()" class="btn btn-primary">
+										<i class="fa fa-eraser" aria-hidden="true"></i> Clear
+									</button>
+								</div>
+							</div>
+							<input type="hidden" autocomplete="off" id="roleId"
+								ng-model="data1.roleId" class="form-control">
+
+							<div class="row">
+								<div class="col-md-4 form-group"
+									ng-class="{'has-error':Form.roleName.$dirty && Form.roleName.$invalid, 'has-success':Form.roleName.$valid}">
+									<label class="col-sm-4 control-label" for="roleName">Role
+										Name<span class="symbol required"></span>
+									</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="roleName"
+											name="roleName" ng-model="data1.roleName" required> <span
+											class="error text-small block"
+											ng-if="Form.roleName.$dirty && Form.roleName.$invalid">Role
+											Name is mandatory</span>
+									</div>
+								</div>
+
+								<div class="col-md-4 form-group"
+									ng-class="{'has-error':Form.roleDesc.$dirty && Form.roleDesc.$invalid, 'has-success':Form.roleDesc.$valid}">
+									<label class="col-sm-5 control-label" for="roleDesc">Role
+										Description<span class="symbol required"></span>
+									</label>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="roleDesc"
+											name="roleDesc" ng-model="data1.roleDesc" required> <span
+											class="error text-small block"
+											ng-if="Form.roleDesc.$dirty && Form.roleDesc.$invalid">RoleDesc
+											is mandatory</span>
+									</div>
+								</div>
+								
+									
+								
+							</div>
+
+						</div>
+					</form> -->
+					<table datatable="" dt-options="disController.dtOptions"
+						dt-columns="disController.dtColumns" dt-instance="dtInstance"
+						class="table table-striped table-bordered">
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

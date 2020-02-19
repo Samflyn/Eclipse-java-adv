@@ -1,0 +1,154 @@
+<script type="text/javascript">
+$(function() {
+	
+	// Clear event
+	$('.image-preview-clear').click(function(){
+	    $('.image-preview').attr("data-content","").popover('hide');
+	    $('.image-preview-filename').val("");
+	    $('.image-preview-clear').hide();
+	    $('.image-preview-input input:file').val("");
+	    $(".image-preview-input-title").text("Browse"); 
+	}); 
+
+	// Create the preview image
+	$(".image-preview-input input:file").change(function (){     
+	    var img = $('<img/>', {
+	        id: 'dynamic',
+	        width:250,
+	        height:200
+	    });      
+	    var file = this.files[0];
+	    var reader = new FileReader();
+	    // Set preview image into the popover data-content
+	    reader.onload = function (e) {
+	        $(".image-preview-input-title").text("Change");
+	        $(".image-preview-clear").show();
+	        $(".image-preview-filename").val(file.name);            
+	        img.attr('src', e.target.result);
+	        $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+	    }        
+	    reader.readAsDataURL(file);
+	});  
+	});
+</script>
+
+
+<div ng-controller="manageItemMappingCtrl as ItemMappingCtrl">
+	<!-- start: PAGE TITLE -->
+	<section id="page-title">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="mainTitle">Manage Item Mapping</h1>
+			</div>
+		</div>
+	</section>
+	<!-- end: PAGE TITLE -->
+	<div class="container-fluid container-fullw form-box">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="inner-page-box">
+					<form name="Form" novalidate ng-submit="form.submit(Form)">
+						<div class="" id="hideuqcform">
+							<div class="col-md-12 margin-bottom-10 sales_heading no-padding">
+								<div class="col-md-4 alert-box">
+									<span id="saveMsg"></span>
+									<span id="errMsg"></span>
+								</div>
+								<div class="col-md-6 text-right pull-right no-padding">
+									<button type="submit" class="btn btn-primary">
+										<i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+									</button>
+									<button type="reset" ng-click="clear()" class="btn btn-primary">
+										<i class="fa fa-eraser" aria-hidden="true"></i> Clear
+									</button>
+								</div>
+							</div>
+							<div class="row">
+							
+							 <div class="col-sm-12" id="uploadFile">							
+							<div class="form-group col-md-6 no-padding" >
+								<label class="col-sm-3 control-label margin-top-5 text-right no-padding">
+									Upload </label>
+								<div class="col-sm-8 padding-right-0">
+									
+									<div class="input-group image-preview">
+										<span class="input-group-addon"><i
+											class="fa fa-file-image-o" aria-hidden="true"></i></span> <input
+											type="text" class="form-control image-preview-filename"
+											disabled="disabled"> <span class="input-group-btn">
+											image-preview-clear button
+											<button type="button"
+												class="btn btn-default image-preview-clear"
+												style="display: none;">
+												<span class="glyphicon glyphicon-remove"></span> Clear
+											</button> image-preview-input
+											<div class="btn btn-primary image-preview-input">
+												<span class="glyphicon glyphicon-search"></span> <span
+													class="image-preview-input-title">Browse</span> <input
+													type="file"value="alasqlupload" nng-file-upload id="ExcelItemFile"
+													accept=".xlsx"
+													name="input-file-preview" />
+											</div>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-4 no-padding">
+								<button type="button" ng-click="uploadItemMapping()"
+									class="btn btn-primary">
+									<i class="fa fa-arrow-right"></i> Import
+								</button>	
+								<a href="/assets/template/SVMP Import Tempates.xlsx"><button type="button"  
+									class="btn btn-default">
+									<i class="fa fa-download"></i> Download Template</button></a>
+								                                                                                               
+							</div>
+					</div>
+                     
+               
+							
+								<div class="form-group margin-bottom-0">
+									<input type="hidden" autocomplete="off" id="uqcMasterId"
+										ng-model="data.uqcMasterId" class="form-control">
+								</div>
+								
+								<div class="col-md-4 form-group no-padding"
+									ng-class="{'has-error':Form.mappinguqc.$dirty && Form.mappingitem.$invalid, 'has-success':Form.mappingitem.$valid}">
+									<label class="col-sm-5 control-label" for="mappingitem">Item Name <span class="symbol required"></span>
+									</label>
+									<div class="col-sm-7">
+										<select class="form-control"
+											ng-model="data.itemMasterDto.itemId" id="mappingitem"
+											name="mappingitem" required>
+											<option value="">--Please Select--</option>
+											<option ng-repeat="item in itemList"
+												ng-value="{{item.itemId}}">{{item.itemName}}</option>
+										</select> <span class="error text-small block"
+											ng-if="Form.mappingitem.$dirty && Form.mappingitem.$invalid">Item Name  is mandatory</span>
+									</div>
+								</div>
+								
+								<div class="col-md-4 form-group no-padding"
+									ng-class="{'has-error':Form.itemCodes.$dirty && Form.itemCodes.$error.required, 'has-success':Form.itemCodes.$valid}">
+									<label class="col-sm-5 control-label" for="itemCodes">Vendor Item Name
+										 <span class="symbol required"></span>
+									</label>
+									<div class="col-sm-7">
+										<input type="text"  class="form-control" id="itemCodes"
+											name="itemCodes" ng-model="data.itemMappingCode" required> 
+										<span class="error text-small block" ng-if="Form.itemCodes.$dirty && Form.itemCodes.$error.required">Vendor Item Name is mandatory</span>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</form>
+					<table datatable="" dt-options="ItemMappingCtrl.dtOptions"
+						dt-columns="ItemMappingCtrl.dtColumns" dt-instance="dtInstance"
+						class="table table-striped table-bordered">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

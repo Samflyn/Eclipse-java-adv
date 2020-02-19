@@ -1,0 +1,602 @@
+<script>
+  $(function() {
+   $('#invoiceDate').datepicker({
+        format: 'dd/mm/yyyy',
+        "setDate": new Date(),
+        autoclose: true,
+        todayHighlight: true,
+    });
+   $('#genFinancialPeriod').datepicker({
+        format: 'mmyyyy',
+        autoclose: true,
+       viewMode: "months", 
+       minViewMode: "months",
+       todayHighlight: true
+    });
+$(document).on('click', '#close-preview', function(){ 
+    $('.image-preview').popover('hide');
+    // Hover befor close the preview
+    $('.image-preview').hover(
+        function () {
+           $('.image-preview').popover('show');
+        }, 
+         function () {
+           $('.image-preview').popover('hide');
+        }
+    );    
+});
+
+    // Create the close button
+    var closebtn = $('<button/>', {
+        type:"button",
+        text: 'x',
+        id: 'close-preview',
+        style: 'font-size: initial;',
+    });
+    closebtn.attr("class","close pull-right");
+    // Set the popover default content
+    $('.image-preview').popover({
+        trigger:'manual',
+        html:true,
+        title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+        content: "There's no image",
+        placement:'bottom'
+    });
+    // Clear event
+    $('.image-preview-clear').click(function(){
+        $('.image-preview').attr("data-content","").popover('hide');
+        $('.image-preview-filename').val("");
+        $('.image-preview-clear').hide();
+        $('.image-preview-input input:file').val("");
+        $(".image-preview-input-title").text("Browse"); 
+    }); 
+    // Create the preview image
+    $(".image-preview-input input:file").change(function (){     
+        var img = $('<img/>', {
+            id: 'dynamic',
+            width:250,
+            height:200
+        });      
+        var file = this.files[0];
+        var reader = new FileReader();
+        // Set preview image into the popover data-content
+        reader.onload = function (e) {
+            $(".image-preview-input-title").text("Change");
+            $(".image-preview-clear").show();
+            $(".image-preview-filename").val(file.name);            
+            img.attr('src', e.target.result);
+            $(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+        }        
+        reader.readAsDataURL(file);
+    });  
+});
+
+</script>
+<div class="container-fluid container-fullw generate-page"  ng-controller="generateInvoiceCtrl">
+<form name="Form" novalidate ng-submit="form.submit(Form)">
+       <input type="hidden" ng-model="data.headerId" class="form-control underline">
+
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+   <div class="row">
+      <div class="col-sm-4">
+         <h1 class="mainTitle" translate="sidebar.nav.pages.GENERATE-INVOICE">Generate Invoice </h1>
+      </div>
+      
+      <div class="col-sm-8 text-right">
+         <a href="javascript:;" data-toggle="collapse" data-target="#uploadFile">
+            <button type="button" class="btn btn-primary"><i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+         </a>
+         <button type="button" class="btn btn-primary" ng-click="sendToErp()" ng-disabled="data.headerId == null ? true : false" ng-show="tenantType=='CUSTOMER' ? true  : false"><i class="fa fa-arrow-right" aria-hidden="true" ></i> Send To ERP </button>
+
+         <button type="button" class="btn btn-primary" ng-click="sendToErp()" ng-disabled="data.headerId == null ? true : false" ng-show="tenantType=='VENDOR' ? true : false"><i class="fa fa-arrow-right" aria-hidden="true" ></i> Send To Customer </button>
+         <button type="submit" class="btn btn-primary" ng-click="submitted=true"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{tenantType=='VENDOR' ? 'Draft' : 'Save'}}</button>
+		<button type="button" class="btn btn-primary" ng-click="clear()"><i class="fa fa-eraser" aria-hidden="true"></i> Clear</button>
+        <a ng-hide="tenantType=='VENDOR' ? true : false" ui-sref="app.dashboard" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+        <a ng-hide="tenantType=='VENDOR' ? false : true" ui-sref="app.vandorDashboard" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+      </div>
+   </div>
+</section>
+<!-- end: PAGE TITLE -->
+
+   
+   <div class="row form-box">
+
+      <div class="col-sm-12">
+         <div class="inner-page-box generate-page-main-box">
+
+            <div class="col-sm-12 panel-collapse collapse" id="uploadFile">
+               <fieldset>
+                        <legend>
+                          Upload Images
+                        </legend>
+               <div class="form-group col-md-6 margin-top-10">
+                  <label class="col-sm-3 control-label margin-top-5" >
+                  		Upload Image
+                  </label>
+                  <div class="col-sm-9">
+                     <!-- <input type="file" file-model="myFile" id="ocrFile" class="form-control underline" style="height: 36px;margin-top: -5px;"> -->
+                     <div class="input-group image-preview">
+                        <span class="input-group-addon"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                <input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
+                <span class="input-group-btn">
+                    <!-- image-preview-clear button -->
+                    <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                        <span class="glyphicon glyphicon-remove"></span> Clear
+                    </button>
+                    <!-- image-preview-input -->
+                    <div class="btn btn-primary image-preview-input">
+                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="image-preview-input-title">Browse</span>
+                        <input type="file" file-model="myFile" id="ocrFile" accept="image/png, image/jpeg, image/gif, .pdf" name="input-file-preview"/> <!-- rename it -->
+                    </div>
+                </span>
+            </div>
+                  </div>
+               </div>
+               <div class="form-group col-md-2 margin-top-10">
+                  <button type="button" ng-click="uploadOCR()" class="btn btn-primary"><i class="fa fa-arrow-right"></i> Submit </button>
+               </div>
+            </fieldset>
+              </div>
+
+            <div class="col-md-12">
+               <span id="saveMsg"></span>
+            </div>
+
+
+     <form role="form" class="form-horizontal">
+          <div class="row hyva_taxer_details_box" ng-hide="data.headerId == null ? true : false">
+           <div class="col-sm-5 text-left">
+            <div class="col-sm-12 text-bold text-left">Invoice Status : <span id="invoiceStatus"></span> 
+              <button type="button" class="btn btn-primary margin-left-10" ng-click="refreshErp()" ng-disabled="data.workFlowStatus == 'Matched' ? true : false"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+            </div>
+            </div>
+         </div>
+      <div class="row hyva_taxer_details_box">
+            
+            <div class="col-sm-4">
+            <div class="col-sm-12 text-bold text-left ">Registered Name : <span class="text-normal-name">{{registeredName}}</span></div>
+            </div>
+            <div class="col-sm-4">
+            <div class="col-sm-5 text-bold text-right padding-0">Registered ID : </div>
+            <div class="col-sm-7">
+            {{registeredId}}
+            </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="col-sm-5 text-bold text-right padding-0">Registered Address : </div>
+            <div class="col-sm-7">
+            {{registeredAddress}}
+            </div>
+            </div>
+         </div> 
+
+<div class="sales_error_box">
+               <span id="saveMsg"></span>
+            </div>
+
+               <div class="row">
+                  <div class="col-md-12 no-padding">
+                        <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.purchaseOrderNo.$dirty && Form.purchaseOrderNo.$invalid, 'has-success':Form.purchaseOrderNo.$valid}">
+                              <label class="col-sm-5 control-label" for="purchaseOrderNo">
+                              Purchase Order No <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" id="purchaseOrderNo" name="purchaseOrderNo"  ng-model="data.purchaseOrderNo" class="form-control underline" required>
+               					 <span class="error text-small block" ng-if="Form.purchaseOrderNo.$dirty && Form.purchaseOrderNo.$invalid">PO Number is mandatory</span>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.invoiceNo.$dirty && Form.invoiceNo.$invalid, 'has-success':Form.invoiceNo.$valid}">
+                              <label class="col-sm-5 control-label" for="invoiceNo">
+                              Invoice Number <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" id="invoiceNo" name="invoiceNo" ng-model="data.invoiceNo" class="form-control underline" required>
+                                 <span class="error text-small block" ng-if="Form.invoiceNo.$dirty && Form.invoiceNo.$invalid">Invoice Number is mandatory</span>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.invoiceDate.$dirty && Form.invoiceDate.$invalid, 'has-success':Form.invoiceDate.$valid}">
+                              <label class="col-sm-5 control-label" for="invoiceDate">
+                              Invoice Date <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                               <!--<div class="input-group">
+                                    <input type="text" id="invoiceDate" ng-model="data.invoiceDate" class="form-control underline"   />
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click="open()">
+                                    <i class="fa fa-calendar"></i>
+                                    </button> </span>
+                                 </div>-->
+ 
+                                  <div class="input-group"  > 
+                                 	<input type="text" id="invoiceDate" name="invoiceDate" ng-model="data.invoiceDate" class="form-control underline" required autocomplete="off" />
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-calendar"></i>
+                                    </button> </span>
+                                 </div> 
+                              	<span class="error text-small block" ng-if="Form.invoiceDate.$dirty && Form.invoiceDate.$invalid">Invoice Date is mandatory</span>
+                               </div>
+                         <div class="clearfix"></div>
+                           </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12 no-padding">
+                        <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.invoiceValue.$dirty && Form.invoiceValue.$invalid, 'has-success':Form.invoiceValue.$valid}">
+                              <label class="col-sm-5 control-label" for="invoiceValue">
+                              Invoice Value <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" id="invoiceValue" name="invoiceValue" ng-model="data.invoiceValue" ng-pattern="/^\d+(?:\.\d{1,5})?$/" class="form-control underline" required>
+                                 <span class="error text-small block" ng-if="Form.invoiceValue.$dirty && Form.invoiceValue.$error.required">Invoice Value is mandatory</span>
+         <span class="error text-small block" ng-if="Form.invoiceValue.$error.pattern">Invoice Value Should be Numeric or should contain maximum 2 decimals</span>							
+	      
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.genFinancialPeriod.$dirty && Form.genFinancialPeriod.$invalid, 'has-success':Form.genFinancialPeriod.$valid}">
+                              <label class="col-sm-5 control-label" for="genFinancialPeriod">
+                              Financial Period <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                  <div class="input-group">
+                                    <input type="text"  ng-model="data.financialPeriod" id="genFinancialPeriod"  name="genFinancialPeriod" class="form-control"  autocomplete="off" required/>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary">
+                                    <i class="fa fa-calendar"></i>
+                                    </button> </span>
+                                 </div>
+                                 <span class="error text-small block" ng-if="Form.genFinancialPeriod.$dirty && Form.genFinancialPeriod.$invalid">Financial Period is mandatory</span>
+                               </div>
+                         <div class="clearfix"></div>
+                           </div>
+                        </div>
+                       <!--  <div class="col-md-6">
+                           <div class="form-group">
+                              <label class="col-sm-5 control-label" for="supplyType">
+                              Supply Type <span class="red-star">*</span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" autocomplete="off" id="supplyType" ng-model="data.supplyType" class="form-control" readonly>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                        </div> -->
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12">
+                     
+                        <fieldset>
+                           <legend>
+                              Business Partner Details
+                           </legend>
+                           <div class="col-md-12 no-padding">
+                           <div class="col-md-4">
+                            <div class="form-group" ng-class="{'has-error':Form.bpName.$dirty && Form.bpName.$invalid, 'has-success':Form.bpName.$valid}">
+                              <label class="col-sm-5 control-label" for="bpName"> 
+                              Name  <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" ng-model="data.bpName"  name="bpName" id ="bpName" bp-auto-complete ng-change='samevalues()' class="form-control underline" required>
+                             <span class="error text-small block" ng-if="Form.bpName.$dirty && Form.bpName.$invalid"> Name is mandatory</span>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.bpRegisteredId.$dirty && Form.bpRegisteredId.$invalid, 'has-success':Form.bpRegisteredId.$valid}">
+                              <label class="col-sm-5 control-label" for="bpRegisteredId">
+                              Registered Id <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" id="bpRegisteredId" ng-model="data.bpRegisteredId"  name="bpRegisteredId" class="form-control underline" ng-pattern="/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/"  required>
+                                 <span class="error text-small block" ng-if="Form.bpRegisteredId.$dirty && Form.bpRegisteredId.$error.required"> Registered Id is mandatory</span>
+                                   <span class="error text-small block" ng-if="Form.bpRegisteredId.$error.pattern">Registered Id  formate should like eg:05AAACB2484Q2ZV</span>							
+
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="col-sm-5 control-label" for="bpCountryId">
+                              Country 
+                              </label>
+                              <div class="col-sm-7">
+                                 <select ng-model="data.bpCountryId" id="bpCountryId" ng-options="country.countryId as country.countryName for country in country" class="form-control underline">
+                                    <option value="" disabled selected>Select Country</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                       </div>
+                       <div class="col-md-12 no-padding">
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="col-sm-5 control-label" for="bpStateId">
+                              State 
+                              </label>
+                              <div class="col-sm-7">
+                                 <select ng-model="data.bpStateId" id="bpStateId" ng-options="state.stateId as state.stateName for state in state" class="form-control underline">
+                                    <option value="" disabled selected>Select State</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.bpAddress.$dirty && Form.bpAddress.$invalid, 'has-success':Form.bpAddress.$valid}">
+                              <label class="col-sm-5 control-label" for="bpAddress">
+                              Address <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <textarea id="bpAddress" ng-model="data.bpAddress" name="bpAddress" class="form-control underline" required></textarea>
+                             <span class="error text-small block" ng-if="Form.bpAddress.$dirty && Form.bpAddress.$invalid"> Address is mandatory</span>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         </div>
+                        </fieldset>
+                     
+                     
+                        <fieldset class="margin-top-15">
+                           <legend>
+                              Ship To  Details
+                              <span class="same_as_cdetails" ng-hide="loginDetails.tenantType=='VENDOR' ? false:true">
+                              <input type="checkbox" autocomplete="off" id="sameAsAbove" ng-model="sameAsAbove" ng-change = 'samevalues()'>
+                              <span><b>Same as billing Details</b></span>
+                           </span>
+                           </legend>
+                           
+                      <div class="col-md-12 no-padding">
+                      <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="col-sm-5 control-label" for="shipToName">
+                              Name
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" ng-model="data.shipToName" id ="shipToName" class="form-control underline">
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.shipToRegisteredId.$dirty && Form.shipToRegisteredId.$invalid, 'has-success':Form.shipToRegisteredId.$valid}">
+                              <label class="col-sm-5 control-label" for="shipToRegisteredId">
+                              Registered Id <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <input type="text" id="shipToRegisteredId" name="shipToRegisteredId" ng-model="data.shipToRegisteredId" class="form-control underline" ng-change="changeEvent()" ng-pattern="/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/" >
+									<!-- <span class="error text-small block" ng-if="Form.shipToRegisteredId.$dirty && Form.shipToRegisteredId.$error.required"> Registered Id is mandatory</span> -->
+                                   <span class="error text-small block" ng-if="Form.shipToRegisteredId.$error.pattern">Registered Id  formate should like eg:05AAACB2484Q2ZV</span>                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="col-sm-5 control-label" for="shipToState">
+                              Ship To Country
+                              </label>
+                              <div class="col-sm-7">
+                                <select ng-model="data.shipToCountryId" id="shipToCountryId" ng-options="country.countryId as country.countryName for country in country" class="form-control underline">
+                                    <option value="" disabled selected>Select Country</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                       </div>
+                       <div class="col-md-12 no-padding">
+                         <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="col-sm-5 control-label" for="shipToState">
+                              Ship To State 
+                              </label>
+                              <div class="col-sm-7">
+                                 <select ng-model="data.shipToState" ng-options="state.stateId as state.stateName for state in state" id="shipToState" class="form-control underline" ng-change="changeEvent()">
+                                    <option value="" disabled selected>Select Ship To State</option>
+                                 </select>
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                         <div class="col-md-4">
+                           <div class="form-group" ng-class="{'has-error':Form.shipToAddress.$dirty && Form.shipToAddress.$invalid, 'has-success':Form.shipToAddress.$valid}">
+                              <label class="col-sm-5 control-label" for="shipToAddress">
+                              Address <span class="symbol required"></span>
+                              </label>
+                              <div class="col-sm-7">
+                                 <textarea ng-model="data.shipToAddress" id = "shipToAddress" name="shipToAddress" class="form-control underline" ng-change="changeEvent()" ></textarea>
+                         		<!-- <span class="error text-small block" ng-if="Form.shipToAddress.$dirty && Form.shipToAddress.$invalid"> Address  is mandatory</span> -->
+                          </div>
+                              <div class="clearfix"></div>
+                           </div>
+                         </div>
+                          </div>
+                        </fieldset>
+                    
+                  </div>
+               </div>
+               
+               
+               <div class="row">
+                  <div class="col-md-12">
+                     <fieldset>
+                        <legend>
+                           Item Details <button type="button" class="btn add_new1" ng-click="addLine()"><i class="fa fa-plus" aria-hidden="true"></i> Add Line</button>
+                        </legend>
+                        <!-- <div class="col-md-12">
+            <div class="pull-right inclusive-box">
+               <input type="checkbox" autocomplete="off" id="inclusive" ng-model="inclusive"  ng-change = "posChanges()" ><span>Inclusive of Tax</span>
+            </div>
+            </div> -->
+                        <div class="col-md-12 eway-bill-box lines-box padding-5">
+                           <div class="table-responsive">
+                              <table class="table table-bordered" id="fixTable" >
+                                 <thead>
+                                    <tr>
+
+                                       <th colspan="1" rowspan="2">S.No</th>
+                                       <th colspan="1" rowspan="2">Item Description<span class="red-star">*</span></th>
+                                       <th colspan="1" rowspan="2">Item Type</th>
+                                       <th colspan="1" rowspan="2">HSN/SAC <span class="red-star">*</span></th>
+                                       <th colspan="1" rowspan="2">Qty <span class="red-star">*</span></th>
+                                       <th colspan="1" rowspan="2">UQC <span class="red-star">*</span></th>
+                                       <th colspan="1" rowspan="2">Rate Per Item <span class="red-star">*</span></th>
+                                       <th colspan="1" rowspan="1">Discount (Rs.)</th>
+                                       <th colspan="1" rowspan="2">Taxable Value</th>
+                                       <th colspan="1" rowspan="2">Taxable Rate <span class="red-star">*</span></th>
+                                       <th colspan="3" rowspan="1">Tax Value (Rs.)</th>
+                                       <th colspan="2" rowspan="1">Cess</th>
+                                       <th colspan="1" rowspan="2">Total</th>
+                                       <th colspan="1" rowspan="2">Actions</th>
+                                    </tr>
+                                    <tr>
+                                    <th colspan="1" rowspan="1" class="two_th text-center">
+                                       <span class="discount-column"> 
+                                          <span>%<input type="radio" name="discount_type" ng-model="discountInr" value="Rate" ng-change="changeToPercentage()"></span> 
+                                          <span>Rs.<input type="radio" name="discount_type" ng-model="discountInr" value="Rupees" ng-checked="true" ng-change="changeToPercentage()" ></span>
+                                       </span>
+                                    </th>                                       <th>CGST <span class="red-star">*</span></th>
+                                       <th>SGST <span class="red-star">*</span></th>
+                                       <th>IGST  <span class="red-star">*</span></th>
+                                       <th>%</th>
+                                       <th>Amt (Rs.)</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr ng-repeat="ctrl in data.items track by $index">
+                                  <input type="hidden" ng-model="ctrl.lineId" value="">
+                                       <td>
+                                          {{ $index + 1 | number }}
+                                       </td>
+                                       <td>
+                                          <div class="input" ng-class="{'has-error':Form.descGoods{{$index}}.$dirty && Form.descGoods{{$index}}.$invalid, 'has-success':Form.descGoods{{$index}}.$valid}" >
+                                          <input type="text" id="descGoods{{$index}}" name="descGoods{{$index}}" ng-model="ctrl.descGoods" class="form-control" placeholder="Select item from list" index="{{$index}}"  required items-auto-complete ng-class="{red:Form.descGoods{{$index}}.$invalid && (Form.descGoods{{$index}}.$touched || Form.$submitted)}">
+                                          <span ng-class="{tooltip11:Form.descGoods{{$index}}.$invalid && (Form.descGoods{{$index}}.$touched || Form.$submitted) && Form.descGoods{{$index}}.$error.required,tooltip12:Form.descGoods{{$index}}.$valid || Form.descGoods{{$index}}.$invalid}">Item Description  is mandatory</span>
+                                          </div>                                          
+                                       </td>
+                                       <td>
+                                          <div class="input">
+                                          <select id="itemType" class="form-control" ng-model="ctrl.itemType">
+                                                <option value="Goods" selected>Goods</option>
+                                                <option value="Services">Services</option>
+                                          </select></div>
+                                       </td>
+                                       <td>
+                                          <div class="input" ng-class="{'has-error':Form.hsnSc{{$index}}.$dirty && Form.hsnSc{{$index}}.$invalid, 'has-success':Form.hsnSc{{$index}}.$valid}">
+                                          <input type="text" id="hsnSc{{$index}}" name="hsnSc{{$index}}" ng-model="ctrl.hsnSc"  pattern="^(0|[1-9][0-9]*)$" class="form-control" required ng-class="{red:Form.hsnSc{{$index}}.$invalid && (Form.hsnSc{{$index}}.$touched || Form.$submitted)}">
+                                          <span ng-class="{tooltip11:Form.hsnSc{{$index}}.$invalid && (Form.hsnSc{{$index}}.$touched || Form.$submitted) && Form.hsnSc{{$index}}.$error.required,tooltip12:Form.hsnSc{{$index}}.$valid || Form.hsnSc{{$index}}.$invalid}">HSN Code  is mandatory</span>
+                                             <span ng-class="{tooltip11:Form.hsnSc{{$index}}.$invalid && (Form.hsnSc{{$index}}.$touched || Form.$submitted) && Form.hsnSc{{$index}}.$error.pattern,tooltip12:Form.hsnSc{{$index}}.$valid || Form.hsnSc{{$index}}.$invalid}"   >Invalid data format</span>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="input" ng-class="{'has-error':Form.qty{{$index}}.$dirty && Form.qty{{$index}}.$invalid, 'has-success':Form.qty{{$index}}.$valid}">
+                                          <input type="number" ng-model="ctrl.qty" id="qty{{$index}}" name="qty{{$index}}" class="form-control" ng-class="{red:Form.qty{{$index}}.$invalid && (Form.qty{{$index}}.$touched || Form.$submitted)}" required>
+                                            <span ng-class="{tooltip11:Form.qty{{$index}}.$invalid && (Form.qty{{$index}}.$touched || Form.$submitted) && Form.qty{{$index}}.$error.required,tooltip12:Form.qty{{$index}}.$valid || Form.qty{{$index}}.$invalid}">Quantity  is mandatory</span>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="input" ng-class="{'has-error':Form.uqc{{$index}}.$dirty && Form.uqc{{$index}}.$invalid, 'has-success':Form.uqc{{$index}}.$valid}">
+                                           <select ng-model="ctrl.uqc" ng-options="uqcList.uqcCode as uqcList.uqcCode for uqcList in uqcList" class="form-control" id="uqc{{$index}}" name="uqc{{$index}}" required ng-class="{red:Form.uqc{{$index}}.$invalid && (Form.uqc{{$index}}.$touched || Form.$submitted)}">
+                                             <option value="" disabled selected>Select UQC</option>
+                                            </select>
+                                          <span ng-class="{tooltip11:Form.uqc{{$index}}.$invalid && (Form.uqc{{$index}}.$touched || Form.$submitted) && Form.uqc{{$index}}.$error.required,tooltip12:Form.uqc{{$index}}.$valid || Form.uqc{{$index}}.$invalid}">UQC  is mandatory</span>
+                                           </div>
+                                       </td>
+                                       <td>
+                                          <div class="input" ng-class="{'has-error':Form.productRate{{$index}}.$dirty && Form.productRate{{$index}}.$invalid, 'has-success':Form.productRate{{$index}}.$valid}">
+                                          <input type="text" ng-model="ctrl.productRate" class="form-control"  pattern = "^[0-9,]+(\.[0-9]{1,5})?$"  id="productRate{{$index}}" name="productRate{{$index}}"   required ng-class="{red:Form.productRate{{$index}}.$invalid && (Form.productRate{{$index}}.$touched || Form.$submitted)}">
+                                          <span ng-class="{tooltip11:Form.productRate{{$index}}.$invalid && (Form.productRate{{$index}}.$touched || Form.$submitted) && Form.productRate{{$index}}.$error.required,tooltip12:Form.productRate{{$index}}.$valid || Form.productRate{{$index}}.$invalid}">Rate per Item  is mandatory</span>
+                                       <span ng-class="{tooltip11:Form.productRate{{$index}}.$invalid && (Form.productRate{{$index}}.$touched || Form.$submitted) && Form.productRate{{$index}}.$error.pattern,tooltip12:Form.productRate{{$index}}.$valid || Form.productRate{{$index}}.$invalid}"   >Invalid data format</span>
+                                          </div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="number" ng-model="ctrl.discountRate" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.txval" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input" ng-class="{'has-error':Form.taxRate{{$index}}.$dirty && Form.taxRate{{$index}}.$invalid, 'has-success':Form.taxRate{{$index}}.$valid}"><!--                                           <div class="input">
+                                             <select id="rt" class="taxable_rate_dropdown " ng-model="ctrl.rt" ng-change = amountCalculations($index) name="rt{{$index}}" ng-class="{red:myForm.rt{{$index}}.$invalid && (myForm.rt{{$index}}.$touched || myForm.$submitted)}" class="grid_input" required>
+                                             <option ng-repeat="taxRate in taxRates" ng-value="{{taxRate.taxRate}}" >{{taxRate.taxRate}}</option>
+                                             </select></div>
+ -->                                          <div class="input">
+                                             <select id="taxRate" ng-model="ctrl.taxRate" class="taxable_rate_dropdown " class="grid_input" name="taxRate{{$index}}" ng-class="{red:Form.taxRate{{$index}}.$invalid && (Form.taxRate{{$index}}.$touched || Form.$submitted)}" required>
+                                             <option >0</option>
+                                             <option >0.25</option>
+                                             <option >3</option>
+                                             </select>
+                                          <span ng-class="{tooltip11:Form.taxRate{{$index}}.$invalid && (Form.taxRate{{$index}}.$touched || Form.$submitted) && Form.taxRate{{$index}}.$error.required,tooltip12:Form.taxRate{{$index}}.$valid || Form.taxRate{{$index}}.$invalid}">Tax Rate is mandatory</span>
+                                             </div>
+</div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.camt" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.samt" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.iamt" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.csrt" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.csamt" class="form-control"></div>
+                                       </td>
+                                       <td>
+                                          <div class="input"><input type="text" ng-model="ctrl.lineValue" class="form-control"></div>
+                                       </td>
+                                       <td class="text-center"><button type="button" class="btn btn-danger btn-xs" title="Delete">
+                                          <i class="fa fa-trash " aria-hidden="true" ng-click=deleteLine($index) title="Delete" ></i></button>
+                                       </td>
+                                       
+                                
+                                    </tr>
+                                    <tr class="salse_total_row">
+                        <td colspan="7" class="text-center">Total Amount</td> 
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td><div class="input"><input type="text" class="form-control" disabled></div></td>
+                        <td></td>
+                        </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+
+
+                        </div>
+                        
+                     </fieldset>
+                  </div>
+               </div>
+            </form>
+         </div>
+         <!-- Main Inner Box end -->
+      </div>
+   </div>
+</form>
+</div>

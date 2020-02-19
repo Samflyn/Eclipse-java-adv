@@ -1,0 +1,440 @@
+<!-- Superadmin Navigation -->
+
+<ul class="main-navigation-menu" ng-show="role=='SUPER_ADMIN' ? true : false">
+	<li ui-sref-active="active"><a ui-sref="app.superadminDashboard">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title">Dashboard</span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a ui-sref="app.manageCustomer">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-plus"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Company </span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a ui-sref="app.manageCustomerUser">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Company User</span>
+				</div>
+			</div>
+		</a></li>
+
+
+	<li ui-sref-active="active"><a ui-sref="app.manageRole">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Role</span>
+				</div>
+			</div>
+		</a></li>
+
+
+	<li ui-sref-active="active"><a ui-sref="app.manageCountry">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Country</span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a ui-sref="app.manageStateCode">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage State</span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a ui-sref="app.emailConfig">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title">Email Configuration</span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a ui-sref="app.errorMaster">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title">Error Master</span>
+				</div>
+			</div>
+		</a></li>
+</ul>
+
+<!-- Admin Navigation -->
+<ul class="main-navigation-menu" ng-show="role=='ADMIN' ? true : false">
+	<li ui-sref-active="active"><a ui-sref="app.adminDashboard">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.dashboard.MAIN">Admin
+						Dashboard</span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a ui-sref="app.manageCustomerUser">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage User</span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageDepartment">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Department </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageDimension">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Dimension </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageLedgerAccount">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Ledger Account </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageVendors">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-user"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Suppliers </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageItemMaster">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-receipt"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage Item Master </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageUqc">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-receipt"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Manage UQC </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageItemMapping">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-receipt"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title">Item Mapping </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+	<li ui-sref-active="active"><a ui-sref="app.manageUqcMapping">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-receipt"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title">UQC Mapping </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+	</li>
+
+	<li><a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-bar-chart-alt"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Reports </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active"><a ui-sref="app.customerInvoiceReport">
+					<i class="ti-receipt"></i><span class="title">PO Reports </span>
+				</a></li>
+			<li ui-sref-active="active"><a ui-sref="app.cutomerCostInvoiceReport"> <i class="ti-receipt"></i><span
+						class="title">Cost Invoice
+						Reports </span>
+				</a></li>
+			<li ng-show="tenantPrevilages.indexOf('report-BulkInvoicereport') > -1" ui-sref-active="active"><a
+					ui-sref="app.bulkInvoiceReport">
+					<i class="ti-download"></i><span class="title">Bulk Upload
+						Report </span>
+				</a></li>
+		</ul>
+	</li>
+</ul>
+
+<!-- Company User Navigation -->
+<ul class="main-navigation-menu" ng-show="(role!='SUPER_ADMIN' && role!='ADMIN')  ? true  : false">
+	<li ui-sref-active="active"><a ui-sref="app.dashboard">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-home"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="sidebar.nav.dashboard.MAIN">Customer
+						Dashboard</span>
+				</div>
+			</div>
+		</a></li>
+
+	<li ui-sref-active="active"><a
+			ui-sref="app.customerGenerate">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-plus"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> PO Invoice </span>
+				</div>
+			</div>
+		</a></li>
+	<li ui-sref-active="active"><a ui-sref="app.billQueue">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> PO Invoice Queue </span>
+				</div>
+			</div>
+		</a></li>
+	<li  ui-sref-active="active"><a ui-sref="app.bulkUpload">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-upload"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> PO Bulk Upload </span>
+				</div>
+			</div>
+		</a></li>
+	<li  ui-sref-active="active"><a
+			ui-sref="app.filestatusQueue({invoiceType:'PI'})">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate=""> PO Invoice Bulk Upload Status</span>
+				</div>
+			</div>
+		</a></li>
+	<li ui-sref-active="active"><a ui-sref="app.customerCostInvoice">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-plus"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Cost Invoice </span>
+				</div>
+			</div>
+		</a></li>
+	<li ui-sref-active="active"><a
+			ui-sref="app.costInvoiceQueue">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate=""> Cost Invoice Queue</span>
+				</div>
+			</div>
+		</a></li>
+	<li  ui-sref-active="active"><a
+			ui-sref="app.costInvoiceBulkUpload">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate=""> Cost Invoice Bulk Upload</span>
+				</div>
+			</div>
+		</a></li>
+	<li  ui-sref-active="active"><a
+			ui-sref="app.filestatusQueue({invoiceType:'CI'})">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate=""> Cost Invoice Bulk Upload Status</span>
+				</div>
+			</div>
+		</a></li>
+	<!-- 	<li ng-show="tenantPrevilages.indexOf('bulkProcessedQueue') > -1" ui-sref-active="active"><a ui-sref="app.processedDataQueue">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-view-list"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title" translate="">
+						Processed Data Queue</span>
+				</div>
+			</div>
+	</a></li> -->
+	<li ><a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-settings"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Master Data </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li  ui-sref-active="active"><a
+					ui-sref="app.manageCustomerUser">
+					<i class="ti-receipt"></i><span class="title">Manage
+						Customer User </span>
+				</a></li>
+			<li  ui-sref-active="active"><a
+					ui-sref="app.manageVendors"> <i class="ti-user"></i><span class="title">Manage Vendors</span>
+				</a></li>
+			<li  ui-sref-active="active"><a
+					ui-sref="app.manageItemMaster">
+					<i class="ti-receipt"></i><span class="title">Manage Item
+						Master</span>
+				</a></li>
+
+			<li  ui-sref-active="active"><a
+					ui-sref="app.manageUqc"> <i class="ti-receipt"></i><span class="title">Manage UQC </span>
+
+				</a></li>
+
+			<li  ui-sref-active="active"><a
+					ui-sref="app.manageItemMapping">
+					<i class="ti-receipt"></i><span class="title"> Item Mapping
+					</span>
+				</a></li>
+			<li  ui-sref-active="active"><a
+					ui-sref="app.manageUqcMapping">
+					<i class="ti-receipt"></i><span class="title">UQC Mapping </span>
+				</a></li>
+		</ul>
+	</li>
+	<li><a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-clipboard"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Audit Log </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li ui-sref-active="active"><a ui-sref="app.exportAuditLog">
+					<i class="ti-view-list"></i> <span class="title">Export Log</span>
+				</a></li>
+		</ul>
+	</li>
+
+	<li ><a href="javascript:void(0)">
+			<div class="item-content">
+				<div class="item-media">
+					<i class="ti-bar-chart-alt"></i>
+				</div>
+				<div class="item-inner">
+					<span class="title"> Reports </span><i class="icon-arrow"></i>
+				</div>
+			</div>
+		</a>
+		<ul class="sub-menu">
+			<li  ui-sref-active="active"><a
+					ui-sref="app.customerInvoiceReport">
+					<i class="ti-receipt"></i><span class="title">PO Reports </span>
+				</a></li>
+			<li  ui-sref-active="active"><a
+					ui-sref="app.cutomerCostInvoiceReport"> <i class="ti-receipt"></i><span class="title">Cost Invoice
+						Reports </span>
+				</a></li>
+			<li >  ui-sref-active="active"><a
+					ui-sref="app.customerPaymentDue">
+					<i class="ti-receipt"></i><span class="title">Payment Due
+						Reports </span>
+				</a></li>
+			<li  ui-sref-active="active"><a
+					ui-sref="app.bulkInvoiceReport">
+					<i class="ti-download"></i><span class="title">Bulk Upload
+						Report </span>
+				</a></li>
+			<li ui-sref-active="active"><a ui-sref="app.report">
+					<i class="ti-download"></i>
+					<span class="title">PO And Cost Invoice Extract Report</span>
+				</a>
+			</li>
+		</ul>
+	</li>
+</ul>

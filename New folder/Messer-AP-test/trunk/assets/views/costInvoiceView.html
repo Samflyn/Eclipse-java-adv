@@ -1,0 +1,644 @@
+<script>
+   $('#invoiceDate').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    });
+   $('#financialPeriod').datepicker({
+        format: 'mmyyyy',
+        autoclose: true,
+       viewMode: "months", 
+       minViewMode: "months"
+    });
+</script>
+
+<style>
+highlight {
+        font-weight: bold;
+        color: blue;
+    }
+    .audit-log-font {
+    font-size: 16px;
+}
+.scroll-lines .table-responsive09 {
+	overflow-y: scroll;
+	max-height: 200px;
+	width: 1060px;
+}
+
+.scroll-lines .table-responsive09.colaps-table-div {
+	width: 100%;
+}
+.lines-box .table-responsive09 .table {
+	width: 100%;
+	max-width: 100%;
+}
+</style>
+<!-- start: PAGE TITLE --> 
+<div ng-controller="viewCostInvoiceCtrl" class="view-invoice-box"> 
+   <form ng-submit="submitData()" name="myForm"  class="form-horizontal">
+<section id="page-title">
+   <div class="row">
+      <div class="col-sm-4">
+         <h1 class="mainTitle" translate="sidebar.nav.pages.VIEW-INVOICE"></h1>
+      </div>
+       <div class="col-sm-3">
+      	Invoice Status: <span id="invoiceStatus"></span>
+      </div>
+      <div class="col-sm-8 text-right">
+      	<button type="button" class="btn btn-primary"
+						ng-click="sendToErp()"
+						ng-if="isenable && tenantType=='CUSTOMER' ? true  : false">
+						<i class="fa fa-arrow-right" aria-hidden="true"></i> Create Cost Invoice
+					</button>
+     	<button type="button" class="btn btn-primary"
+			ng-click="submitCostInvoiceForApproval()"
+			ng-if="issubmitenable && tenantType=='CUSTOMER' ? true  : false">
+			<i class="fa fa-arrow-right" aria-hidden="true"></i> Approve
+		</button> 
+		<button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" ng-if="issubmitenable && tenantType=='CUSTOMER' ? true  : false"> <i class="fa fa-close" aria-hidden="true"></i>  Reject </button>
+        <a ui-sref="app.costInvoiceQueue" class="btn btn-primary"><i class="fa fa-arrow-left"></i> Back</a>
+      </div>
+   </div>
+</section>
+<!-- end: PAGE TITLE -->
+<div class="container-fluid container-fullw generate-page">
+   <div class="row">
+      <div class="col-sm-12">
+         <div class="inner-page-box generate-page-main-box">
+            <div class="col-md-12">
+               <span id="saveMsg"></span>
+            </div>
+               
+    
+
+		<div class="sales_error_box">
+               <span id="saveMsg"></span>
+            </div>
+               <div class="row">
+                  <div class="col-md-12">
+                    <fieldset class="margin-top-15">
+                           <legend>
+                             Vendor Details
+                           </legend>
+                             	<div class="col-md-4 to-md-6">
+									<div class="col-sm-5 text-bold text-right padding-0">Vendor
+										Name :</div>
+									<!--  <span class="text-normal-name">{{registeredName}}</span> -->
+									<div class="col-sm-7">{{data.bpName}}
+									</div>
+								</div>
+								
+								<div class="col-md-4 to-md-6 ">
+									<div class="col-sm-5 text-bold text-right padding-0">Registered
+										ID :</div>
+									<div class="col-sm-7">{{data.bpRegisteredId}}
+									</div>
+								</div>
+						
+						<div class="col-md-4 to-md-6">
+							<div class="form-group">
+								<label class="col-sm-5 control-label" for="invoiceNo">
+									Invoice Number:
+								</label>
+								<div class="col-sm-7">{{data.invoiceNo}}
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="col-md-4 to-md-6">
+							<div class="form-group">
+								<label class="col-sm-5 control-label" for="invoiceDate">
+									Invoice Date :
+								</label>
+								<div class="col-sm-7">
+									<div class="input-group">{{data.invoiceDate}}
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="col-md-4 to-md-6">
+							<div class="form-group">
+								<label class="col-sm-5 control-label" for="invoiceValue">
+									Invoice Value :
+								</label>
+								<div class="col-sm-7">{{data.invoiceValue}}
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="col-md-4 to-md-6">
+							<div class="form-group">
+								<label class="col-sm-5 control-label" for="genFinancialPeriod">
+									Financial Period :
+								</label>
+								<div class="col-sm-7">
+									<div class="input-group">{{data.financialPeriod}}
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						</div>
+						<div class="col-md-4 to-md-6">
+							<div class="form-group">
+								<label class="col-sm-5 control-label" for="dueDate">
+									Due Date :
+								</label>
+								<div class="col-sm-7">
+									<div class="input-group">{{data.dueDate}}
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+					    </div>
+					   		<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="bpStateId">
+											Vendor State :</label>
+										 <div class="col-sm-7" ng-repeat="states in state | filter: {stateId: data.bpStateId || ''} : true |filter:search:strict">
+                                {{states.stateName}}
+                              </div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+							<div class="form-group">
+								<label class="col-sm-5 control-label" for="bpAddress">
+									Address :
+								</label>
+								<div class="col-sm-7">
+									<div class="input-group">{{data.bpAddress}}
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+					    </div>
+                        </fieldset>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-12">
+                       <fieldset class="margin-top-15">
+                           <legend>
+                              Company Details
+                           </legend>
+                    		<div class="col-md-12 no-padding">
+								<div class="col-md-4 to-md-6">
+									<div class="form-group" >
+										<label class="col-sm-5 control-label" for="registeredName" >
+											Name :
+										</label>
+										<div class="col-sm-7">{{data.registeredName}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							 <div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="registeredId">
+											Registered Id :
+										</label>
+										<div class="col-sm-7">{{data.registeredId}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							<!-- 	<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="bpCountryId">
+											Country </label>
+										<div class="col-sm-7">{{data.ShipToCountry}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div> -->
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="registeredStateId">
+											State </label>
+										<div class="col-sm-7">
+							 <div class="col-sm-7" ng-repeat="states in state | filter: {stateId: data.registeredStateId|| ''} : true |filter:search:strict">
+                                {{states.stateName}}
+                              </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="registeredAddress">
+											Address
+										</label>
+										<div class="col-sm-7">{{data.registeredAddress}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+                        </fieldset>
+                          <fieldset class="margin-top-15">
+							<legend>
+								Ship To Details <span class="same_as_cdetails"
+									ng-hide="loginDetails.tenantType=='VENDOR' ? false:true">
+									<input type="checkbox" autocomplete="off" id="sameAsAbove"
+									ng-model="sameAsAbove" ng-change='samevalues()'> <span><b>Same
+											as billing Details</b></span>
+								</span>
+							</legend>
+
+							<div class="col-md-12 no-padding">
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="shipToName">
+											Name :</label>
+										<div class="col-sm-7">{{data.shipToName}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="shipToRegisteredId">
+											Registered Id :
+										</label>
+										<div class="col-sm-7">{{data.shipToRegisteredId}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="shipToState">
+											Ship To State :</label>
+										<div class="col-sm-7">
+										<div class="col-sm-7" ng-repeat="states in state | filter: {stateId: data.shipToState || ''} : true |filter:search:strict">
+                                {{states.stateName}}
+                              </div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="shipToAddress">
+											Address :
+										</label>
+										<div class="col-sm-7">{{data.shipToAddress}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+                        <fieldset class="margin-top-15">
+							<legend>
+								General Details
+							</legend>
+
+							<div class="col-md-12 no-padding">
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="deliveryTerms">
+											Delivery Terms : </label>
+										<div class="col-sm-7">
+											{{data.deliveryTerms}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="grnNumber">
+											GRN Number:
+										</label>
+										<div class="col-sm-7">
+											{{data.grnNumber}}
+											
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="iban">
+											IBan :</label>
+										<div class="col-sm-7">
+										{{data.iban}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="paymentTerms">
+											Payment Terms: </label>
+										<div class="col-sm-7">
+										{{data.paymentTerms}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="totalTaxableValue">
+											Total Taxable Value :
+										</label>
+										<div class="col-sm-7">
+										{{data.totalTaxableValue}}
+								
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="totalTaxValue">
+											Total Tax Value :
+										</label>
+										<div class="col-sm-7">
+										{{data.totalTaxValue}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<!-- <div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="customField1">
+											Custom Filed1:
+										</label>
+										<div class="col-sm-7">
+										{{data.customField1}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="col-md-4 to-md-6">
+									<div class="form-group">
+										<label class="col-sm-5 control-label" for="customField2">
+											Custom Filed2:
+										</label>
+										<div class="col-sm-7">
+										{{data.customField2}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div> -->
+							</div>
+						</fieldset>
+                       
+                  </div>
+               </div>
+               
+               
+               <div class="row">
+                  <div class="col-md-12 scroll-lines no-padding">
+                     <fieldset>
+                        <legend>
+                           Item Details
+                        </legend>
+                        <!-- <div class="col-md-12">
+            <div class="pull-right inclusive-box">
+               <input type="checkbox" autocomplete="off" id="inclusive" ng-model="inclusive"  ng-change = "posChanges()" ><span>Inclusive of Tax</span>
+            </div>
+            </div> -->
+                        <div class="col-md-12 eway-bill-box padding-5">
+                           <div class="table-responsive09">
+                              <table class="table table-bordered" id="fixTable">
+                                 <thead>
+                                    <tr>
+
+                                       <th colspan="1" rowspan="2">S.No</th>
+                                       <th colspan="1" rowspan="2">Item Description</th>
+                                       <th colspan="1" rowspan="2">HSN/SAC </th>
+                                       <th colspan="1" rowspan="2">Qty </th>
+                                       <th colspan="1" rowspan="2">UQC </th>
+                                       <th colspan="1" rowspan="2">Rate Per Item </th>
+                                       <th colspan="1" rowspan="2">Discount </th>
+                                       <th colspan="1" rowspan="2">Taxable Value </th>
+                                       <th ng-if="companydetails.countryConfiguration=='INDIA'" colspan="1" rowspan="2">Tax Rate </th>
+                                       <th ng-if="companydetails.countryConfiguration=='INDIA'" colspan="3" rowspan="1">Tax Value (Rs.)</th>
+                                     <!--   <th colspan="2" rowspan="1">Dimension</th> -->
+                                       <th ng-if="companydetails.countryConfiguration=='INDIA'"  colspan="2" rowspan="1">Cess</th>
+                                        <th  ng-if="companydetails.countryConfiguration=='OTHER'" colspan="1" rowspan="2">vat</th>
+									    <th  ng-if="companydetails.countryConfiguration=='OTHER'" colspan="1" rowspan="2">VatAmount</th>
+									    <th colspan="1" rowspan="2">Currency</th>
+									    <th colspan="1" rowspan="2">GL Account</th>
+									    <th colspan="1" rowspan="2">CostCenter</th>
+										<th colspan="1" rowspan="2">Freight</th>
+										<th colspan="1" rowspan="2">Packing</th>
+										<th colspan="1" rowspan="2">Insurance</th>
+									    <th colspan="1" rowspan="2">Total</th>
+                                    </tr>
+                                    <tr>
+                                    <!-- <th colspan="1" rowspan="1" class="two_th text-center">
+                                       <span class="discount-column"> 
+                                          <span>%<input type="radio" name="discount_type" ng-model="discountInr" value="Rate" ng-change="changeToPercentage()"></span> 
+                                          <span>Rs.<input type="radio" name="discount_type" ng-model="discountInr" value="Rupees" ng-checked="true" ng-change="changeToPercentage()" ></span>
+                                       </span>
+                                    </th> -->                                       
+                                    <th  ng-if="companydetails.countryConfiguration=='INDIA'">CGST </th>
+                                       <th  ng-if="companydetails.countryConfiguration=='INDIA'">SGST </th>
+                                       <th  ng-if="companydetails.countryConfiguration=='INDIA'">IGST </th>
+                                        <!-- <th>Type </th>
+                                         <th>Value </th> -->
+                                       <th  ng-if="companydetails.countryConfiguration=='INDIA'">%</th>
+                                       <th  ng-if="companydetails.countryConfiguration=='INDIA'">Amt (Rs.)</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr ng-repeat="ctrl in data.items">
+                                       <td>
+                                          {{ $index + 1 | number }}
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.descGoods}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.hsnSc}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.qty}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.uqc}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.productRate}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.discountRate}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.txval}}</div>
+                                       </td>
+                                       <td  ng-if="companydetails.countryConfiguration=='INDIA'">
+                                          <div class="input">{{ctrl.rate}}</div>
+                                       </td>
+                                       <td  ng-if="companydetails.countryConfiguration=='INDIA'">
+                                          <div class="input">{{ctrl.camt}}</div>
+                                       </td>
+                                       <td  ng-if="companydetails.countryConfiguration=='INDIA'">
+                                          <div class="input">{{ctrl.samt}}</div>
+                                       </td>
+                                       <td  ng-if="companydetails.countryConfiguration=='INDIA'">
+                                          <div class="input">{{ctrl.iamt}}</div>
+                                       </td>
+                                       <!-- <td>
+                                          <div class="input">{{ctrl.dimensionType}}</div>
+                                       </td>
+                                       <td>
+                                          <div class="input">{{ctrl.dimensionValue}}</div>
+                                       </td> -->
+                                       <td  ng-if="companydetails.countryConfiguration=='INDIA'">
+                                          <div class="input">{{ctrl.csrt}}</div>
+                                       </td>
+                                       <td  ng-if="companydetails.countryConfiguration=='INDIA'">
+                                          <div class="input">{{ctrl.csamt}}</div>
+                                       </td>
+                                          <td  ng-if="companydetails.countryConfiguration=='OTHER'">
+													<div class="input">
+													{{ctrl.vat}}
+													</div>
+												</td>
+												<td  ng-if="companydetails.countryConfiguration=='OTHER'">
+													<div class="input">{{ctrl.vatAmount}}
+													</div>
+												</td>
+												<td>
+													<div class="input">{{ctrl.currency}}
+													</div>
+												</td>
+												  <td>
+														<div class="input">{{ctrl.ledgerAccount}}
+														</div>
+
+												</td>
+											    <td>
+													<div class="input">{{ctrl.costCenter}}
+													</div>
+												</td>
+
+													<td>
+														<div class="input">{{ctrl.freight}}
+														</div>
+													</td>
+
+													<td>
+														<div class="input">{{ctrl.packing}}
+														</div>
+													</td>
+
+													<td>
+														<div class="input">{{ctrl.insurance}}
+														</div>
+													</td>
+												<td>	
+                                          <div class="input">{{ctrl.lineValue}}</div>
+                                       </td>
+                                    </tr>
+                              
+                                 </tbody>
+                              </table>
+                           </div>
+
+
+                        </div>
+                        
+                     </fieldset>
+                     <div class="col-sm-12">
+			<div class=" col-sm-6">
+				<span class="audit-log-font"><b>Created By:</b>{{userName}}</span>
+			</div>
+			<div class=" col-sm-6">
+				<span class="audit-log-font"><b>Created On :</b>{{data.createdOn}}</span>
+			</div>
+			
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+		<button type="button" class="btn btn-primary" ng-click="logShowHide()">Open Log Details <div><i class="fa fa-angle-double-down" aria-hidden="true"></i></div></button>
+		</div>    
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 log-box" ng-repeat="ctrl in log track by $index" ng-show = "logisVisible">
+			<div class="col-sm-12 ">
+			<div class=" col-sm-4">
+				<span class="audit-log-font"><b>Action : </b> {{ctrl.action}}</span>
+			</div>
+			<div class=" col-sm-4">
+				<span class="audit-log-font"><b>Action Date :</b>{{ctrl.loggedDate}}</span>
+			</div>
+			<div class=" col-sm-4">
+				<span class="audit-log-font"><b>Action By :</b>{{ctrl.userName}}</span>
+			</div>
+			</div>
+			<div class="faield-date-box-data">
+			
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 log-half-box">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding margin-top-5" ng-show="ctrl.oldData">
+			<div class="log-head">Old Headers</div>
+			<div class="log-content">{{ctrl.oldData}}</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding margin-top-5" ng-show="ctrl.items[1]">
+			<div class="log-head">Old Lines</div>
+			<div class="log-content" ng-repeat="ctrlItems in ctrl.items[1] track by $index">
+					{{ctrlItems}}
+			</div>
+			</div>			
+			</div>			
+			
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 log-half-box">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding margin-top-5" ng-show="ctrl.newDate">
+			<div class="log-head">New Headers</div>
+			<div class="log-content">{{ctrl.newDate}}</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-padding margin-top-5" ng-show="ctrl.items[0]">
+			<div class="log-head">New Lines </div>
+			<div class="log-content" ng-repeat="ctrlItems in ctrl.items[0] track by $index">
+					{{ctrlItems}}
+				</div>
+				</div>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+			</div>
+		</div> 
+			
+			
+			
+			
+                  </div>
+               </div>
+            
+         </div>
+         <!-- Main Inner Box end -->
+      </div>
+   </div>
+</div>
+  <div class="modal fade asignToModalBox" id="myModal" role="dialog">
+    <div class="modal-dialog">
+   <!--  <form name="rejectForm" novalidate > -->
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reject Invoice</h4>
+        </div>
+        <div class="modal-body">
+        <div class="col-md-12 form-group no-padding">
+			<label class="col-sm-3 control-label" for="">Reason</label>
+			<div class="col-sm-7">
+			<textarea style="width:100%" class="form-control" placeholder="Reason for Rejecting?" ng-model="data.rejectReason"></textarea>
+			</div>
+		</div>
+		<div class="col-md-12 form-group no-padding text-center">
+		
+		<button type="button"  class="btn btn-primary" ng-click="sendForReject()" data-dismiss="modal"><i class="fa fa-arrow-right" aria-hidden="true"></i>OK</button>
+		<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close" aria-hidden="true"></i>Cancel</button>
+		</div>
+        <div class="clearfix"></div>
+        </div>
+      </div>
+     <!--  </form> -->
+    </div>
+  </div>
+</form>
+</div>

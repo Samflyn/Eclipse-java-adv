@@ -1,0 +1,85 @@
+<div ng-controller="bulkInvoiceReportCtrl as invoiceReportCtrl">
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-12">
+		<div class="col-sm-6">
+			<h1 class="mainTitle">Processed Bulk data Report</h1>
+			</div>
+			<div class="col-sm-6 text-right margin-bottom-5">
+                <button type="button" class="btn btn-primary" name="export" value="export" id="export" ng-click="form.submit(Form)">Export to Excel</button>
+            </div>
+		</div>
+	</div>
+</section>
+
+<div class="container-fluid container-fullw generate-page">
+    <form name="Form" novalidate ng-submit="form.submit(Form)">
+
+        <!-- start: PAGE TITLE -->
+
+        <!-- end: PAGE TITLE -->
+        <div class="form-box">
+            <div class="col-sm-12">
+                <div class="inner-page-box generate-page-main-box">
+                    <span id="saveMsg"></span>
+                </div>
+                <!-- Main Inner Box end -->
+            </div>
+            
+			<div class="col-md-12 no-padding">
+			<div class="alert alert-info" ><strong>Info!</strong> Select Invoice date Range</div>
+			<!-- <p><b>Note :</b> This os test note.</p> -->
+			</div>
+            <div class="col-md-12">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label" for="fromDate1">
+                            From Date <span class="symbol required"></span>
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <input type="text" id="fromDate" name="fromDate1" ng-model="data.fromDate" class="form-control underline" required autocomplete="off" />
+                                <span class="input-group-btn">
+										</span>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="col-sm-5 control-label" for="toDate1">
+                            To Date <span class="symbol required"></span>
+                        </label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <input type="text" id="toDate" name="toDate1" ng-model="data.toDate" class="form-control underline" required autocomplete="off" />
+                                <span class="input-group-btn">
+										</span>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+<!-- 
+                <div class="col-md-4 form-group">
+                    <label class="col-sm-5 control-label" for="stateId">Select Status </label>
+                    <div class="col-sm-7">
+                        <select ng-model="data.tenantDto" class="form-control" id="vendorId" name="vendorId"  >
+                            <option value="">--Please Select--</option>
+                            <option ng-repeat="vendor in vendors" ng-value="{{vendor.tenantId}}">{{vendor.tenantName}}</option>
+                        </select>
+                    </div>
+                </div> -->
+
+            </div>
+
+
+        </div>
+    </form>
+</div>
+</div>

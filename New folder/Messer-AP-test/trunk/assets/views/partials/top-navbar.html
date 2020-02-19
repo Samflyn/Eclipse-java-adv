@@ -1,0 +1,200 @@
+<!-- start: TOP NAVBAR -->
+<!-- start: NAVBAR HEADER -->
+<div class="navbar-header">
+    <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" ng-click="toggle('sidebar')" class="btn btn-navbar sidebar-toggle"> <i class="ti-align-justify"></i> </a>
+
+    <a class="navbar-brand logo-text" ui-sref="app.dashboard"><img src="assets\images\logo\MCS Logo_rgb.png" alt="" width="130"> </a>
+
+    <!-- <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed"> <i class="ti-align-justify"></i> </a> -->
+    <a class="pull-right menu-toggler visible-xs-block" id="menu-toggler" ng-click="navbarCollapsed = !navbarCollapsed"> <span class="sr-only">Toggle navigation</span> <i class="ti-view-grid"></i> </a>
+    <!-- <a href="#" class="sidebar-mobile-toggler pull-left hidden-md hidden-lg" ng-click="toggle('sidebar')" class="btn btn-navbar sidebar-toggle"> <i class="ti-align-justify"></i> </a> -->
+
+
+    <a href="#" class="sidebar-toggler pull-right visible-md visible-lg" ng-click="app.layout.isSidebarClosed = !app.layout.isSidebarClosed"> <i class="ti-align-justify"></i> </a>
+    <a class="pull-right menu-toggler visible-xs-block" id="menu-toggler" ng-click="navbarCollapsed = !navbarCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <!-- <i class="ti-view-grid"></i> -->
+    </a>
+</div>
+<!-- end: NAVBAR HEADER -->
+<!-- start: NAVBAR COLLAPSE -->
+<div ng-controller="chooseGSTIN">
+    <div class="navbar-collapse collapse" uib-collapse="navbarCollapsed" ng-init="navbarCollapsed = true" off-click="navbarCollapsed = true" off-click-if='!navbarCollapsed' off-click-filter="#menu-toggler">
+        <!-- 	<div class="log-time-box"><span class="margin-right-40">Login time:{{loginTime}}</span><span>Last Logout time:{{logOutTime}}</span> </div> -->
+        <ul class="nav navbar-right" ct-fullheight="window" data-ct-fullheight-exclusion="header" data-ct-fullheight-if="isSmallDevice">
+            <!-- start: MESSAGES DROPDOWN -->
+            <!-- /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/InboxCtrl.js /// -->
+            <!-- <li class="gstin-details">GSTIN: 05AAACB2484Q1ZE <br>EWAY1</li>
+	<div class="navbar-collapse collapse" uib-collapse="navbarCollapsed" ng-init="navbarCollapsed = true"
+		off-click="navbarCollapsed = true" off-click-if='!navbarCollapsed' off-click-filter="#menu-toggler">
+		<!-- 	<div class="log-time-box"><span class="margin-right-40">Login time:{{loginTime}}</span><span>Last Logout time:{{logOutTime}}</span> </div> -->
+            <ul class="nav navbar-right" ct-fullheight="window" data-ct-fullheight-exclusion="header" data-ct-fullheight-if="isSmallDevice">
+                <!-- start: MESSAGES DROPDOWN -->
+                <!-- /// controller:  'InboxCtrl' -  localtion: assets/js/controllers/InboxCtrl.js /// -->
+                <!-- <li class="gstin-details">GSTIN: 05AAACB2484Q1ZE <br>EWAY1</li>
+		<li><a href="" ng-click="open('lg')"><i class="ti-reload"></i>GSTIN</a></li> -->
+                <!-- end: MESSAGES DROPDOWN -->
+                <!-- start: ACTIVITIES DROPDOWN -->
+
+
+                <li ng-show="tenantPrevilages.indexOf('notifications')>-1" class="dropdown" uib-dropdown on-toggle="toggled(open)">
+
+
+                    <a href class="dropdown-toggle" uib-dropdown-toggle> <i class="ti-check-box"></i> <span>Notifications</span> </a>
+
+
+                    <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large">
+                        <li ng-hide=unread>
+                            <a class="dropdown-header"> You have {{data}} Unread Records From Vendor</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-header" ng-repeat="invoice in data">{{invoice}}</a>
+                        </li>
+
+                        <li class="view-all">
+                            <a href="#" translate="topbar.activities.SEEALL"> See All </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- end: ACTIVITIES DROPDOWN -->
+                <!-- start: LANGUAGE SWITCHER -->
+                <!-- <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+			<!-- end: MESSAGES DROPDOWN -->
+                <!-- start: ACTIVITIES DROPDOWN -->
+
+
+                <li ng-show="tenantPrevilages.indexOf('notifications')>-1" class="dropdown" uib-dropdown on-toggle="toggled(open)">
+
+
+                    <a href class="dropdown-toggle" uib-dropdown-toggle> <i class="ti-check-box"></i>
+                        <span>Notifications</span> </a>
+
+
+                    <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large">
+                        <li ng-hide=unread>
+                            <a class="dropdown-header"> You have {{data}} Unread Records From Vendor</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-header" ng-repeat="invoice in data">{{invoice}}</a>
+                        </li>
+
+                        <li class="view-all">
+                            <a href="#" translate="topbar.activities.SEEALL"> See All </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- end: ACTIVITIES DROPDOWN -->
+                <!-- start: LANGUAGE SWITCHER -->
+                <!-- <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+			<a href class="dropdown-toggle" uib-dropdown-toggle> <i class="ti-world"></i> {{language.selected}} </a>
+			<ul role="menu" class="dropdown-menu dropdown-light fadeInUpShort">
+				<li ng-repeat="(localeId, langName) in language.available">
+					<a ng-click="language.set(localeId, $event)" href="#" class="menu-toggler"> {{langName}} </a>
+				</li>
+			</ul>
+		</li> -->
+                <!-- start: LANGUAGE SWITCHER -->
+                <!-- start: USER OPTIONS DROPDOWN -->
+                <li class="dropdown current-user" uib-dropdown on-toggle="toggled(open)">
+                    <a href class="dropdown-toggle" uib-dropdown-toggle> <i class="fa fa-user-circle user-icon" aria-hidden="true"></i> <span class="username">{{user.username}} <i class="ti-angle-down"></i></i></span> </a>
+                    <ul class="dropdown-menu dropdown-dark">
+                        <li>
+                            <a ui-sref="app.pages.user" translate="topbar.user.PROFILE"> My Profile </a>
+                        </li>
+                        <li>
+                            <a ui-sref="app.changePassword"> Change Password </a>
+                        </li>
+                        <li>
+                            <a ui-sref="login.lockscreen" translate="topbar.user.LOCKSCREEN"> Lock Screen </a>
+                        </li>
+                        <li>
+                            <a ng-click="logout()"> Log Out </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- end: USER OPTIONS DROPDOWN -->
+            </ul>
+            <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+            <div class="close-handle visible-xs-block menu-toggler" ng-click="navbarCollapsed = true">
+                <div class="arrow-left"></div>
+                <div class="arrow-right"></div>
+            </div>
+            <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+    </div>
+    <!-- <a class="sidebar-mobile-toggler dropdown-off-sidebar hidden-md hidden-lg" ng-click="toggle('off-sidebar')"> &nbsp; </a>
+			<!-- start: LANGUAGE SWITCHER -->
+    <!-- start: USER OPTIONS DROPDOWN -->
+    <!-- <li class="dropdown current-user" uib-dropdown on-toggle="toggled(open)">
+        <a href class="dropdown-toggle" uib-dropdown-toggle> <i class="fa fa-user-circle user-icon" aria-hidden="true"></i> <span class="username">{{user.username}} <i
+							class="ti-angle-down"></i></i></span> </a>
+        <ul class="dropdown-menu dropdown-dark">
+            <li>
+                <a ui-sref="app.pages.user" translate="topbar.user.PROFILE"> My Profile </a>
+            </li>
+            <li>
+                <a ui-sref="app.changePassword"> Change Password </a>
+            </li>
+            <li>
+                <a ui-sref="login.lockscreen" translate="topbar.user.LOCKSCREEN"> Lock Screen </a>
+            </li>
+            <li>
+                <a ng-click="logout()"> Log Out </a>
+            </li>
+        </ul>
+    </li> -->
+    <!-- end: USER OPTIONS DROPDOWN -->
+    </ul>
+    <!-- start: MENU TOGGLER FOR MOBILE DEVICES -->
+    <div class="close-handle visible-xs-block menu-toggler" ng-click="navbarCollapsed = true">
+        <div class="arrow-left"></div>
+        <div class="arrow-right"></div>
+    </div>
+    <!-- end: MENU TOGGLER FOR MOBILE DEVICES -->
+</div>
+<!-- <a class="sidebar-mobile-toggler dropdown-off-sidebar hidden-md hidden-lg" ng-click="toggle('off-sidebar')"> &nbsp; </a>
+<a class="dropdown-off-sidebar hidden-sm hidden-xs" ng-click="toggle('off-sidebar')"> &nbsp; </a>
+ -->
+<!-- end: NAVBAR COLLAPSE -->
+<!-- start: TOP NAVBAR -->
+<!-- end: NAVBAR COLLAPSE -->
+<!-- start: TOP NAVBAR -->
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a ng-click="selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="item in items">
+                <a ng-click="selected.item = item">{{ item }}</a>
+            </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-primary btn-o" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+</div>

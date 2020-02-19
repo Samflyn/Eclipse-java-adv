@@ -1,0 +1,102 @@
+<!-- start: FORGOT -->
+<div ng-class="{'app-navbar-fixed': app.layout.isNavbarFixed == false}"></div>
+<style type="text/css">
+    body{
+	background: url("assets/images/login-bg.png") no-repeat;
+	background-size: 100% 100%;
+	}
+    .app-navbar-fixed {
+    padding-top: 0;
+}
+.box-login-new .form-actions a {
+    border-bottom: 1px solid;
+}
+</style>
+
+<div class="row" ng-controller="resetCtrl">
+<div class="container-fluid main-login">
+     <div class="col-md-12 logo-text logo-box-new">
+        <a href="#" class="">SVMP</a>
+    </div>
+    <div class="col-md-12">
+    <!-- <div class="col-md-5 no-padding login-conetnt-box">
+        <h1 class="white">SVMP Will</h1>
+        <h1 class="white">Make it Happen!</h1>
+        <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button class="btn btn-primary">More</button> 
+
+    </div>-->
+    <div class="col-lg-4 col-md-4 col-sm-4 pull-right margin-right-40">
+        <div class="box-login-new">
+            <form class="form-login" name="myForm">
+                        <h3 class="margin-left-20">Reset Password</h3>
+                    <p class="margin-left-20 margin-bottom-20">
+                        Enter your OTP sent to your mail Id.
+                    </p>
+                    <span id="saveMsg"></span>
+                    <div class="form-group">
+                        <span class="input-icon">
+                            <input type="text" class="form-control" ng-model="otp" name="otp" placeholder="OTP" required>
+                            <i class="fa fa-circle-o" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="input-icon">
+                            <input type="password" class="form-control" ng-model="newPassword" name="newPassword" placeholder="New Password" required>
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <!-- <span ng-show="myForm.username.$touched && myForm.username.$invalid && myForm.username.$invalid">The name is required.</span> -->
+                    <div class="form-group">
+                        <span class="input-icon">
+                        <input type="password" class="form-control" ng-model="confirmPassword" name="confirmPassword" placeholder="Conform Password" required>
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="form-actions margin-top-20">
+                        <button type="button" ng-click="resendOTP()" class="btn btn-primary pull-left">
+                            <i class="fa fa-circle-o"></i> Resend OTP 
+                        </button>
+                        <button type="button" ng-click="resetPassword()" class="btn btn-primary pull-right">
+                            Submit <i class="fa fa-arrow-circle-right"></i>
+                        </button>
+                    </div>
+                    <div class="form-actions margin-top-10">
+                    <p>OTP will be expired on {{counter | secondsToDateTime | date:'mm:ss'}}</p> 
+                    </div>
+                    
+            </form>
+        </div>
+    </div>
+    </div>
+</div> 
+<div class="container-fluid main-login">
+    <div class="col-md-12 footer-box-new">
+        <div class="copyright_new pull-left">
+                <!-- {{app.year}} &copy; {{ app.name }} by {{ app.author }}. -->
+                &copy; 2018 SAILOTECH PVT. LTD. All rights reserved
+            </div>
+			<div class="pull-right margin-top-5">
+			Powered By : <img class="footer-login-ts-logo margin-right-10" src="assets/images/logo-1.png">
+			</div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

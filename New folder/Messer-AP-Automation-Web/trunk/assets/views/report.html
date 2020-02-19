@@ -1,0 +1,114 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle">Report</h1>
+		</div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<div class="container-fluid container-fullw bg-white super-admin-pages" ng-controller="reportCtrl as report">
+<form name="myForm" novalidate ng-submit="submitData()">
+<div class="col-lg-12">
+<div class="col-md-4">
+	<input type="radio"  name=reportName ng-model="data.reportName" ng-change="emptyCheckList('Purchase Invoice')" value="Purchase Invoice"><label>Purchase Invoice</label>
+	</div>
+<div class="col-md-4">
+	<input type="radio" name="reportName" ng-model="data.reportName" ng-change="emptyCheckList('Cost Invoice')" value="Cost Invoice"><label>Cost Invoice</label>
+	</div>
+</div>
+<div>
+<div class="col-md-4 form-group">
+						<button type="submit" ng-click="submitted=true"
+							class="btn btn-primary  btn btn-dark-green margin-right-10">
+							<i class="fa fa-download" aria-hidden="true"></i> Download
+						</button>
+					 </div>
+</div>
+<div class="row">
+<div class="col-lg-12">
+	<div class="col-md-3">
+		<label> Supplier Name: <input type="checkbox"
+			ng-model="data.bpName" ng-checked="bpName"></label>
+	</div>
+	<div class="col-md-3">
+		<label>Invoice Date: <input type="checkbox" ng-model="data.invoiceDate"
+			ng-checked="invoiceDate"></label>
+	</div>
+	<div class="col-md-3">
+		<label>Invoice Number: <input type="checkbox"
+			ng-model="data.invoiceNo" ng-checked="invoiceNo"></label>
+	</div>
+	<div class="col-md-3">
+		<label>Invoice Account: <input type="checkbox"
+			ng-model="data.invoiceValue" ng-checked="invoiceValue"></label>
+	</div>
+</div>
+<div class="col-lg-12">
+	<div class="col-md-3">
+		<label>Iban: <input type="checkbox" ng-model="data.iban"
+			ng-checked="iban"></label>
+	</div>
+	<div class="col-md-3">
+		<label>Delivery Terms: <input type="checkbox"
+			ng-model="data.deliveryTerms" ng-checked="deliveryTerms"></label>
+	</div>
+	<div class="col-md-3">
+		<label>Payment terms: <input type="checkbox" ng-model="data.paymentTerms"
+			ng-checked="paymentTerms"></label>
+	</div>
+	<div class="col-md-3">
+		<label>Good Receipt Note: <input type="checkbox"
+			ng-model="data.goodsReceiptNote" ng-checked="goodsReceiptNote"></label>
+	</div>
+</div>
+<div class="col-lg-12">
+<div class="col-md-3" ng-if="data.reportName=='Purchase Invoice'">
+		<label>Purchase Order Number: <input type="checkbox"
+			ng-model="data.purchaseOrderNo" ng-checked="purchaseOrderNo"></label>
+	</div>
+		<div class="col-md-3">
+		<label>Unit Of Measurement: <input type="checkbox"
+			ng-model="data.uqc" ng-checked="uqc"></label>
+	</div>
+		<div class="col-md-3">
+		<label>Item Quantity: <input type="checkbox"
+			ng-model="data.qty" ng-checked=" qty"></label>
+	</div>
+		<div class="col-md-3">
+		<label>Item Price: <input type="checkbox"
+			ng-model="data.productRate" ng-checked=" productRate"></label>
+	</div>
+</div>
+<div class="col-lg-12">
+	<div class="col-md-3">
+		<label>Item Code / Number: <input type="checkbox"
+			ng-model="data.hsnSc" ng-checked="hsnSc"></label>
+	</div>
+		<div class="col-md-3">
+		<label>VAT/GST: <input type="checkbox"
+			ng-model="data.vat" ng-checked="vat"></label>
+	</div>
+		<div class="col-md-3">
+		<label>Vat Amount: <input type="checkbox"
+			ng-model="data.vatAmount" ng-checked="vatAmount"></label>
+	</div>
+		<div class="col-md-3">
+		<label>Freight: <input type="checkbox"
+			ng-model="data.freight" ng-checked="freight"></label>
+	</div>
+</div>
+<div class="col-lg-12">
+	<div class="col-md-3">
+		<label>Packing Cost: <input type="checkbox"
+			ng-model="data.packing" ng-checked="packing"></label>
+	</div>
+		<div class="col-md-3">
+		<label>Currency: <input type="checkbox"
+			ng-model="data.currency" ng-checked="currency"></label>
+	</div>
+</div>
+</div>
+</form>
+</div>

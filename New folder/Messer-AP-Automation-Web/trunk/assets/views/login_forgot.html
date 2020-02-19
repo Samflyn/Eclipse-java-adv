@@ -1,0 +1,54 @@
+<!-- start: FORGOT -->
+<div ng-class="{'app-navbar-fixed': app.layout.isNavbarFixed == false}"></div>
+<div class="row" ng-controller="forgotCtrl">
+    <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+        <div class="logo text-center">
+            <a href="">
+                <img src="assets\images\logo\MCS Logo_rgb.png" alt="" class="img">
+            </a>
+
+        </div>
+        <!-- start: FORGOT BOX -->
+        <div class="box-forgot">
+            <form class="form-login" name="myForm">
+                <fieldset>
+                    <legend>
+                        Forget Password?
+                    </legend>
+                    <p>
+                        Enter your e-mail address below to reset your password.
+                    </p>
+
+                    <span id="saveMsg"></span>
+                    <div class="form-group">
+                        <span class="input-icon">
+                            <input type="text" class="form-control" ng-model="data.userLoginId" name="userLoginId" placeholder="Username" required>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <span class="input-icon">
+                            <input type="email" class="form-control" ng-model="data.emailId" name="emailId" placeholder="Email Id" required>
+                                <i class="fa fa-envelope-o"></i>
+                            </span>
+                    </div>
+                    <div class="form-actions margin-top-20">
+                        <a class="btn btn-primary btn-o" ui-sref="login.signin">
+                            <i class="fa fa-chevron-circle-left"></i> Log-In
+                        </a>
+                        <button type="button" ng-click="forgotPassword()" class="btn btn-primary pull-right">
+                                Submit <i class="fa fa-arrow-circle-right"></i>
+                            </button>
+                    </div>
+                </fieldset>
+            </form>
+            <!-- start: COPYRIGHT -->
+            <div class="copyright">
+                {{app.year}} &copy; {{ app.name }} by {{ app.author }}.
+            </div>
+            <!-- end: COPYRIGHT -->
+        </div>
+        <!-- end: FORGOT BOX -->
+    </div>
+</div>
+<!-- end: FORGOT -->
