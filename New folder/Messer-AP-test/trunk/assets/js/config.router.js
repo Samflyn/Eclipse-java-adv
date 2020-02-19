@@ -252,6 +252,33 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 label: 'Manage Customer User'
             },
             requireLogin: true
+        }).state('app.manageDepartment', {
+            url: '/manage-department',
+            templateUrl: "assets/views/masters/manage-department.html",
+            title: 'Manage Department',
+            resolve: loadSequence('manageDepartmentCtrl', 'DepartmentService'),
+            ncyBreadcrumb: {
+                label: 'Manage Customer User'
+            },
+            requireLogin: true
+        }).state('app.manageDimensionType', {
+            url: '/manage-dimension-type',
+            templateUrl: "assets/views/masters/manage-dimension-type.html",
+            title: 'Manage Dimension Type',
+            resolve: loadSequence('manageDimensionTypeCtrl', 'DimensionTypeService'),
+            ncyBreadcrumb: {
+                label: 'Manage Dimension Type'
+            },
+            requireLogin: true
+        }).state('app.manageLedgerAccount', {
+            url: '/manage-ledger-account',
+            templateUrl: "assets/views/masters/manage-ledger-account.html",
+            title: 'Manage Ledger Account',
+            resolve: loadSequence('manageLedgerAccountCtrl', 'LedgerAccountService'),
+            ncyBreadcrumb: {
+                label: 'Manage Ledger Account'
+            },
+            requireLogin: true
         }).state('app.manageItemMaster', {
             url: '/manage-item',
             templateUrl: "assets/views/masters/manage-item-master.html",
