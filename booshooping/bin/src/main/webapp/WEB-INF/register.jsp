@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 
@@ -25,17 +26,20 @@
 				<option value="Male">Male</option>
 				<option value="Female">Female</option>
 			</select><br>
-			<c:if test="${customer.role == 'Admin'}">
+			<sec:authorize access="hasRole('ADMIN')">
 				<br> Role: <select name="role">
-					<option value="Customer">Customer</option>
-					<option value="Admin">Admin</option>
+					<option value="USER">User</option>
+					<option value="ADMIN">Admin</option>
 				</select>
-			</c:if>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ANONYMOUS')">
+				<input type="text" name="role" id="role" value="USER" hidden>
+			</sec:authorize>
 			<br> <br> <input type="submit" value="Submit"> <input type="reset" value="Clear">
 		</div>
 	</form>
-	<br>
-	<a href="javascript:history.back()">Go Back</a>
+	<br><br>
+	<input type="button" onclick="window.location.href='javascript:history.back()';" value="Go back">
 </body>
 
 </html>

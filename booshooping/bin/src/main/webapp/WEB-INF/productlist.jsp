@@ -14,7 +14,13 @@
                 var id = this.id;
                 var quantity = "quantity" + id.replace("add", "");
                 var value = parseInt($('#' + quantity).val(), 10) + 1;
-                $("#" + quantity).val(value);
+                var max = parseInt($("#" + quantity).attr("max"));
+                if (value <= max) {
+                    $("#" + quantity).val(value);
+                } else {
+                    alert("Max quantity in stock = " + max);
+                }
+
                 return false;
             });
             $(".minus").click(function () {
@@ -71,13 +77,19 @@
                 <td style="text-align: center;" id="name${roll.count}">${product.name}</td>
                 <td style="text-align: center;">
                     <button id="minus${roll.count}" class="minus">-</button> <input type="text"
-                        id="quantity${roll.count}" value="0" size="1">
+                        id="quantity${roll.count}" value="0" size="1" max="${product.stock}">
                     <button id="add${roll.count}" class="add">+</button>
                 </td>
                 <td style="text-align: center;" id="about">${product.about}</td>
                 <td style="text-align: center;" id="price${roll.count}">${product.price}</td>
-                <td style="text-align: center;"><input type="button" value="Add to cart" id="tocart${roll.count}"
-                        class="tocart"></td>
+
+                <c:if test="${product.stock ne 0}">
+                    <td style="text-align: center;"><input type="button" value="Add to cart" id="tocart${roll.count}"
+                            class="tocart"></td>
+                </c:if>
+                <c:if test="${product.stock eq 0}">
+                    <td style="text-align: center;color: red;">Out of Stock!</td>
+                </c:if>
             </tr>
         </c:forEach>
     </table>
