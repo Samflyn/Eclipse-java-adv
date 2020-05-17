@@ -26,7 +26,7 @@ public class TestStepVerifier {
         });
     }
 
-    @GetMapping("stepVerifier")
+    @GetMapping("stepVerifierNoExp")
     public Flux<Emp> getDataNew() {
         List<Emp> empList = List.of(
                 new Emp(1, "name", "data"),
@@ -38,7 +38,7 @@ public class TestStepVerifier {
     }
 
     @Test
-    void testFlux() throws InterruptedException {
+    void testFlux() {
         System.out.println("Test starting");
         Flux<Emp> empFlux = getDataNew();
         empFlux.subscribe(
