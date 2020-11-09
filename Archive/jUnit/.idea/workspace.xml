@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd4e7421-e1d9-4fe5-9346-d4bd9485d210" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1isC0I8Xl7ptNWzqY7J4gxIT4RP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RunManager" selected="JUnit.JunitTest.testJunitTest_Exception">
+    <configuration name="Testss" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.test.Testss" />
+      <module name="jUnit" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JunitTest.testJunitTest_Exception" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="jUnit" />
+      <option name="PACKAGE_NAME" value="com.example.test" />
+      <option name="MAIN_CLASS_NAME" value="com.example.test.JunitTest" />
+      <option name="METHOD_NAME" value="testJunitTest_Exception" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Testss" />
+      <item itemvalue="JUnit.JunitTest.testJunitTest_Exception" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.JunitTest.testJunitTest_Exception" />
+        <item itemvalue="Application.Testss" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="141" y="27" width="1074" height="741" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1602761144141">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="141" y="27" width="1074" height="741" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1366.741@0.27.1366.741" timestamp="1602761144141" />
+    <state x="100" y="127" width="1166" height="541" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog" timestamp="1602687867132">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="100" y="127" width="1166" height="541" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.27.1366.741@0.27.1366.741" timestamp="1602687867132" />
+    <state x="434" y="251" width="488" height="300" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1602702007954">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="434" y="251" width="488" height="300" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.27.1366.741@0.27.1366.741" timestamp="1602702007954" />
+    <state width="1320" height="172" key="GridCell.Tab.0.bottom" timestamp="1602761865625">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="172" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1602761865625" />
+    <state width="1320" height="172" key="GridCell.Tab.0.center" timestamp="1602761865625">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="172" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1602761865625" />
+    <state width="1320" height="172" key="GridCell.Tab.0.left" timestamp="1602761865624">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="172" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1602761865624" />
+    <state width="1320" height="172" key="GridCell.Tab.0.right" timestamp="1602761865625">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state width="1320" height="172" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1602761865625" />
+    <state x="166" y="27" width="1024" height="741" key="SettingsEditor" timestamp="1602703099644">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="166" y="27" width="1024" height="741" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1602703099644" />
+  </component>
+</project>
