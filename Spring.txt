@@ -1,0 +1,9 @@
+Spring Cloud Netflix Ribbon -->> Spring Cloud Load Balancer
+
+Spring Cloud Netflix Zuul -->> Spring Cloud Gateway
+
+Spring Cloud Hystrix -->> SC CircuitBreaker + Resilience4J
+
+Spring Cloud Netflix Turbine -->> Micrometer + Prometheus
+
+Spring Cloud Netflix Archaius -->> SC Config Server
