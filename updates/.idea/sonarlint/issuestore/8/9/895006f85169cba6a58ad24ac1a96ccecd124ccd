@@ -1,0 +1,44 @@
+
+\
+java:S1854R"?Remove this useless assignment to local variable "fileContent".(æ´äé8ÍÄÁÅõ.
+\
+java:S18543":Remove this useless assignment to local variable "eList1".(ÌÛ¾üÿÿÿÿ8šŒàÄõ.
+L
+java:S14812"*Remove this unused "eList" local variable.(ª¼®Àÿÿÿÿÿ8šŒàÄõ.
+P
+java:S1481H".Remove this unused "lineCount" local variable.(…ĞÔ²şÿÿÿÿ8ôœÅõ.
+”
+java:S11301"rRemove the declaration of thrown exception 'java.lang.UnsupportedOperationException' which is a runtime exception.(–ä©Ÿüÿÿÿÿ8šŒàÄõ.
+Z
+java:S1854;"=Remove this useless assignment to local variable "repeating".(’ûï8ºâûÄõ.
+M
+java:S14813"+Remove this unused "eList1" local variable.(ÌÛ¾üÿÿÿÿ8šŒàÄõ.
+”
+java:S1130"rRemove the declaration of thrown exception 'java.lang.UnsupportedOperationException' which is a runtime exception.(õÂ´éşÿÿÿÿ8šŒàÄõ.
+E	java:S108")Either remove or fill this block of code.(ß´’‡8šŒàÄõ.
+H
+java:S1612Z",Replace this lambda with a method reference.(ƒ™ñT8‚ûŞÅõ.
+j
+java:S2095"MUse try-with-resources or close this "FileInputStream" in a "finally" clause.(Şè°Á8šŒàÄõ.
+]
+java:S1854Y"@Remove this useless assignment to local variable "resultString".(Şÿ´”8‚ûŞÅõ.
+P
+java:S1481+".Remove this unused "something" local variable.(Ï„»ûùÿÿÿÿ8šŒàÄõ.
+_
+java:S1854H"=Remove this useless assignment to local variable "lineCount".(…ĞÔ²şÿÿÿÿ8ôœÅõ.
+U
+java:S1481>"8Remove this unused "stripLeadingTailing" local variable.(…­×8â…Åõ.
+P
+java:S1481C".Remove this unused "isItBlank" local variable.(ŒÒÖıüÿÿÿÿ8¶î‹Åõ.
+d
+java:S1854>"GRemove this useless assignment to local variable "stripLeadingTailing".(…­×8â…Åõ.
+_
+java:S1854C"=Remove this useless assignment to local variable "isItBlank".(ŒÒÖıüÿÿÿÿ8¶î‹Åõ.
+M
+java:S1481R"0Remove this unused "fileContent" local variable.(æ´äé8ÍÄÁÅõ.
+N
+java:S1481Y"1Remove this unused "resultString" local variable.(Şÿ´”8‚ûŞÅõ.
+[
+java:S18542"9Remove this useless assignment to local variable "eList".(ª¼®Àÿÿÿÿÿ8šŒàÄõ.
+K
+java:S1481;".Remove this unused "repeating" local variable.(’ûï8ºâûÄõ.
